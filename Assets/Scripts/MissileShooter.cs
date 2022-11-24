@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class MissileShooter : MonoBehaviour
 {
@@ -11,41 +7,33 @@ public class MissileShooter : MonoBehaviour
     [SerializeField] private Missile MissilePrefab;
     [SerializeField] private float MissileSpeed = 5f;
 
-    private InputActions inputActions;
-
     private static Pool<Missile> missilePool;
+
+    private MissileCommander missileCommander;
+
+    public float Ammo { get; private set; }
 
     private void Awake()
     {
-        inputActions = new InputActions();
         missilePool = new Pool<Missile>(MissilePrefab, 5);
-        inputActions.Player.Fire.performed += FireMissile;
+        Ammo = 1;
     }
 
-    private void OnEnable()
+    public void Setup(MissileCommander missileCommander)
     {
-        inputActions.Enable();
-    }
-
-    private void OnDisable()
-    {
-        inputActions.Disable();
+        this.missileCommander = missileCommander;
     }
 
     private void Update()
     {
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(inputActions.Player.Look.ReadValue<Vector2>());
-
-        Vector2 directionToMouse = mousePosition - transform.position;
-
+        Vector2 directionToMouse = missileCommander.MousePosition - transform.position;
         float angle = Vector2.SignedAngle(Vector2.up, directionToMouse);
         WeaponPivot.eulerAngles = new Vector3(0, 0, angle);
     }
 
-    private void FireMissile(InputAction.CallbackContext context)
+    public void FireMissile()
     {
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(inputActions.Player.Look.ReadValue<Vector2>());
         Missile missile = missilePool.Get();
-        missile.Setup(SpawnPoint.position, SpawnPoint.rotation, SpawnPoint.position, mousePosition, MissileSpeed);
+        missile.Setup(SpawnPoint.position, SpawnPoint.rotation, SpawnPoint.position, missileCommander.MousePosition, MissileSpeed);
     }
 }
