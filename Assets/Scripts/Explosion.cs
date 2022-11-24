@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class Explosion : MonoBehaviour
 {
@@ -23,6 +24,19 @@ public class Explosion : MonoBehaviour
         if (time > duration)
         {
             Destroy(gameObject);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.TryGetComponent(out Score score))
+        {
+            Debug.Log("Add score");
+        }
+
+        if (collision.TryGetComponent(out Destructible destructible))
+        {
+            destructible.Die();
         }
     }
 }

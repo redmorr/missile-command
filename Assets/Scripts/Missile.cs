@@ -1,43 +1,37 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Explode))]
 public class Missile : MonoBehaviour
 {
-    [SerializeReference] private float DistanceThereshold;
-    [SerializeReference] private Explosion Explosion;
+    [SerializeReference] private Rigidbody2D Rigidbody2D;
+    [SerializeReference] private Destructible Destructible;
+    [SerializeReference] private float DistanceThereshold; // TODO: Calculate from fixed time step * speed.
 
     private Vector2 startPoint;
-    private Vector2 endPoint;
+    private Vector2 destinationPoint;
+    private Vector2 directionToDestination;
     private float speed;
 
-    public void Setup(Vector2 endPoint, float speed)
+    public void Setup(Vector2 startPoint, Vector2 destinationPoint, float speed)
     {
-        this.endPoint = endPoint;
+        this.startPoint = startPoint;
+        this.destinationPoint = destinationPoint;
         this.speed = speed;
+
+        directionToDestination = (destinationPoint - startPoint).normalized;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         Move();
-
     }
 
     private void Move()
     {
-        if (Vector2.Distance(transform.position, endPoint) < DistanceThereshold)
-        {
-            Instantiate(Explosion, transform.position, Quaternion.identity);
-            Destroy(gameObject);
-        }
+        if (Vector2.Distance(transform.position, destinationPoint) < DistanceThereshold)
+            Destructible.Die();
 
-        transform.position += (new Vector3(endPoint.x, endPoint.y) - transform.position).normalized * speed * Time.deltaTime;
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        Debug.Log(gameObject.name);
-        Instantiate(Explosion, transform.position, Quaternion.identity);
-        Destroy(gameObject);
+        Rigidbody2D.MovePosition(new Vector2(transform.position.x, transform.position.y) + speed * Time.fixedDeltaTime * directionToDestination);
     }
 }
