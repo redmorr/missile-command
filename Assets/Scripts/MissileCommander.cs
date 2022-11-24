@@ -40,7 +40,7 @@ public class MissileCommander : MonoBehaviour
     public void FireMissile(InputAction.CallbackContext context)
     {
         if (GetClosestNonEmptyMissileShooter(out missileShooter))
-            missileShooter.FireMissile();
+            missileShooter.FireMissile(MousePosition);
     }
 
     private bool GetClosestNonEmptyMissileShooter(out MissileShooter missileShooter)

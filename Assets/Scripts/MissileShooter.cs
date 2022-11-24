@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MissileShooter : MonoBehaviour
 {
@@ -6,13 +7,14 @@ public class MissileShooter : MonoBehaviour
     [SerializeField] private Transform SpawnPoint;
     [SerializeField] private Missile MissilePrefab;
     [SerializeField] private float MissileSpeed = 5f;
-    [SerializeField] private float MaxShootAngle = 90f;
-
-    private static Pool<Missile> missilePool;
-
-    private MissileCommander missileCommander;
 
     public float Ammo { get; private set; }
+
+    private readonly float maxShootAngle = 90f;
+    private static Pool<Missile> missilePool;
+    private MissileCommander missileCommander;
+    private float shootAngle;
+    private Vector2 targetPosition;
 
     private void Awake()
     {
@@ -28,13 +30,14 @@ public class MissileShooter : MonoBehaviour
     private void Update()
     {
         Vector2 directionToMouse = missileCommander.MousePosition - transform.position;
-        float angle = Mathf.Clamp(Vector2.SignedAngle(Vector2.up, directionToMouse), -MaxShootAngle, MaxShootAngle);
-        WeaponPivot.eulerAngles = new Vector3(0, 0, angle);
+        shootAngle = Vector2.SignedAngle(Vector2.up, directionToMouse);
+        WeaponPivot.eulerAngles = new Vector3(0, 0, Mathf.Clamp(shootAngle, -maxShootAngle, maxShootAngle));
     }
 
-    public void FireMissile()
+    public void FireMissile(Vector3 target)
     {
         Missile missile = missilePool.Get();
-        missile.Setup(SpawnPoint.position, SpawnPoint.rotation, SpawnPoint.position, missileCommander.MousePosition, MissileSpeed);
+        missile.Setup(SpawnPoint.position, SpawnPoint.rotation, SpawnPoint.position, new Vector2(target.x, Mathf.Max(target.y, SpawnPoint.position.y) ), MissileSpeed);
     }
+
 }
