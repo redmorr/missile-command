@@ -31,10 +31,10 @@ public class Explosion : MonoBehaviour
     {
         if (collision.TryGetComponent(out Score score))
         {
-            Debug.Log("Add score");
+
         }
 
-        if (collision.TryGetComponent(out Destructible destructible))
+        if (collision.TryGetComponent(out IDestructible destructible))
         {
             destructible.Die();
         }

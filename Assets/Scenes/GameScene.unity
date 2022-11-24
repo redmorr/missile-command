@@ -553,7 +553,6 @@ GameObject:
   - component: {fileID: 1070117059}
   - component: {fileID: 1070117058}
   - component: {fileID: 1070117064}
-  - component: {fileID: 1070117065}
   m_Layer: 0
   m_Name: WarPlane
   m_TagString: Untagged
@@ -699,19 +698,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68cf419381fa4134196d3132e6099ed8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1070117065
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1070117057}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4a33038a51af9148ac4927ffa0d199d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ExplosionPrefab: {fileID: 5269832221445860310, guid: 4bea67ec1db3707419e5634717dcf06d, type: 3}
 --- !u!1 &1176815754
 GameObject:
   m_ObjectHideFlags: 0
@@ -924,6 +910,7 @@ MonoBehaviour:
   WeaponPivot: {fileID: 2060368282}
   SpawnPoint: {fileID: 952006110}
   MissilePrefab: {fileID: 2739014110904703649, guid: ecbbe2f7790315e44b60e7d57c944128, type: 3}
+  MissileSpeed: 5
 --- !u!1 &1724182562
 GameObject:
   m_ObjectHideFlags: 0

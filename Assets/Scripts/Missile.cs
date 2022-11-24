@@ -1,20 +1,23 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(Explode))]
-public class Missile : MonoBehaviour
+public class Missile : MonoBehaviour, IPoolable<Missile>, IDestructible
 {
-    [SerializeReference] private Rigidbody2D Rigidbody2D;
-    [SerializeReference] private Destructible Destructible;
-    [SerializeReference] private float DistanceThereshold; // TODO: Calculate from fixed time step * speed.
+    [SerializeField] private Rigidbody2D Rigidbody2D;
+    [SerializeField] private float DistanceThereshold; // TODO: Calculate from fixed time step * speed.
+    [SerializeField] private Explosion ExplosionPrefab;
 
+    private Action<Missile> returnToPool;
     private Vector2 startPoint;
     private Vector2 destinationPoint;
     private Vector2 directionToDestination;
     private float speed;
+    public int id;
 
-    public void Setup(Vector2 startPoint, Vector2 destinationPoint, float speed)
+    public void Setup(Vector3 position, Quaternion rotation, Vector2 startPoint, Vector2 destinationPoint, float speed)
     {
+        transform.SetPositionAndRotation(position, rotation);
         this.startPoint = startPoint;
         this.destinationPoint = destinationPoint;
         this.speed = speed;
@@ -27,11 +30,32 @@ public class Missile : MonoBehaviour
         Move();
     }
 
+    private void OnDisable()
+    {
+        ReturnToPool();
+    }
+
+    public void Init(Action<Missile> action)
+    {
+        returnToPool = action;
+    }
+
+    public void ReturnToPool()
+    {
+        returnToPool?.Invoke(this);
+    }
+
     private void Move()
     {
         if (Vector2.Distance(transform.position, destinationPoint) < DistanceThereshold)
-            Destructible.Die();
+            Die();
 
         Rigidbody2D.MovePosition(new Vector2(transform.position.x, transform.position.y) + speed * Time.fixedDeltaTime * directionToDestination);
+    }
+
+    public void Die()
+    {
+        Instantiate(ExplosionPrefab, transform.position, Quaternion.identity);
+        gameObject.SetActive(false);
     }
 }

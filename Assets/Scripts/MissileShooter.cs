@@ -13,10 +13,23 @@ public class MissileShooter : MonoBehaviour
 
     private InputActions inputActions;
 
+    private static Pool<Missile> missilePool;
+
     private void Awake()
     {
         inputActions = new InputActions();
+        missilePool = new Pool<Missile>(MissilePrefab, 5);
         inputActions.Player.Fire.performed += FireMissile;
+    }
+
+    private void OnEnable()
+    {
+        inputActions.Enable();
+    }
+
+    private void OnDisable()
+    {
+        inputActions.Disable();
     }
 
     private void Update()
@@ -32,17 +45,7 @@ public class MissileShooter : MonoBehaviour
     private void FireMissile(InputAction.CallbackContext context)
     {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(inputActions.Player.Look.ReadValue<Vector2>());
-        Missile missile = Instantiate(MissilePrefab, SpawnPoint.position, SpawnPoint.rotation);
-        missile.Setup(SpawnPoint.position, mousePosition, MissileSpeed);
-    }
-
-    private void OnEnable()
-    {
-        inputActions.Enable();
-    }
-
-    private void OnDisable()
-    {
-        inputActions.Disable();
+        Missile missile = missilePool.Get();
+        missile.Setup(SpawnPoint.position, SpawnPoint.rotation, SpawnPoint.position, mousePosition, MissileSpeed);
     }
 }

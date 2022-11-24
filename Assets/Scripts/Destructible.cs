@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Destructible : MonoBehaviour
+public interface IDestructible
 {
-    public abstract void Die();
+    public void Die();
 }
