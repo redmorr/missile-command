@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class MissileCommander : MonoBehaviour
 {
-    private Launcher[] launchers;
+    private ILaunchMissile[] launchers;
 
     public Vector3 MousePosition { get; private set; }
 
@@ -13,7 +13,7 @@ public class MissileCommander : MonoBehaviour
     {
         inputActions = new InputActions();
         inputActions.Player.Fire.performed += FireMissile;
-        launchers = GetComponentsInChildren<Launcher>();
+        launchers = GetComponentsInChildren<ILaunchMissile>();
     }
 
     private void OnEnable()
@@ -32,25 +32,22 @@ public class MissileCommander : MonoBehaviour
 
     public void FireMissile(InputAction.CallbackContext context)
     {
-        if (GetClosestMissileShooter(out Launcher launcher))
+        if (GetClosestMissileShooter(out ILaunchMissile launcher))
             launcher.Launch(MousePosition);
     }
 
-    private bool GetClosestMissileShooter(out Launcher missileShooter)
+    private bool GetClosestMissileShooter(out ILaunchMissile missileShooter)
     {
         missileShooter = null;
         float minDistnace = Mathf.Infinity;
 
-        foreach (Launcher launcher in launchers)
+        foreach (ILaunchMissile launcher in launchers)
         {
-            if (launcher)
+            float distance = Vector2.Distance(MousePosition, launcher.Position);
+            if (launcher.CanFire && distance < minDistnace)
             {
-                float distance = Vector2.Distance(MousePosition, launcher.transform.position);
-                if (launcher.CanFire && distance < minDistnace)
-                {
-                    minDistnace = distance;
-                    missileShooter = launcher;
-                }
+                minDistnace = distance;
+                missileShooter = launcher;
             }
         }
 

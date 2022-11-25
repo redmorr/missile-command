@@ -5,12 +5,11 @@ using UnityEngine.Events;
 
 public class Launcher : MonoBehaviour
 {
-    [SerializeField] private Transform Muzzle;
     [SerializeField] private float MissileSpeed = 5f;
 
-    public UnityAction<Vector3> OnLaunch;
-
     public bool CanFire { get => ammo.CurrentAmmo > 0; }
+
+    public UnityAction<Vector3> OnLaunch;
 
     private Ammo ammo;
 
@@ -19,14 +18,13 @@ public class Launcher : MonoBehaviour
         ammo = GetComponent<Ammo>();
     }
 
-    public void Launch(Vector3 target)
+    public void Launch(Vector3 from, Vector3 to)
     {
         if (ammo.GetMissile(out Missile missile))
         {
-            target.y = Mathf.Max(target.y, Muzzle.position.y);
-            Vector3 directionToTarget = target - Muzzle.position;
-            missile.Setup(Muzzle.position, Quaternion.LookRotation(Vector3.forward, directionToTarget), Muzzle.position, target, MissileSpeed);
-            OnLaunch?.Invoke(target);
+            Vector3 directionToTarget = to - from;
+            missile.Setup(from, Quaternion.LookRotation(Vector3.forward, directionToTarget), from, to, MissileSpeed);
+            OnLaunch?.Invoke(to);
         }
     }
 }
