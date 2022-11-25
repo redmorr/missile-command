@@ -2,29 +2,34 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Ammo : MonoBehaviour
 {
     [SerializeField] private int InitialAmmoSize;
     [SerializeField] private Missile MissilePrefab;
 
-    private static Pool<Missile> missilePool;
+    public UnityAction<int> OnAmmoChanged;
 
-    public float AmmoCount { get; private set; }
+    public int CurrentAmmo { get; private set; }
+    public int InitialAmmo { get => InitialAmmoSize; }
+
+    private static Pool<Missile> missilePool;
 
     private void Awake()
     {
         missilePool = new Pool<Missile>(MissilePrefab, InitialAmmoSize);
-        AmmoCount = InitialAmmoSize;
+        CurrentAmmo = InitialAmmoSize;
     }
 
     public bool GetMissile(out Missile missile)
     {
         missile = null;
-        if (AmmoCount > 0)
+        if (CurrentAmmo > 0)
         {
             missile = missilePool.Get();
-            AmmoCount--;
+            CurrentAmmo--;
+            OnAmmoChanged?.Invoke(CurrentAmmo);
             return true;
         }
         return false;

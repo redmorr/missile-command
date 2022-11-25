@@ -10,7 +10,7 @@ public class Launcher : MonoBehaviour
 
     public UnityAction<Vector3> OnLaunch;
 
-    public bool CanFire { get => ammo.AmmoCount > 0; }
+    public bool CanFire { get => ammo.CurrentAmmo > 0; }
 
     private Ammo ammo;
 
