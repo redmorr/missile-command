@@ -5,11 +5,19 @@ using UnityEngine.Tilemaps;
 
 public class Explosion : MonoBehaviour
 {
-    private float duration = 1f;
-    private Vector3 startScale = new Vector3(1f, 1f, 1f);
-    private Vector2 finalScale = new Vector3(2f, 2f, 2f);
+    [SerializeField] private float Duration = 1f;
+    [SerializeField] private float MinimumSize = 1f;
+    [SerializeField] private float MaximumSize = 3f;
 
     private float time;
+    private Vector3 startScale;
+    private Vector2 finalScale;
+
+    private void Awake()
+    {
+        startScale = new Vector3(MinimumSize, MinimumSize, MinimumSize);
+        finalScale = new Vector3(MaximumSize, MaximumSize, MaximumSize);
+    }
 
     private void Start()
     {
@@ -18,10 +26,10 @@ public class Explosion : MonoBehaviour
 
     private void Update()
     {
-        transform.localScale = Vector3.Lerp(startScale, finalScale, time / duration);
+        transform.localScale = Vector3.Lerp(startScale, finalScale, time / Duration);
         time += Time.deltaTime;
 
-        if (time > duration)
+        if (time > Duration)
         {
             Destroy(gameObject);
         }

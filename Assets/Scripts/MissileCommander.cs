@@ -1,53 +1,35 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class MissileCommander : MonoBehaviour
+public class MissileCommander : MonoBehaviour, ICommander
 {
     private ILaunchMissile[] launchers;
 
-    public Vector3 MousePosition { get; private set; }
-
-    private InputActions inputActions;
-
     private void Awake()
     {
-        inputActions = new InputActions();
-        inputActions.Player.Fire.performed += FireMissile;
         launchers = GetComponentsInChildren<ILaunchMissile>();
     }
 
-    private void OnEnable()
+    public void OrderAttack(Vector3 target)
     {
-        inputActions.Enable();
+        if (GetClosestMissileShooter(out ILaunchMissile launcher, target))
+            launcher.Launch(target);
     }
 
-    private void OnDisable()
-    {
-        inputActions.Disable();
-    }
-    private void Update()
-    {
-        MousePosition = Camera.main.ScreenToWorldPoint(inputActions.Player.Look.ReadValue<Vector2>());
-    }
-
-    public void FireMissile(InputAction.CallbackContext context)
-    {
-        if (GetClosestMissileShooter(out ILaunchMissile launcher))
-            launcher.Launch(MousePosition);
-    }
-
-    private bool GetClosestMissileShooter(out ILaunchMissile missileShooter)
+    private bool GetClosestMissileShooter(out ILaunchMissile missileShooter, Vector3 target)
     {
         missileShooter = null;
         float minDistnace = Mathf.Infinity;
 
         foreach (ILaunchMissile launcher in launchers)
         {
-            float distance = Vector2.Distance(MousePosition, launcher.Position);
-            if (launcher.CanFire && distance < minDistnace)
+            if (launcher.CanFire)
             {
-                minDistnace = distance;
-                missileShooter = launcher;
+                float distance = Vector2.Distance(target, launcher.Position);
+                if (distance < minDistnace)
+                {
+                    minDistnace = distance;
+                    missileShooter = launcher;
+                }
             }
         }
 
