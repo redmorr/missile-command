@@ -3657,8 +3657,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2101566030}
-  - component: {fileID: 2101566032}
   - component: {fileID: 2101566031}
+  - component: {fileID: 2101566032}
+  - component: {fileID: 2101566033}
   m_Layer: 0
   m_Name: SkyLauncher
   m_TagString: Untagged
@@ -3674,7 +3675,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2101566029}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -19.6, y: 27.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3693,6 +3694,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d278fe7012e95bf42b07f88bf4c056a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Launcher: {fileID: 2101566032}
 --- !u!114 &2101566032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3706,6 +3708,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MissileSpeed: 5
+--- !u!114 &2101566033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2101566029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe992196085d50942ad06b403e701ff0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InitialAmmoSize: 0
+  InfiniteAmmo: 1
+  MissilePrefab: {fileID: 2739014110904703649, guid: ecbbe2f7790315e44b60e7d57c944128, type: 3}
 --- !u!4 &5510995373621366845 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4408283780969614848, guid: 9e32c78540286b34f80c6baad0cbc062, type: 3}

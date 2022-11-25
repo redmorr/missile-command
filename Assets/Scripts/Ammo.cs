@@ -7,6 +7,7 @@ using UnityEngine.Events;
 public class Ammo : MonoBehaviour
 {
     [SerializeField] private int InitialAmmoSize;
+    [SerializeField] private bool InfiniteAmmo;
     [SerializeField] private Missile MissilePrefab;
 
     public UnityAction<int> OnAmmoChanged;
@@ -25,7 +26,7 @@ public class Ammo : MonoBehaviour
     public bool GetMissile(out Missile missile)
     {
         missile = null;
-        if (CurrentAmmo > 0)
+        if (CurrentAmmo > 0 || InfiniteAmmo)
         {
             missile = missilePool.Get();
             CurrentAmmo--;

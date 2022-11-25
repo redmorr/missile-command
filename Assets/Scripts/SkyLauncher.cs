@@ -4,24 +4,16 @@ using UnityEngine;
 
 public class SkyLauncher : MonoBehaviour, ILaunchMissile
 {
+
+    [SerializeField] private Launcher Launcher;
+
     public bool CanFire => true;
 
-    public Vector3 Position => throw new System.NotImplementedException();
+    public Vector3 Position => transform.position;
 
     public void Launch(Vector3 target)
     {
-        throw new System.NotImplementedException();
+        Launcher.Launch(transform.position, target);
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }
