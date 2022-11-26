@@ -3,7 +3,6 @@ using UnityEngine;
 public class MissilePool : Singleton<MissilePool>
 {
     [SerializeField] private int InitialAmmoSize;
-    [SerializeField] private bool InfiniteAmmo;
     [SerializeField] private Missile MissilePrefab;
 
     private Pool<Missile> missilePool;

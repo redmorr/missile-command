@@ -8,25 +8,27 @@ public class Ammo : MonoBehaviour
 
     public UnityAction<int> OnAmmoChanged;
 
-    public int CurrentAmmo { get; private set; }
     public int InitialAmmo { get => InitialAmmoSize; }
+    public bool HasAmmo { get => currentAmmo > 0 || InfiniteAmmo; }
 
+    private Launcher launcher;
+    private int currentAmmo;
 
     private void Awake()
     {
-        CurrentAmmo = InitialAmmoSize;
+        launcher = GetComponent<Launcher>();
+        launcher.OnLaunch += SpentAmmo;
+        currentAmmo = InitialAmmoSize;
     }
 
-    public bool GetMissile(out Missile missile)
+    private void SpentAmmo(Vector3 _)
     {
-        missile = null;
-        if (CurrentAmmo > 0 || InfiniteAmmo)
-        {
-            missile = MissilePool.Instance.Pull;
-            CurrentAmmo--;
-            OnAmmoChanged?.Invoke(CurrentAmmo);
-            return true;
-        }
-        return false;
+        currentAmmo--;
+        OnAmmoChanged?.Invoke(currentAmmo);
+    }
+
+    private void OnDisable()
+    {
+        launcher.OnLaunch -= SpentAmmo;
     }
 }

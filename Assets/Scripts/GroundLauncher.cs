@@ -7,7 +7,7 @@ public class GroundLauncher : MonoBehaviour, ILaunchMissile
     [SerializeField] private Targeter targeter;
     [SerializeField] private Ammo ammo;
 
-    public bool CanFire => isActiveAndEnabled && ammo.CurrentAmmo > 0;
+    public bool CanFire => isActiveAndEnabled && ammo.HasAmmo;
 
     public Vector3 Position => transform.position;
 
