@@ -7,7 +7,7 @@ public class Missile : MonoBehaviour, IPoolable<Missile>, IDestructible, IPoints
     [SerializeField] private float DistanceThereshold; // TODO: Calculate from fixed time step * speed.
 
     public int PointsForBeingDestroyed { get; private set; }
-    public ExplosionStats ExplosionStats { get; set; }
+    public ExplosionStats ExplosionStats { get; private set; }
 
     private Rigidbody2D _rigidbody2D;
     private Action<Missile> returnToPool;
@@ -23,20 +23,16 @@ public class Missile : MonoBehaviour, IPoolable<Missile>, IDestructible, IPoints
         explosionPool = FindObjectOfType<ExplosionPool>();
     }
 
-    public void Setup(Vector3 position, Quaternion rotation, Vector2 startPoint, Vector2 destinationPoint, float speed, int points)
+    public void Setup(Vector3 position, Quaternion rotation, Vector2 startPoint, Vector2 destinationPoint, float speed, int points, ExplosionStats explosionStats)
     {
         transform.SetPositionAndRotation(position, rotation);
         this.startPoint = startPoint;
         this.destinationPoint = destinationPoint;
         this.speed = speed;
         PointsForBeingDestroyed = points;
+        ExplosionStats = explosionStats;
 
         directionToDestination = (destinationPoint - startPoint).normalized;
-    }
-
-    public void SetupExplosion(ExplosionStats explosionStats)
-    {
-        ExplosionStats = explosionStats;
     }
 
     private void FixedUpdate()

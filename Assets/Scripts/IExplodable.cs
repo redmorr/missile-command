@@ -1,5 +1,5 @@
 public interface IExplodable
 {
-    public ExplosionStats ExplosionStats { get; set; }
+    public ExplosionStats ExplosionStats { get; }
     public void Explode();
 }

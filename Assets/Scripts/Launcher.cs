@@ -22,8 +22,13 @@ public class Launcher : MonoBehaviour
     {
         Missile missile = missilePool.Pull;
         Vector3 directionToTarget = to - from;
-        missile.Setup(from, Quaternion.LookRotation(Vector3.forward, directionToTarget), from, to, MissileSpeed, PointsOnMissileDestroyed);
-        missile.SetupExplosion(MissileExplostionStats);
+        missile.Setup(from,
+                      Quaternion.LookRotation(Vector3.forward, directionToTarget),
+                      from,
+                      to,
+                      MissileSpeed,
+                      PointsOnMissileDestroyed,
+                      MissileExplostionStats);
         OnLaunch?.Invoke(to);
     }
 }
