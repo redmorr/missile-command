@@ -1,15 +1,17 @@
 using System;
 using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class Explosion : MonoBehaviour, IPoolable<Explosion>
 {
+    public GameObject Owner;
     private Action<Explosion> returnToPool;
     private float duration;
     private Vector3 minScale;
     private Vector3 maxScale;
     private float time;
 
-    public void Setup(Vector3 position, ExplosionStats explosionStats)
+    public void Setup(Vector2 position, ExplosionStats explosionStats)
     {
         duration = explosionStats.Duration;
         minScale = new Vector3(explosionStats.StartRadius, explosionStats.StartRadius, explosionStats.StartRadius);
@@ -26,6 +28,7 @@ public class Explosion : MonoBehaviour, IPoolable<Explosion>
         if (time > duration)
         {
             gameObject.SetActive(false);
+            ReturnToPool();
         }
     }
 
@@ -41,11 +44,13 @@ public class Explosion : MonoBehaviour, IPoolable<Explosion>
 
     private void OnDisable()
     {
+        transform.localScale = Vector3.zero;
         ReturnToPool();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log(name);
         if (collision.TryGetComponent(out IDestructible destructible))
         {
             if (destructible is IPointsOnDestroyed)

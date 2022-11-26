@@ -310,7 +310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c36ac0aeb7489254db83a06811dd0776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MissileSpeed: 5
+  MissileSpeed: 1
   MissileExplostionStats: {fileID: 11400000, guid: ec2c12c4b0b664841ae38d525c2d7d0e, type: 2}
   PointsOnMissileDestroyed: 0
 --- !u!114 &3983638268371524492
@@ -428,6 +428,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Points: 0
+  _ExplosionStats: {fileID: 0}
 --- !u!1 &8919541692635855613
 GameObject:
   m_ObjectHideFlags: 0
