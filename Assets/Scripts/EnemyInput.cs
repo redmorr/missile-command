@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class EnemyInput : MonoBehaviour
 {
+    [SerializeField] private float frequency = 2f;
     [SerializeField] private List<Targetable> playersUnits;
     [SerializeField] private ICommander commander;
 
@@ -41,7 +42,7 @@ public class EnemyInput : MonoBehaviour
             {
                 commander.OrderAttack(pos);
             }
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(frequency);
         }
     }
 
