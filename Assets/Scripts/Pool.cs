@@ -41,7 +41,7 @@ public class Pool<T> where T : MonoBehaviour, IPoolable<T>
             instance = GameObject.Instantiate(poolableObjectPrefab);
 
         instance.gameObject.SetActive(true);
-        instance.Init(Add);
+        instance.InitPoolable(Add);
 
         return instance;
     }

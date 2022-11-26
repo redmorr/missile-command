@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class Launcher : MonoBehaviour
 {
     [SerializeField] private float MissileSpeed = 5f;
+    [SerializeField] private ExplosionStats MissileExplostionStats;
     [SerializeField] private int PointsOnMissileDestroyed;
 
     public UnityAction<Vector3> OnLaunch;
@@ -22,6 +23,7 @@ public class Launcher : MonoBehaviour
         Missile missile = missilePool.Pull;
         Vector3 directionToTarget = to - from;
         missile.Setup(from, Quaternion.LookRotation(Vector3.forward, directionToTarget), from, to, MissileSpeed, PointsOnMissileDestroyed);
+        missile.SetupExplosion(MissileExplostionStats);
         OnLaunch?.Invoke(to);
     }
 }

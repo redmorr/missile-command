@@ -1,21 +1,27 @@
 using System;
 using UnityEngine;
-using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Missile : MonoBehaviour, IPoolable<Missile>, IDestructible, IPointsOnDestroyed
+public class Missile : MonoBehaviour, IPoolable<Missile>, IDestructible, IPointsOnDestroyed, IExplodable
 {
-    [SerializeField] private Rigidbody2D Rigidbody2D;
     [SerializeField] private float DistanceThereshold; // TODO: Calculate from fixed time step * speed.
-    [SerializeField] private Explosion ExplosionPrefab;
 
+    public int PointsForBeingDestroyed { get; private set; }
+    public ExplosionStats ExplosionStats { get; set; }
+
+    private Rigidbody2D _rigidbody2D;
     private Action<Missile> returnToPool;
     private Vector2 startPoint;
     private Vector2 destinationPoint;
     private Vector2 directionToDestination;
     private float speed;
+    private ExplosionPool explosionPool;
 
-    public int PointsForBeingDestroyed { get; private set; }
+    private void Awake()
+    {
+        _rigidbody2D = GetComponent<Rigidbody2D>();
+        explosionPool = FindObjectOfType<ExplosionPool>();
+    }
 
     public void Setup(Vector3 position, Quaternion rotation, Vector2 startPoint, Vector2 destinationPoint, float speed, int points)
     {
@@ -28,6 +34,11 @@ public class Missile : MonoBehaviour, IPoolable<Missile>, IDestructible, IPoints
         directionToDestination = (destinationPoint - startPoint).normalized;
     }
 
+    public void SetupExplosion(ExplosionStats explosionStats)
+    {
+        ExplosionStats = explosionStats;
+    }
+
     private void FixedUpdate()
     {
         Move();
@@ -38,7 +49,7 @@ public class Missile : MonoBehaviour, IPoolable<Missile>, IDestructible, IPoints
         ReturnToPool();
     }
 
-    public void Init(Action<Missile> action)
+    public void InitPoolable(Action<Missile> action)
     {
         returnToPool = action;
     }
@@ -51,14 +62,22 @@ public class Missile : MonoBehaviour, IPoolable<Missile>, IDestructible, IPoints
     private void Move()
     {
         if (Vector2.Distance(transform.position, destinationPoint) < DistanceThereshold)
+        {
+            Explode();
             Die();
+        }
 
-        Rigidbody2D.MovePosition(new Vector2(transform.position.x, transform.position.y) + speed * Time.fixedDeltaTime * directionToDestination);
+        _rigidbody2D.MovePosition(new Vector2(transform.position.x, transform.position.y) + speed * Time.fixedDeltaTime * directionToDestination);
     }
 
     public void Die()
     {
-        Instantiate(ExplosionPrefab, transform.position, Quaternion.identity);
         gameObject.SetActive(false);
+    }
+
+    public void Explode()
+    {
+        Explosion explosion = explosionPool.Pull;
+        explosion.Setup(transform.position, ExplosionStats);
     }
 }

@@ -1,35 +1,47 @@
+using System;
 using UnityEngine;
 
-public class Explosion : MonoBehaviour
+public class Explosion : MonoBehaviour, IPoolable<Explosion>
 {
-    [SerializeField] private float Duration = 1f;
-    [SerializeField] private float MinimumSize = 1f;
-    [SerializeField] private float MaximumSize = 3f;
-
+    private Action<Explosion> returnToPool;
+    private float duration;
+    private Vector3 minScale;
+    private Vector3 maxScale;
     private float time;
-    private Vector3 startScale;
-    private Vector2 finalScale;
 
-    private void Awake()
+    public void Setup(Vector3 position, ExplosionStats explosionStats)
     {
-        startScale = new Vector3(MinimumSize, MinimumSize, MinimumSize);
-        finalScale = new Vector3(MaximumSize, MaximumSize, MaximumSize);
-    }
-
-    private void Start()
-    {
+        duration = explosionStats.Duration;
+        minScale = new Vector3(explosionStats.StartRadius, explosionStats.StartRadius, explosionStats.StartRadius);
+        maxScale = new Vector3(explosionStats.EndRadius, explosionStats.EndRadius, explosionStats.EndRadius);
+        transform.position = position;
         time = 0f;
     }
 
     private void Update()
     {
-        transform.localScale = Vector3.Lerp(startScale, finalScale, time / Duration);
+        transform.localScale = Vector3.Lerp(minScale, maxScale, time / duration);
         time += Time.deltaTime;
 
-        if (time > Duration)
+        if (time > duration)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
+    }
+
+    public void InitPoolable(Action<Explosion> action)
+    {
+        returnToPool = action;
+    }
+
+    public void ReturnToPool()
+    {
+        returnToPool?.Invoke(this);
+    }
+
+    private void OnDisable()
+    {
+        ReturnToPool();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -37,10 +49,13 @@ public class Explosion : MonoBehaviour
         if (collision.TryGetComponent(out IDestructible destructible))
         {
             if (destructible is IPointsOnDestroyed)
-            {
                 ScoreKeeper.Instance.AddScore((destructible as IPointsOnDestroyed).PointsForBeingDestroyed);
-            }
+
             destructible.Die();
+
+            if (destructible is IExplodable)
+                (destructible as IExplodable).Explode();
+
         }
     }
 }

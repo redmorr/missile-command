@@ -311,6 +311,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MissileSpeed: 5
+  MissileExplostionStats: {fileID: 11400000, guid: ec2c12c4b0b664841ae38d525c2d7d0e, type: 2}
+  PointsOnMissileDestroyed: 0
 --- !u!114 &3983638268371524492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -350,7 +352,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InitialAmmoSize: 5
-  MissilePrefab: {fileID: 2739014110904703649, guid: ecbbe2f7790315e44b60e7d57c944128, type: 3}
+  InfiniteAmmo: 0
 --- !u!114 &5853306852312172977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -425,6 +427,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dbf6e2cf9113c04db614a97c26fbe12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Points: 0
 --- !u!1 &8919541692635855613
 GameObject:
   m_ObjectHideFlags: 0
