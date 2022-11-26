@@ -1,8 +1,9 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Missile : MonoBehaviour, IPoolable<Missile>, IDestructible
+public class Missile : MonoBehaviour, IPoolable<Missile>, IDestructible, IPointsOnDestroyed
 {
     [SerializeField] private Rigidbody2D Rigidbody2D;
     [SerializeField] private float DistanceThereshold; // TODO: Calculate from fixed time step * speed.
@@ -13,14 +14,16 @@ public class Missile : MonoBehaviour, IPoolable<Missile>, IDestructible
     private Vector2 destinationPoint;
     private Vector2 directionToDestination;
     private float speed;
-    public int id;
 
-    public void Setup(Vector3 position, Quaternion rotation, Vector2 startPoint, Vector2 destinationPoint, float speed)
+    public int PointsForBeingDestroyed { get; private set; }
+
+    public void Setup(Vector3 position, Quaternion rotation, Vector2 startPoint, Vector2 destinationPoint, float speed, int points)
     {
         transform.SetPositionAndRotation(position, rotation);
         this.startPoint = startPoint;
         this.destinationPoint = destinationPoint;
         this.speed = speed;
+        PointsForBeingDestroyed = points;
 
         directionToDestination = (destinationPoint - startPoint).normalized;
     }

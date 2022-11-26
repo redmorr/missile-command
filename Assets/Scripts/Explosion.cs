@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 public class Explosion : MonoBehaviour
 {
@@ -37,13 +34,12 @@ public class Explosion : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out Score score))
-        {
-
-        }
-
         if (collision.TryGetComponent(out IDestructible destructible))
         {
+            if (destructible is IPointsOnDestroyed)
+            {
+                ScoreKeeper.Instance.AddScore((destructible as IPointsOnDestroyed).PointsForBeingDestroyed);
+            }
             destructible.Die();
         }
     }

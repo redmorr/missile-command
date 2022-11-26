@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class Launcher : MonoBehaviour
 {
     [SerializeField] private float MissileSpeed = 5f;
+    [SerializeField] private int PointsOnDestroyed;
 
     public bool CanFire { get => ammo.CurrentAmmo > 0; }
 
@@ -23,7 +24,7 @@ public class Launcher : MonoBehaviour
         if (ammo.GetMissile(out Missile missile))
         {
             Vector3 directionToTarget = to - from;
-            missile.Setup(from, Quaternion.LookRotation(Vector3.forward, directionToTarget), from, to, MissileSpeed);
+            missile.Setup(from, Quaternion.LookRotation(Vector3.forward, directionToTarget), from, to, MissileSpeed, PointsOnDestroyed);
             OnLaunch?.Invoke(to);
         }
     }
