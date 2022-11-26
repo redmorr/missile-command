@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 874f9a3c317eb8a4b90fea6515d08439, type: 3}
   m_Name: CityExplosion
   m_EditorClassIdentifier: 
-  StartRadius: 0
-  EndRadius: 0
-  Duration: 0
+  StartRadius: 0.1
+  EndRadius: 2
+  Duration: 1.5
