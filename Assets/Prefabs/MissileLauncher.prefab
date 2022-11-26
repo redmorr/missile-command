@@ -428,6 +428,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Points: 0
+  _ExplosionStats: {fileID: 11400000, guid: d007713ab41577e49a8d066fce3b7201, type: 2}
 --- !u!1 &8919541692635855613
 GameObject:
   m_ObjectHideFlags: 0

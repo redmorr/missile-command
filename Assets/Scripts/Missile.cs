@@ -16,6 +16,7 @@ public class Missile : MonoBehaviour, IPoolable<Missile>, IDestructible, IPoints
     private Vector2 directionToDestination;
     private float speed;
     private ExplosionPool explosionPool;
+    private float previousDistance;
 
     private void Awake()
     {
@@ -31,7 +32,7 @@ public class Missile : MonoBehaviour, IPoolable<Missile>, IDestructible, IPoints
         this.speed = speed;
         PointsForBeingDestroyed = points;
         ExplosionStats = explosionStats;
-
+        previousDistance = Mathf.Infinity;
         directionToDestination = (destinationPoint - startPoint).normalized;
     }
 
@@ -57,13 +58,17 @@ public class Missile : MonoBehaviour, IPoolable<Missile>, IDestructible, IPoints
 
     private void Move()
     {
-        if (Vector2.Distance(transform.position, destinationPoint) < DistanceThereshold)
+        float distance = Vector2.Distance(transform.position, destinationPoint);
+        if (distance > previousDistance)
         {
             Explode();
             Die();
         }
-
-        _rigidbody2D.MovePosition(new Vector2(transform.position.x, transform.position.y) + speed * Time.fixedDeltaTime * directionToDestination);
+        else
+        {
+            previousDistance = distance;
+            _rigidbody2D.MovePosition(new Vector2(transform.position.x, transform.position.y) + speed * Time.fixedDeltaTime * directionToDestination);
+        }
     }
 
     public void Die()
