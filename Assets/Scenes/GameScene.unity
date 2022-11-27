@@ -1194,13 +1194,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 884663569}
     m_Modifications:
+    - target: {fileID: -1340277158383024670, guid: d82e8d7ead33f864cb7c69b69b7ed6b0, type: 3}
+      propertyPath: Speed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4849304467631767160, guid: d82e8d7ead33f864cb7c69b69b7ed6b0, type: 3}
       propertyPath: m_Name
       value: SkyLauncher (1)
       objectReference: {fileID: 0}
     - target: {fileID: 4849304467631767160, guid: d82e8d7ead33f864cb7c69b69b7ed6b0, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4849304467631767163, guid: d82e8d7ead33f864cb7c69b69b7ed6b0, type: 3}
       propertyPath: m_RootOrder
@@ -1871,7 +1875,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1328054045
 Transform:
   m_ObjectHideFlags: 0
@@ -2067,13 +2071,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 884663569}
     m_Modifications:
+    - target: {fileID: -1340277158383024670, guid: d82e8d7ead33f864cb7c69b69b7ed6b0, type: 3}
+      propertyPath: Speed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4849304467631767160, guid: d82e8d7ead33f864cb7c69b69b7ed6b0, type: 3}
       propertyPath: m_Name
       value: SkyLauncher
       objectReference: {fileID: 0}
     - target: {fileID: 4849304467631767160, guid: d82e8d7ead33f864cb7c69b69b7ed6b0, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4849304467631767163, guid: d82e8d7ead33f864cb7c69b69b7ed6b0, type: 3}
       propertyPath: m_RootOrder

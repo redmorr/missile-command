@@ -41,7 +41,7 @@ public class EnemyInput : MonoBehaviour
             yield return new WaitForSeconds(frequency);
             if (GetRandomTargetablePosition(out Vector3 pos))
             {
-                commander.OrderAttack(pos);
+                commander.OrderAttackRandom(pos);
             }
         }
     }
