@@ -710,6 +710,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GroundMissileLauncher 3
       objectReference: {fileID: 0}
+    - target: {fileID: 8919541692296506069, guid: 9e32c78540286b34f80c6baad0cbc062, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8919541692296506071, guid: 9e32c78540286b34f80c6baad0cbc062, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1103,7 +1107,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &716868970
 PrefabInstance:
@@ -1135,6 +1139,10 @@ PrefabInstance:
     - target: {fileID: 8919541692296506069, guid: 9e32c78540286b34f80c6baad0cbc062, type: 3}
       propertyPath: m_Name
       value: GroundMissileLauncher 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8919541692296506069, guid: 9e32c78540286b34f80c6baad0cbc062, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8919541692296506071, guid: 9e32c78540286b34f80c6baad0cbc062, type: 3}
       propertyPath: m_RootOrder
@@ -1301,7 +1309,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &823752969
 GameObject:
@@ -1509,7 +1517,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1046764781
 GameObject:
@@ -1868,7 +1876,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1328054045}
   - component: {fileID: 1328054047}
-  - component: {fileID: 1328054046}
+  - component: {fileID: 1328054048}
   m_Layer: 0
   m_Name: MissileCommander
   m_TagString: Untagged
@@ -1894,18 +1902,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1328054046
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1328054044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ce89f9d9df61e64a8886b795464b8d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1328054047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1918,6 +1914,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcb6b280197955e4cb28f154870220a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MaxTargetHeight: {fileID: 1895998657}
+--- !u!114 &1328054048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1328054044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3aebdbe921ca723428d8f7374a775d1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  launchers: []
 --- !u!1 &1442978972
 GameObject:
   m_ObjectHideFlags: 0
@@ -2353,6 +2363,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1854964692}
   m_CullTransparentMesh: 1
+--- !u!1 &1895998656
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1895998657}
+  m_Layer: 0
+  m_Name: MaxTargetHeightMarker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1895998657
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1895998656}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -22.4, y: -24.5, z: -0.46335816}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1934174618
 GameObject:
   m_ObjectHideFlags: 0
@@ -2481,7 +2522,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &5510995373621366845 stripped
 Transform:
@@ -2576,6 +2617,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GroundMissileLauncher 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8919541692296506069, guid: 9e32c78540286b34f80c6baad0cbc062, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8919541692296506071, guid: 9e32c78540286b34f80c6baad0cbc062, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -2631,7 +2676,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9137790564235397358}
-  - component: {fileID: 9137790564235397359}
+  - component: {fileID: 9137790564235397362}
   - component: {fileID: 9137790564235397360}
   - component: {fileID: 9137790564235397361}
   m_Layer: 0
@@ -2656,19 +2701,6 @@ Transform:
   m_Father: {fileID: 884663569}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9137790564235397359
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9137790564235397357}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d278fe7012e95bf42b07f88bf4c056a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Launcher: {fileID: 9137790564235397360}
 --- !u!114 &9137790564235397360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2696,3 +2728,16 @@ MonoBehaviour:
   PointsForBeingDestroyed: 200
   Speed: 3
   ExplosionStats: {fileID: 11400000, guid: 64c141c770d0dfe40a8bd37d4f1bdb05, type: 2}
+--- !u!114 &9137790564235397362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9137790564235397357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54317868d2a754c4e8717a827f8e9e09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Commander: {fileID: 0}

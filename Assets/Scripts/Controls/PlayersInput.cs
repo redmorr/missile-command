@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 
 public class PlayersInput : MonoBehaviour
 {
+    [SerializeField] private Transform MaxTargetHeight;
     private InputActions inputActions;
 
     private ICommander commander;
@@ -26,6 +27,8 @@ public class PlayersInput : MonoBehaviour
 
     public void ChooseTarget(InputAction.CallbackContext _)
     {
-        commander.OrderAttack(Camera.main.ScreenToWorldPoint(inputActions.Player.Look.ReadValue<Vector2>()));
+        Vector3 target = Camera.main.ScreenToWorldPoint(inputActions.Player.Look.ReadValue<Vector2>());
+        target.y = Mathf.Max(target.y, MaxTargetHeight.position.y);
+        commander.OrderAttack(target);
     }
 }
