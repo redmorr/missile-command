@@ -1,18 +1,18 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.VFX;
 
-public class Pool<T> where T : MonoBehaviour, IPoolable<T>
+public class Pool<T> : Singleton<Pool<T>> where T : MonoBehaviour, IPoolable<T>
 {
-    private T poolableObjectPrefab;
-    private Stack<T> pooledObjects = new Stack<T>();
+    [SerializeField] private int InitialPoolSize;
+    [SerializeField] private T Prefab;
 
-    public Pool(T poolableObjectPrefab, int initialPoolSize)
+    protected override void Awake()
     {
-        this.poolableObjectPrefab = poolableObjectPrefab;
-        Spawn(initialPoolSize);
+        base.Awake();
+        Spawn(InitialPoolSize);
     }
+
+    private Stack<T> pooledObjects = new Stack<T>();
 
     private void Spawn(int amount)
     {
@@ -20,7 +20,7 @@ public class Pool<T> where T : MonoBehaviour, IPoolable<T>
 
         for (int i = 0; i < amount; i++)
         {
-            instance = GameObject.Instantiate(poolableObjectPrefab);
+            instance = GameObject.Instantiate(Prefab);
             Add(instance);
         }
     }
@@ -38,7 +38,7 @@ public class Pool<T> where T : MonoBehaviour, IPoolable<T>
         if (pooledObjects.Count > 0)
             instance = pooledObjects.Pop();
         else
-            instance = GameObject.Instantiate(poolableObjectPrefab);
+            instance = GameObject.Instantiate(Prefab);
 
         instance.gameObject.SetActive(true);
         instance.InitPoolable(Add);

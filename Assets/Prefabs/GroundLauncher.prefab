@@ -207,8 +207,9 @@ GameObject:
   - component: {fileID: 8908958873710900322}
   - component: {fileID: 3273492007100349180}
   - component: {fileID: 5614678071834072365}
+  - component: {fileID: -1611565349558367955}
   m_Layer: 0
-  m_Name: MissileLauncher
+  m_Name: GroundLauncher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -310,7 +311,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c36ac0aeb7489254db83a06811dd0776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MissileSpeed: 5
   MissileExplostionStats: {fileID: 11400000, guid: ec2c12c4b0b664841ae38d525c2d7d0e, type: 2}
   PointsOnMissileDestroyed: 0
 --- !u!114 &3983638268371524492
@@ -429,6 +429,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Points: 0
   _ExplosionStats: {fileID: 11400000, guid: d007713ab41577e49a8d066fce3b7201, type: 2}
+--- !u!114 &-1611565349558367955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8919541692296506069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9360f9541136c74ab553b66766a2442, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8919541692635855613
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Ammo : MonoBehaviour
+public class AmmoCounter : MonoBehaviour
 {
     [SerializeField] private int InitialAmmoSize;
     [SerializeField] private bool InfiniteAmmo;

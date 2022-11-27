@@ -99,9 +99,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a1e9bd9d5b28745899ddc713a04797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Rigidbody2D: {fileID: 8459203165034034285}
   DistanceThereshold: 0.2
-  ExplosionPrefab: {fileID: 5269832221445860310, guid: 4bea67ec1db3707419e5634717dcf06d, type: 3}
+  _PointsForBeingDestroyed: 100
+  Speed: 10
+  _ExplosionStats: {fileID: 11400000, guid: ec2c12c4b0b664841ae38d525c2d7d0e, type: 2}
 --- !u!50 &8459203165034034285
 Rigidbody2D:
   serializedVersion: 4

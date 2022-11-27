@@ -8,12 +8,12 @@ public class AmmoDisplay : MonoBehaviour
     [SerializeField] private Canvas AmmoDisplayCanvas;
     [SerializeField] private RectTransform AmmoCellPrefab;
 
-    private Ammo ammo;
+    private AmmoCounter ammo;
     public List<RectTransform> ammoCells;
 
     private void Awake()
     {
-        ammo = GetComponent<Ammo>();
+        ammo = GetComponent<AmmoCounter>();
         ammo.OnAmmoChanged += UpdateDisplay;
 
         ammoCells = new List<RectTransform>();
