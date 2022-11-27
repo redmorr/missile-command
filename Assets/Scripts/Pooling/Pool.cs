@@ -6,11 +6,12 @@ public class Pool<T> : Singleton<Pool<T>> where T : MonoBehaviour, IPoolable<T>
     [SerializeField] private int InitialPoolSize;
     [SerializeField] private T Prefab;
 
-    private Stack<T> pooledObjects = new Stack<T>();
+    private Stack<T> pooledObjects;
 
     protected override void Awake()
     {
         base.Awake();
+        pooledObjects = new Stack<T>(InitialPoolSize);
         Spawn(InitialPoolSize);
     }
 
