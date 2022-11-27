@@ -1,7 +1,7 @@
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
-public class GroundLauncher : MonoBehaviour, ILaunchMissile
+public class GroundLauncher : MonoBehaviour//, ILaunchMissile
 {
     [SerializeField] private Launcher launcher;
     [SerializeField] private Targeter targeter;
@@ -13,7 +13,10 @@ public class GroundLauncher : MonoBehaviour, ILaunchMissile
 
     public void Launch(Vector3 target)
     {
+        IProjectile projectile = projectileProvider.GetProjectile();
         Vector3 calculatedTarget = targeter.CalculateTarget(target);
-        launcher.Launch(transform.position, calculatedTarget);
+        launcher.Launch(projectile, transform.position, calculatedTarget);
     }
+
+    private IProjectileProvider projectileProvider;
 }

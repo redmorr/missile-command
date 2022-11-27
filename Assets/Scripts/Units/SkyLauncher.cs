@@ -1,19 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class SkyLauncher : MonoBehaviour, ILaunchMissile
+public class SkyLauncher : ILaunchMissile
 {
-
     [SerializeField] private Launcher Launcher;
 
-    public bool CanFire => true;
+    private IProjectileProvider projectileProvider;
 
-    public Vector3 Position => transform.position;
-
-    public void Launch(Vector3 target)
+    private void Awake()
     {
-        Launcher.Launch(transform.position, target);
+        projectileProvider = GetComponent<IProjectileProvider>();
+    }
+
+    public override void Launch(Vector3 target)
+    {
+        IProjectile projectile = projectileProvider.GetProjectile();
+        Launcher.Launch(projectile, transform.position, target);
     }
 
 }

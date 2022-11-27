@@ -3,21 +3,11 @@ using UnityEngine.Events;
 
 public class Launcher : MonoBehaviour
 {
-    [SerializeField] private ExplosionStats MissileExplostionStats;
-    [SerializeField] private int PointsOnMissileDestroyed;
-
     public UnityAction<Vector3> OnLaunch;
 
-    private IProjectileProvider projectileProvider;
-
-    private void Awake()
+   
+    public void Launch(IProjectile projectile, Vector3 from, Vector3 to)
     {
-        projectileProvider = GetComponent<IProjectileProvider>();
-    }
-
-    public void Launch(Vector3 from, Vector3 to)
-    {
-        IProjectile projectile = projectileProvider.GetProjectile();
         Vector3 directionToTarget = to - from;
         projectile.Launch(from, to);
         OnLaunch?.Invoke(to);

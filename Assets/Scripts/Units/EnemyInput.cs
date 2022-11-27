@@ -38,11 +38,11 @@ public class EnemyInput : MonoBehaviour
     {
         while (true)
         {
+            yield return new WaitForSeconds(frequency);
             if (GetRandomTargetablePosition(out Vector3 pos))
             {
                 commander.OrderAttack(pos);
             }
-            yield return new WaitForSeconds(frequency);
         }
     }
 

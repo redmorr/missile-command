@@ -1088,7 +1088,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0ef710877d06a744ad173fe8512f2b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InitialPoolSize: 10
+  InitialPoolSize: 4
   Prefab: {fileID: 5269832221445860310, guid: 4bea67ec1db3707419e5634717dcf06d, type: 3}
 --- !u!4 &678044032
 Transform:
@@ -1198,6 +1198,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SkyLauncher (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4849304467631767160, guid: d82e8d7ead33f864cb7c69b69b7ed6b0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4849304467631767163, guid: d82e8d7ead33f864cb7c69b69b7ed6b0, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1249,6 +1253,52 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4849304467631767163, guid: d82e8d7ead33f864cb7c69b69b7ed6b0, type: 3}
   m_PrefabInstance: {fileID: 730673941}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &734965827
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 734965829}
+  - component: {fileID: 734965828}
+  m_Layer: 0
+  m_Name: AirplanePool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &734965828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 734965827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a26ee479db05f314082fe421edfe326e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InitialPoolSize: 3
+  Prefab: {fileID: 9076182390790883976, guid: c59ce31f679b5344d966be733983bc02, type: 3}
+--- !u!4 &734965829
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 734965827}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 14.4809265, y: -1.156759, z: 0.3326273}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &823752969
 GameObject:
   m_ObjectHideFlags: 0
@@ -1375,6 +1425,7 @@ Transform:
   m_Children:
   - {fileID: 1698835769}
   - {fileID: 730673942}
+  - {fileID: 9137790564235397358}
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1390,6 +1441,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aebdbe921ca723428d8f7374a775d1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  launchers: []
 --- !u!114 &884663571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1438,7 +1490,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afe9b8116f7ce6a468651e86fa8bc9b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InitialPoolSize: 10
+  InitialPoolSize: 4
   Prefab: {fileID: 2739014110904703649, guid: ecbbe2f7790315e44b60e7d57c944128, type: 3}
 --- !u!4 &997982603
 Transform:
@@ -1819,7 +1871,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1328054045
 Transform:
   m_ObjectHideFlags: 0
@@ -2018,6 +2070,10 @@ PrefabInstance:
     - target: {fileID: 4849304467631767160, guid: d82e8d7ead33f864cb7c69b69b7ed6b0, type: 3}
       propertyPath: m_Name
       value: SkyLauncher
+      objectReference: {fileID: 0}
+    - target: {fileID: 4849304467631767160, guid: d82e8d7ead33f864cb7c69b69b7ed6b0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4849304467631767163, guid: d82e8d7ead33f864cb7c69b69b7ed6b0, type: 3}
       propertyPath: m_RootOrder
@@ -2558,3 +2614,77 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e32c78540286b34f80c6baad0cbc062, type: 3}
+--- !u!1 &9137790564235397357
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9137790564235397358}
+  - component: {fileID: 9137790564235397359}
+  - component: {fileID: 9137790564235397360}
+  - component: {fileID: 9137790564235397361}
+  m_Layer: 0
+  m_Name: AirplaneLauncher
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9137790564235397358
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9137790564235397357}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 14.7, y: 8.41, z: -1.1233892}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 884663569}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9137790564235397359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9137790564235397357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d278fe7012e95bf42b07f88bf4c056a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Launcher: {fileID: 9137790564235397360}
+--- !u!114 &9137790564235397360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9137790564235397357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c36ac0aeb7489254db83a06811dd0776, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &9137790564235397361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9137790564235397357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86616130edc24044a9fcc5fdfcbd04fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PointsForBeingDestroyed: 200
+  Speed: 3
+  ExplosionStats: {fileID: 11400000, guid: 64c141c770d0dfe40a8bd37d4f1bdb05, type: 2}

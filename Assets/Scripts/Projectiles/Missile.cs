@@ -9,7 +9,7 @@ public class Missile : MonoBehaviour, IPoolable<Missile>, IDestructible, IPoints
     public ExplosionStats ExplosionStats { get; set; }
 
     private Rigidbody2D _rigidbody2D;
-    private Action<Missile> returnToPool;
+    protected Action<Missile> returnToPool;
     private Vector3 from;
     private Vector3 to;
     private Vector3 directionToDestination;
