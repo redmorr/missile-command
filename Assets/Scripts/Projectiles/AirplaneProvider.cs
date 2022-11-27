@@ -20,15 +20,16 @@ public class AirplaneProvider : MonoBehaviour, IProjectileProvider
 
     public IProjectile GetProjectile()
     {
-        Airplane missile = projectilePool.Pull();
+        Airplane airplane = projectilePool.Pull();
 
         Unit thisUnit = launcher.GetComponent<Unit>();
-        Unit newSkyLauncher = missile.GetComponent<Unit>();
-        thisUnit.Commander.Register(newSkyLauncher);
+        Unit newUnit = airplane.GetComponent<Unit>();
 
-        missile.Speed = Speed;
-        missile.ExplosionStats = ExplosionStats;
-        missile.PointsForBeingDestroyed = PointsForBeingDestroyed;
-        return missile;
+        thisUnit.Commander.Register(newUnit);
+
+        airplane.Speed = Speed;
+        airplane.ExplosionStats = ExplosionStats;
+        airplane.PointsForBeingDestroyed = PointsForBeingDestroyed;
+        return airplane;
     }
 }

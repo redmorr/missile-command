@@ -4,8 +4,9 @@ using UnityEngine.Events;
 public class Unit : MonoBehaviour
 {
     public UnityAction<Unit> OnBeingDestroyed;
-    public Commander Commander;
-    public  bool CanFire { get => true; }
+    
+    public Commander Commander { get; set; }
+    public bool CanFire { get => true; }
     public Vector3 Position { get => transform.position; }
 
     private Launcher launcher;

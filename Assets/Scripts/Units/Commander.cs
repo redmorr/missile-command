@@ -1,83 +1,79 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class Commander : MonoBehaviour, ICommander
 {
-    public List<Unit> launchers;
+    public List<Unit> units;
 
     private void Awake()
     {
-        launchers = GetComponentsInChildren<Unit>().ToList();
+        units = GetComponentsInChildren<Unit>().ToList();
 
-        foreach (var item in launchers)
+        foreach (Unit unit in units)
         {
-            item.Commander = this;
-            item.OnBeingDestroyed += Unregister;
+            unit.Commander = this;
+            unit.OnBeingDestroyed += Unregister;
         }
     }
 
     public void OrderAttackRandom(Vector3 target)
     {
-        if (GetRandomMissileShooter(out Unit launcher))
+        if (GetRandomUnit(out Unit launcher))
             launcher.Launch(target);
     }
 
     public void OrderAttack(Vector3 target)
     {
-        if (GetClosestMissileShooter(out Unit launcher, target))
+        if (GetUnitClosestToTarget(out Unit launcher, target))
             launcher.Launch(target);
     }
 
-    public void Register(Unit newSkyLauncher)
+    public void Register(Unit newUnit)
     {
-        launchers.Add(newSkyLauncher);
-        newSkyLauncher.Commander = this;
-        newSkyLauncher.OnBeingDestroyed += Unregister;
+        units.Add(newUnit);
+        newUnit.Commander = this;
+        newUnit.OnBeingDestroyed += Unregister;
     }
 
-    private void Unregister(Unit launcher)
+    private void Unregister(Unit unit)
     {
-        launchers.Remove(launcher);
-        launcher.OnBeingDestroyed -= Unregister;
+        units.Remove(unit);
+        unit.OnBeingDestroyed -= Unregister;
     }
 
-    private bool GetRandomMissileShooter(out Unit missileShooter)
+    private bool GetRandomUnit(out Unit unit)
     {
-        missileShooter = null;
-        var randomIndex = Random.Range(0, launchers.Count);
+        unit = null;
+        var randomIndex = Random.Range(0, units.Count);
 
-        if (launchers[randomIndex] )
+        if (units[randomIndex])
         {
-            missileShooter = launchers[randomIndex];
+            unit = units[randomIndex];
             return true;
         }
 
         return false;
     }
 
-
-    private bool GetClosestMissileShooter(out Unit missileShooter, Vector3 target)
+    private bool GetUnitClosestToTarget(out Unit closestUnit, Vector3 target)
     {
-        missileShooter = null;
+        closestUnit = null;
         float minDistnace = Mathf.Infinity;
 
-        foreach (Unit launcher in launchers)
+        foreach (Unit unit in units)
         {
-            if (launcher.CanFire)
+            if (unit.CanFire)
             {
-                float distance = Vector2.Distance(target, launcher.Position);
+                float distance = Vector2.Distance(target, unit.Position);
                 if (distance < minDistnace)
                 {
                     minDistnace = distance;
-                    missileShooter = launcher;
+                    closestUnit = unit;
                 }
             }
         }
 
-        return missileShooter != null;
+        return closestUnit != null;
     }
-
-
 }
