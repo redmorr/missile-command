@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
   m_Color: {r: 0.96862745, g: 1, b: 0, a: 1}
   m_FlipX: 0
@@ -99,10 +99,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a1e9bd9d5b28745899ddc713a04797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DistanceThereshold: 0.2
-  _PointsForBeingDestroyed: 100
-  Speed: 10
-  _ExplosionStats: {fileID: 11400000, guid: ec2c12c4b0b664841ae38d525c2d7d0e, type: 2}
 --- !u!50 &8459203165034034285
 Rigidbody2D:
   serializedVersion: 4
