@@ -8,16 +8,16 @@ public class Launcher : MonoBehaviour
 
     public UnityAction<Vector3> OnLaunch;
 
-    private AmmoProvider ammoProvider;
+    private IProjectileProvider projectileProvider;
 
     private void Awake()
     {
-        ammoProvider = GetComponent<AmmoProvider>();
+        projectileProvider = GetComponent<IProjectileProvider>();
     }
 
     public void Launch(Vector3 from, Vector3 to)
     {
-        IProjectile projectile = ammoProvider.GetProjectile();
+        IProjectile projectile = projectileProvider.GetProjectile();
         Vector3 directionToTarget = to - from;
         projectile.Setup(from, to);
         OnLaunch?.Invoke(to);

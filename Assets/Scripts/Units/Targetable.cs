@@ -36,7 +36,7 @@ public class Targetable : MonoBehaviour, IDestructible, IPointsOnSurvived, IExpl
 
     public void Explode()
     {
-        Explosion explosion = explosionPool.Get();
+        Explosion explosion = explosionPool.Pull();
         explosion.Setup(transform.position, ExplosionStats);
     }
 }

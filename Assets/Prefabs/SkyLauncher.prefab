@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4849304467631767163}
   - component: {fileID: 4849304467631767162}
   - component: {fileID: 4849304467631767141}
-  - component: {fileID: 523949083032926836}
+  - component: {fileID: -1340277158383024670}
   m_Layer: 0
   m_Name: SkyLauncher
   m_TagString: Untagged
@@ -61,7 +61,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MissileExplostionStats: {fileID: 11400000, guid: 64c141c770d0dfe40a8bd37d4f1bdb05, type: 2}
   PointsOnMissileDestroyed: 100
---- !u!114 &523949083032926836
+--- !u!114 &-1340277158383024670
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -70,6 +70,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 4849304467631767160}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9360f9541136c74ab553b66766a2442, type: 3}
+  m_Script: {fileID: 11500000, guid: c880488ec016fcc4cac143b524247a6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

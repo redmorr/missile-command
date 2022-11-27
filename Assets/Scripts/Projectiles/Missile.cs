@@ -77,7 +77,7 @@ public class Missile : MonoBehaviour, IPoolable<Missile>, IDestructible, IPoints
 
     public void Explode()
     {
-        Explosion explosion = explosionPool.Get();
+        Explosion explosion = explosionPool.Pull();
         explosion.Setup(transform.position, ExplosionStats);
     }
 }

@@ -6,13 +6,13 @@ public class Pool<T> : Singleton<Pool<T>> where T : MonoBehaviour, IPoolable<T>
     [SerializeField] private int InitialPoolSize;
     [SerializeField] private T Prefab;
 
+    private Stack<T> pooledObjects = new Stack<T>();
+
     protected override void Awake()
     {
         base.Awake();
         Spawn(InitialPoolSize);
     }
-
-    private Stack<T> pooledObjects = new Stack<T>();
 
     private void Spawn(int amount)
     {
@@ -21,17 +21,17 @@ public class Pool<T> : Singleton<Pool<T>> where T : MonoBehaviour, IPoolable<T>
         for (int i = 0; i < amount; i++)
         {
             instance = GameObject.Instantiate(Prefab);
-            Add(instance);
+            Release(instance);
         }
     }
 
-    private void Add(T instance)
+    private void Release(T instance)
     {
         instance.gameObject.SetActive(false);
         pooledObjects.Push(instance);
     }
 
-    public T Get()
+    public T Pull()
     {
         T instance;
 
@@ -41,7 +41,7 @@ public class Pool<T> : Singleton<Pool<T>> where T : MonoBehaviour, IPoolable<T>
             instance = GameObject.Instantiate(Prefab);
 
         instance.gameObject.SetActive(true);
-        instance.InitPoolable(Add);
+        instance.InitPoolable(Release);
 
         return instance;
     }
