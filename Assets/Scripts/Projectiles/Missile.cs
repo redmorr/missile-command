@@ -4,13 +4,9 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Missile : MonoBehaviour, IPoolable<Missile>, IDestructible, IPointsOnDestroyed, IExplodable, IProjectile
 {
-    [SerializeField] private float DistanceThereshold; // TODO: Calculate from fixed time step * speed.
-    [SerializeField] private int _PointsForBeingDestroyed;
-    [SerializeField] private int Speed;
-    [SerializeField] private ExplosionStats _ExplosionStats;
-
-    public int PointsForBeingDestroyed { get => _PointsForBeingDestroyed; set => _PointsForBeingDestroyed = value; }
-    public ExplosionStats ExplosionStats { get => _ExplosionStats; set => _ExplosionStats = value; }
+    public float Speed { get; set; }
+    public int PointsForBeingDestroyed { get; set; }
+    public ExplosionStats ExplosionStats { get; set; }
 
     private Rigidbody2D _rigidbody2D;
     private Action<Missile> returnToPool;
@@ -26,7 +22,7 @@ public class Missile : MonoBehaviour, IPoolable<Missile>, IDestructible, IPoints
         explosionPool = FindObjectOfType<ExplosionPool>();
     }
 
-    public void Setup(Vector3 from, Vector3 to)
+    public void Launch(Vector3 from, Vector3 to)
     {
         this.from = from;
         this.to = to;

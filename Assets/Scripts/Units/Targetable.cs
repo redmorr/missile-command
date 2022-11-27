@@ -8,7 +8,7 @@ public class Targetable : MonoBehaviour, IDestructible, IPointsOnSurvived, IExpl
     [SerializeField] private int Points;
     [SerializeField] private ExplosionStats _ExplosionStats;
 
-    public ExplosionStats ExplosionStats { get => _ExplosionStats; private set => _ExplosionStats = value; }
+    public ExplosionStats ExplosionStats { get => _ExplosionStats; set => _ExplosionStats = value; }
 
     public UnityAction<Targetable> OnBeingDestroyed;
 
@@ -17,7 +17,7 @@ public class Targetable : MonoBehaviour, IDestructible, IPointsOnSurvived, IExpl
 
     public Vector3 Position { get => transform.position; }
 
-    public int PointsForSurviving { get => Points; }
+    public int PointsForSurviving { get => Points; set => Points = value; }
 
 
     private void Awake()

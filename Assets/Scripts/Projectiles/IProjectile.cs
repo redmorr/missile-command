@@ -2,5 +2,6 @@ using UnityEngine;
 
 public interface IProjectile
 {
-    public void Setup(Vector3 from, Vector3 to);
+    public float Speed { get; set; }
+    public void Launch(Vector3 from, Vector3 to);
 }

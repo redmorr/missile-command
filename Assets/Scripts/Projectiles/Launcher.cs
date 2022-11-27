@@ -19,7 +19,7 @@ public class Launcher : MonoBehaviour
     {
         IProjectile projectile = projectileProvider.GetProjectile();
         Vector3 directionToTarget = to - from;
-        projectile.Setup(from, to);
+        projectile.Launch(from, to);
         OnLaunch?.Invoke(to);
     }
 }

@@ -1,4 +1,4 @@
 public interface IPointsOnDestroyed
 {
-    public int PointsForBeingDestroyed { get; }
+    public int PointsForBeingDestroyed { get; set; }
 }
