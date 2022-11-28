@@ -4,15 +4,15 @@ using UnityEngine.InputSystem;
 public class PlayersInput : MonoBehaviour
 {
     [SerializeField] private Transform MaxTargetHeight;
-    private InputActions inputActions;
 
+    private InputActions inputActions;
     private IOrderUnitAttack commander;
 
     private void Awake()
     {
         commander = GetComponent<IOrderUnitAttack>();
         inputActions = new InputActions();
-        inputActions.Player.Fire.performed += ChooseTarget;
+        inputActions.Player.Fire.performed += SelectTarget;
     }
 
     private void OnEnable()
@@ -25,7 +25,7 @@ public class PlayersInput : MonoBehaviour
         inputActions.Disable();
     }
 
-    public void ChooseTarget(InputAction.CallbackContext _)
+    public void SelectTarget(InputAction.CallbackContext _)
     {
         Vector3 target = Camera.main.ScreenToWorldPoint(inputActions.Player.Look.ReadValue<Vector2>());
         target.y = Mathf.Max(target.y, MaxTargetHeight.position.y);

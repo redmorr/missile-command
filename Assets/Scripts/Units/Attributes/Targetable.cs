@@ -6,19 +6,15 @@ using UnityEngine.Events;
 public class Targetable : MonoBehaviour, IDestructible, IPointsOnSurvived, IExplodable
 {
     [SerializeField] private int Points;
-    [SerializeField] private ExplosionStats _ExplosionStats;
-
-    public ExplosionStats ExplosionStats { get => _ExplosionStats; set => _ExplosionStats = value; }
+    [SerializeField] private ExplosionStats ExplosionStats;
 
     public UnityAction<Targetable> OnBeingDestroyed;
 
-    private Rigidbody2D _rigidbody2D;
-    private ExplosionPool explosionPool;
-
     public Vector3 Position { get => transform.position; }
-
     public int PointsForSurviving { get => Points; set => Points = value; }
 
+    private Rigidbody2D _rigidbody2D;
+    private ExplosionPool explosionPool;
 
     private void Awake()
     {

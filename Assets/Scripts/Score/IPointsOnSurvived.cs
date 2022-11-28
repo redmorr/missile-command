@@ -1,4 +1,4 @@
 public interface IPointsOnSurvived
 {
-    public int PointsForSurviving { get; set; }
+    public int PointsForSurviving { get; }
 }

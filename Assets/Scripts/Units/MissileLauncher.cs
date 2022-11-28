@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class MissileLauncher : MonoBehaviour, IAttacker
 {
@@ -9,9 +8,7 @@ public class MissileLauncher : MonoBehaviour, IAttacker
     [SerializeField] private int Speed;
     [SerializeField] private ExplosionStats ExplosionStats;
 
-    public UnityAction<MissileLauncher> OnBeingDestroyed;
     private Action<IAttacker> deregister;
-
     public bool CanFire { get => true; }
     public Vector3 Position { get => transform.position; }
 
@@ -29,7 +26,7 @@ public class MissileLauncher : MonoBehaviour, IAttacker
         launcher.Launch(missile, transform.position, target);
     }
 
-    public void InitPoolable(Action<IAttacker> action)
+    public void SetupAttacker(Action<IAttacker> action)
     {
         deregister = action;
     }

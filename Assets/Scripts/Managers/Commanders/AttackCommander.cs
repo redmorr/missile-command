@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class AttackCommander : MonoBehaviour, IOrderUnitAttack
 {
-    public List<IAttacker> units;
+    private List<IAttacker> attackers;
 
     private void Awake()
     {
-        units = GetComponentsInChildren<IAttacker>().ToList();
+        attackers = GetComponentsInChildren<IAttacker>().ToList();
 
-        foreach (IAttacker unit in units)
+        foreach (IAttacker attacker in attackers)
         {
-            unit.InitPoolable(Deregister);
+            attacker.SetupAttacker(Deregister);
         }
     }
 
@@ -30,43 +30,43 @@ public class AttackCommander : MonoBehaviour, IOrderUnitAttack
 
     public void Register(IAttacker newUnit)
     {
-        units.Add(newUnit);
-        newUnit.InitPoolable(Deregister);
+        attackers.Add(newUnit);
+        newUnit.SetupAttacker(Deregister);
     }
 
     private void Deregister(IAttacker unit)
     {
-        units.Remove(unit);
+        attackers.Remove(unit);
     }
 
     private bool GetRandomUnit(out IAttacker unit)
     {
         unit = null;
-        var randomIndex = Random.Range(0, units.Count);
+        var randomIndex = Random.Range(0, attackers.Count);
 
-        if (units.Count > 0)
+        if (attackers.Count > 0)
         {
-            unit = units[randomIndex];
+            unit = attackers[randomIndex];
             return true;
         }
 
         return false;
     }
 
-    private bool GetUnitClosestToTarget(out IAttacker closestUnit, Vector3 target)
+    private bool GetUnitClosestToTarget(out IAttacker closestAttacker, Vector3 target)
     {
-        closestUnit = null;
+        closestAttacker = null;
         float minDistnace = Mathf.Infinity;
 
-        foreach (IAttacker unit in units)
+        foreach (IAttacker attacker in attackers)
         {
-            float distance = Vector2.Distance(target, unit.Position);
+            float distance = Vector2.Distance(target, attacker.Position);
             if (distance < minDistnace)
             {
                 minDistnace = distance;
-                closestUnit = unit;
+                closestAttacker = attacker;
             }
         }
-        return closestUnit != null;
+        return closestAttacker != null;
     }
 }

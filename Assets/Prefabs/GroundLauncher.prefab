@@ -348,8 +348,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dbf6e2cf9113c04db614a97c26fbe12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Points: 0
-  _ExplosionStats: {fileID: 11400000, guid: d007713ab41577e49a8d066fce3b7201, type: 2}
+  Points: 1000
+  ExplosionStats: {fileID: 11400000, guid: d007713ab41577e49a8d066fce3b7201, type: 2}
 --- !u!61 &8908958873710900322
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -409,6 +409,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea027a925732d474b808a10af32c29aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  missilePool: {fileID: 0}
   PointsForBeingDestroyed: 0
   Speed: 13
   ExplosionStats: {fileID: 11400000, guid: ec2c12c4b0b664841ae38d525c2d7d0e, type: 2}

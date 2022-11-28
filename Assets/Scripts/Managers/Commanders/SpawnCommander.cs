@@ -4,54 +4,53 @@ using UnityEngine;
 
 public class SpawnCommander : MonoBehaviour, IOrderUnitSpawn
 {
-    public List<ISpawner> units;
-    public List<IAutonomous> autonomousUnits = new List<IAutonomous>();
+    private List<ISpawner> spawners;
+    private List<IAutoAttacker> autoAttackers = new List<IAutoAttacker>();
 
     private void Awake()
     {
-        units = GetComponentsInChildren<ISpawner>().ToList();
+        spawners = GetComponentsInChildren<ISpawner>().ToList();
 
-        foreach (ISpawner unit in units)
+        foreach (ISpawner unit in spawners)
         {
-            unit.InitPoolable(Deregister);
+            unit.InitSpawner(Deregister);
         }
-
     }
 
-    public void Spawn()
+    public void OrderSpawn()
     {
         if (GetRandomUnit(out ISpawner spawner))
         {
-            IAutonomous a = spawner.Spawn();
-            a.InitDeregistration(DeregisterAuto);
-            autonomousUnits.Add(a);
+            IAutoAttacker autoAttacker = spawner.Spawn();
+            autoAttacker.SetupAutoAttacker(DeregisterAuto);
+            autoAttackers.Add(autoAttacker);
         }
     }
 
     public void Register(ISpawner newUnit)
     {
-        units.Add(newUnit);
-        newUnit.InitPoolable(Deregister);
+        spawners.Add(newUnit);
+        newUnit.InitSpawner(Deregister);
     }
 
     private void Deregister(ISpawner unit)
     {
-        units.Remove(unit);
+        spawners.Remove(unit);
     }
 
-    private void DeregisterAuto(IAutonomous unit)
+    private void DeregisterAuto(IAutoAttacker unit)
     {
-        autonomousUnits.Remove(unit);
+        autoAttackers.Remove(unit);
     }
 
-    private bool GetRandomUnit(out ISpawner unit)
+    private bool GetRandomUnit(out ISpawner spawner)
     {
-        unit = null;
-        var randomIndex = Random.Range(0, units.Count);
+        spawner = null;
 
-        if (units.Count > 0)
+        if (spawners.Count > 0)
         {
-            unit = units[randomIndex];
+            int randomIndex = Random.Range(0, spawners.Count);
+            spawner = spawners[randomIndex];
             return true;
         }
 

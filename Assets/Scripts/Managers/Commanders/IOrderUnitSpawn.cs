@@ -1,4 +1,4 @@
 public interface IOrderUnitSpawn
 {
-    public void Spawn();
+    public void OrderSpawn();
 }

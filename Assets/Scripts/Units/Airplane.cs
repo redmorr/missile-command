@@ -1,31 +1,32 @@
 using System;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.WSA;
-using static UnityEngine.GraphicsBuffer;
 
-public class Airplane : MonoBehaviour, IPoolable<Airplane>, IAutonomous
+public class Airplane : MonoBehaviour, IPoolable<Airplane>, IAutoAttacker
 {
-    protected Action<Airplane> returnToPool;
+    private Action<Airplane> returnToPool;
 
-    private float Frequency;
-    private int PointsForBeingDestroyed;
-    private float Speed;
-    private ExplosionStats ExplosionStats;
+    private float attackFrequency;
+    private int pointsForBeingDestroyed;
+    private float speed;
+    private ExplosionStats explosionStats;
 
-    private Action<IAutonomous> deregister;
-
-    public UnityAction<MissileLauncher> OnBeingDestroyed;
-
-    public bool CanFire { get => true; }
+    private Action<IAutoAttacker> deregister;
     public Vector3 Position { get => transform.position; }
 
     private Launcher launcher;
     private ObjectPool<Missile> missilePool;
     private TargetManager targetManager;
-    private Coroutine coroutine;
+    private Coroutine attackRoutine;
+
+    public void Setup(float attackFrequency, float speed, int pointsForBeingDestroyed, ExplosionStats explosionStats)
+    {
+        this.attackFrequency = attackFrequency;
+        this.speed = speed;
+        this.pointsForBeingDestroyed = pointsForBeingDestroyed;
+        this.explosionStats = explosionStats;
+    }
 
     private void Awake()
     {
@@ -36,19 +37,19 @@ public class Airplane : MonoBehaviour, IPoolable<Airplane>, IAutonomous
 
     private void OnEnable()
     {
-        coroutine = StartCoroutine(SpawnRoutine());
+        attackRoutine = StartCoroutine(SpawnRoutine());
     }
 
     private IEnumerator SpawnRoutine()
     {
         while (true)
         {
-            yield return new WaitForSeconds(Frequency);
+            yield return new WaitForSeconds(attackFrequency);
 
             if (targetManager.GetRandomTargetablePosition(out Vector3 pos))
             {
                 Missile missile = missilePool.Pull();
-                missile.Setup(Speed, PointsForBeingDestroyed, ExplosionStats);
+                missile.Setup(speed, pointsForBeingDestroyed, explosionStats);
                 launcher.Launch(missile, transform.position, pos);
             }
         }
@@ -56,36 +57,15 @@ public class Airplane : MonoBehaviour, IPoolable<Airplane>, IAutonomous
 
     private void OnDisable()
     {
-        StopCoroutine(coroutine);
+        StopCoroutine(attackRoutine);
         deregister?.Invoke(this);
         returnToPool?.Invoke(this);
     }
 
-    public void InitPoolable(Action<Airplane> action)
-    {
-        returnToPool = action;
-    }
+    public void InitPoolable(Action<Airplane> action) => returnToPool = action;
 
-    public void InitDeregistration(Action<IAutonomous> action)
-    {
-        deregister = action;
-    }
+    public void SetupAutoAttacker(Action<IAutoAttacker> action) => deregister = action;
 
-    public void ReturnToPool()
-    {
-        returnToPool?.Invoke(this);
-    }
+    public void ReturnToPool() => returnToPool?.Invoke(this);
 
-    public void Setup(float frequency, float speed, int pointsForBeingDestroyed, ExplosionStats explosionStats)
-    {
-        Frequency = frequency;
-        Speed = speed;
-        PointsForBeingDestroyed = pointsForBeingDestroyed;
-        ExplosionStats = explosionStats;
-    }
-
-    public void InitPoolable(Action<IAutonomous> action)
-    {
-        deregister = action;
-    }
 }

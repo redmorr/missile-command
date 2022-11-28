@@ -7,15 +7,12 @@ using UnityEngine.Events;
 
 public class AirplaneSpawner : MonoBehaviour, ISpawner
 {
-    public UnityAction<AirplaneSpawner> OnBeingDestroyed;
-
     [SerializeField] private ObjectPool<Airplane> autonomousPool;
     [SerializeField] private float Frequency;
     [SerializeField] private int PointsForBeingDestroyed;
     [SerializeField] private int Speed;
     [SerializeField] private ExplosionStats ExplosionStats;
 
-    public bool CanFire { get => true; }
     public Vector3 Position { get => transform.position; }
 
     private Action<ISpawner> deregister;
@@ -26,7 +23,7 @@ public class AirplaneSpawner : MonoBehaviour, ISpawner
         launcher = GetComponent<Launcher>();
     }
 
-    public IAutonomous Spawn()
+    public IAutoAttacker Spawn()
     {
         Airplane autonomous = autonomousPool.Pull();
 
@@ -46,7 +43,7 @@ public class AirplaneSpawner : MonoBehaviour, ISpawner
         deregister?.Invoke(this);
     }
 
-    public void InitPoolable(Action<ISpawner> action)
+    public void InitSpawner(Action<ISpawner> action)
     {
         deregister = action;
     }

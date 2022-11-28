@@ -44,7 +44,7 @@ public class EnemyInput : MonoBehaviour
             yield return new WaitForSeconds(SpawnFrequency);
             if (targetManager.GetRandomTargetablePosition(out Vector3 _))
             {
-                spawnerCommander.Spawn();
+                spawnerCommander.OrderSpawn();
             }
         }
     }
