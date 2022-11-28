@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AutonomousPool : Pool<Autonomous>
+public class AutonomousPool : ObjectPool<Autonomous>
 {
 
 }

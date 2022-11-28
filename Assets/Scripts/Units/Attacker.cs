@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 public class Attacker : MonoBehaviour, IAttacker
 {
-    [SerializeField] private Pool<Missile> missilePool;
+    [SerializeField] private ObjectPool<Missile> missilePool;
     [SerializeField] private int PointsForBeingDestroyed;
     [SerializeField] private int Speed;
     [SerializeField] private ExplosionStats ExplosionStats;

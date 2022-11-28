@@ -24,14 +24,14 @@ public class Autonomous : MonoBehaviour, IPoolable<Autonomous>, IAutonomous
     public Vector3 Position { get => transform.position; }
 
     private Launcher launcher;
-    private Pool<Missile> missilePool;
+    private ObjectPool<Missile> missilePool;
     private TargetManager targetManager;
     private Coroutine coroutine;
 
     private void Awake()
     {
         targetManager = FindObjectOfType<TargetManager>();
-        missilePool = FindObjectOfType<Pool<Missile>>();
+        missilePool = FindObjectOfType<ObjectPool<Missile>>();
         launcher = GetComponent<Launcher>();
     }
 

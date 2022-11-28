@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pool<T> : Singleton<Pool<T>> where T : MonoBehaviour, IPoolable<T>
+public class ObjectPool<T> : Singleton<ObjectPool<T>> where T : MonoBehaviour, IPoolable<T>
 {
     [SerializeField] private int InitialPoolSize;
     [SerializeField] private T Prefab;

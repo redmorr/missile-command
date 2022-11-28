@@ -9,7 +9,7 @@ public class Spawner : MonoBehaviour, ISpawner
 {
     public UnityAction<Spawner> OnBeingDestroyed;
 
-    [SerializeField] private Pool<Autonomous> autonomousPool;
+    [SerializeField] private ObjectPool<Autonomous> autonomousPool;
     [SerializeField] private float Frequency;
     [SerializeField] private int PointsForBeingDestroyed;
     [SerializeField] private int Speed;
