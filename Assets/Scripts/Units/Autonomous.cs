@@ -1,11 +1,15 @@
+using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.WSA;
 using static UnityEngine.GraphicsBuffer;
 
-public class Autonomous : MonoBehaviour
+public class Autonomous : MonoBehaviour, IPoolable<Autonomous>
 {
+    protected Action<Autonomous> returnToPool;
+
     public float Frequency { get; set; }
     public int PointsForBeingDestroyed { get; set; }
     public int Speed { get; set; }
@@ -56,5 +60,15 @@ public class Autonomous : MonoBehaviour
     private void OnDisable()
     {
         StopCoroutine(coroutine);
+    }
+
+    public void InitPoolable(Action<Autonomous> action)
+    {
+        returnToPool = action;
+    }
+
+    public void ReturnToPool()
+    {
+        returnToPool?.Invoke(this);
     }
 }

@@ -19,29 +19,30 @@ public class Spawner : MonoBehaviour
     public Vector3 Position { get => transform.position; }
 
     private Launcher launcher;
-    private Pool<Airplane> airplanePool;
+    private Pool<Autonomous> autonomousPool;
 
     private void Awake()
     {
-        airplanePool = FindObjectOfType<Pool<Airplane>>();
+        autonomousPool = FindObjectOfType<Pool<Autonomous>>();
         launcher = GetComponent<Launcher>();
     }
 
     public void Spawn()
     {
-        Airplane airplane = airplanePool.Pull();
+        Autonomous autonomous = autonomousPool.Pull();
 
-        Autonomous autonomous = airplane.GetComponent<Autonomous>();
+        Missile missile = autonomous.GetComponent<Missile>();
+
+        missile.Speed = Speed;
+        missile.PointsForBeingDestroyed = PointsForBeingDestroyed;
+        missile.ExplosionStats = ExplosionStats;
+
         autonomous.Frequency = Frequency;
         autonomous.Speed = Speed;
         autonomous.PointsForBeingDestroyed = PointsForBeingDestroyed;
         autonomous.ExplosionStats = ExplosionStats;
 
-        airplane.Speed = Speed;
-        airplane.PointsForBeingDestroyed = PointsForBeingDestroyed;
-        airplane.ExplosionStats = ExplosionStats;
-
-        launcher.Launch(airplane, transform.position, transform.position + Vector3.right * 50f);
+        launcher.Launch(missile, transform.position, transform.position + Vector3.right * 50f);
     }
 
     private void OnDisable()
