@@ -6,6 +6,7 @@ using static UnityEngine.GraphicsBuffer;
 public class SpawnCommander : MonoBehaviour, ICommandSpawns
 {
     public List<Spawner> units;
+    public List<Autonomous> autonomousUnits;
 
     private void Awake()
     {
@@ -20,8 +21,8 @@ public class SpawnCommander : MonoBehaviour, ICommandSpawns
 
     public void Spawn()
     {
-        if (GetRandomUnit(out Spawner launcher))
-            launcher.Spawn();
+        if (GetRandomUnit(out Spawner spawner))
+            spawner.Spawn();
     }
 
     public void Register(Spawner newUnit)

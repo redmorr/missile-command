@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4849304467631767163}
   - component: {fileID: 4741830162735704218}
   - component: {fileID: 4849304467631767141}
-  - component: {fileID: -1340277158383024670}
   m_Layer: 0
   m_Name: SkyLauncher
   m_TagString: Untagged
@@ -46,6 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea027a925732d474b808a10af32c29aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PointsForBeingDestroyed: 2
+  Speed: 2
+  ExplosionStats: {fileID: 11400000, guid: 64c141c770d0dfe40a8bd37d4f1bdb05, type: 2}
 --- !u!114 &4849304467631767141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58,18 +60,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c36ac0aeb7489254db83a06811dd0776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-1340277158383024670
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4849304467631767160}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c880488ec016fcc4cac143b524247a6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PointsForBeingDestroyed: 100
-  Speed: 2
-  ExplosionStats: {fileID: 11400000, guid: 64c141c770d0dfe40a8bd37d4f1bdb05, type: 2}

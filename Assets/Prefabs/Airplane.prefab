@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 9076182390790883976}
   - component: {fileID: 4398211257519104242}
   - component: {fileID: -2689164545782194046}
-  - component: {fileID: 6668485063455577033}
   - component: {fileID: 5890061732654235889}
   m_Layer: 7
   m_Name: Airplane
@@ -147,21 +146,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c36ac0aeb7489254db83a06811dd0776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6668485063455577033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3769525054263234886}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c880488ec016fcc4cac143b524247a6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PointsForBeingDestroyed: 100
-  Speed: 2
-  ExplosionStats: {fileID: 11400000, guid: 64c141c770d0dfe40a8bd37d4f1bdb05, type: 2}
 --- !u!61 &5890061732654235889
 BoxCollider2D:
   m_ObjectHideFlags: 0
