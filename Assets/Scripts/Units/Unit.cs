@@ -5,7 +5,7 @@ public class Unit : MonoBehaviour
 {
     public UnityAction<Unit> OnBeingDestroyed;
     
-    public Commander Commander { get; set; }
+    public ICommander Commander { get; set; }
     public bool CanFire { get => true; }
     public Vector3 Position { get => transform.position; }
 

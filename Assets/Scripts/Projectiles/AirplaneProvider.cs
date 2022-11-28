@@ -22,11 +22,6 @@ public class AirplaneProvider : MonoBehaviour, IProjectileProvider
     {
         Airplane airplane = projectilePool.Pull();
 
-        Unit thisUnit = launcher.GetComponent<Unit>();
-        Unit newUnit = airplane.GetComponent<Unit>();
-
-        thisUnit.Commander.Register(newUnit);
-
         airplane.Speed = Speed;
         airplane.ExplosionStats = ExplosionStats;
         airplane.PointsForBeingDestroyed = PointsForBeingDestroyed;

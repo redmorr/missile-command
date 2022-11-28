@@ -1,24 +1,27 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
+using UnityEngine.WSA;
 
-
-public class EnemyInput : MonoBehaviour
+public class AutonomousUnit: MonoBehaviour
 {
-    [SerializeField] private float frequency = 2f;
-    
-    private ICommander commander;
+    [SerializeField] private float frequency = 1f;
+
     private TargetManager targetManager;
     private Coroutine coroutine;
+    private Launcher launcher;
 
     private void Awake()
     {
-        commander = GetComponent<ICommander>();
         targetManager = FindObjectOfType<TargetManager>();
+        launcher = GetComponent<Launcher>();
     }
 
-    private void Start()
+    public void Launch(Vector3 target)
+    {
+        launcher.Launch(transform.position, target);
+    }
+
+    private void OnEnable()
     {
         coroutine = StartCoroutine(SpawnRoutine());
     }
@@ -30,7 +33,7 @@ public class EnemyInput : MonoBehaviour
             yield return new WaitForSeconds(frequency);
             if (targetManager.GetRandomTargetablePosition(out Vector3 pos))
             {
-                commander.OrderAttackRandom(pos);
+                launcher.Launch(transform.position, pos);
             }
         }
     }
