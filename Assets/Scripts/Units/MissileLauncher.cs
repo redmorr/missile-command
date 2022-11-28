@@ -10,7 +10,7 @@ public class MissileLauncher : MonoBehaviour, IAttacker
     [SerializeField] private ExplosionStats ExplosionStats;
 
     public UnityAction<MissileLauncher> OnBeingDestroyed;
-    Action<IAttacker> deregister;
+    private Action<IAttacker> deregister;
 
     public bool CanFire { get => true; }
     public Vector3 Position { get => transform.position; }
@@ -29,13 +29,13 @@ public class MissileLauncher : MonoBehaviour, IAttacker
         launcher.Launch(missile, transform.position, target);
     }
 
-    private void OnDisable()
-    {
-        deregister?.Invoke(this);
-    }
-
     public void InitPoolable(Action<IAttacker> action)
     {
         deregister = action;
+    }
+
+    private void OnDisable()
+    {
+        deregister?.Invoke(this);
     }
 }

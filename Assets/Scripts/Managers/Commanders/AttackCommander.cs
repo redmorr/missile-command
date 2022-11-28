@@ -49,7 +49,7 @@ public class AttackCommander : MonoBehaviour, IOrderUnitAttack
             unit = units[randomIndex];
             return true;
         }
-        
+
         return false;
     }
 
@@ -60,18 +60,13 @@ public class AttackCommander : MonoBehaviour, IOrderUnitAttack
 
         foreach (IAttacker unit in units)
         {
-            if (unit.CanFire)
+            float distance = Vector2.Distance(target, unit.Position);
+            if (distance < minDistnace)
             {
-                float distance = Vector2.Distance(target, unit.Position);
-                if (distance < minDistnace)
-                {
-                    minDistnace = distance;
-                    closestUnit = unit;
-                }
+                minDistnace = distance;
+                closestUnit = unit;
             }
         }
-
         return closestUnit != null;
     }
-
 }
