@@ -6,31 +6,47 @@ using UnityEngine;
 
 public class EnemyInput : MonoBehaviour
 {
-    [SerializeField] private float frequency = 2f;
-    
-    private ICommander commander;
+    [SerializeField] private float AttackFrequency = 2f;
+    [SerializeField] private float SpawnFrequency = 3f;
+
+    private ICommandAttacks attackerCommander;
+    private ICommandSpawns spawnerCommander;
     private TargetManager targetManager;
     private Coroutine coroutine;
 
     private void Awake()
     {
-        commander = GetComponent<ICommander>();
+        attackerCommander = GetComponent<ICommandAttacks>();
+        spawnerCommander = GetComponent<ICommandSpawns>();
         targetManager = FindObjectOfType<TargetManager>();
     }
 
     private void Start()
     {
-        coroutine = StartCoroutine(SpawnRoutine());
+        coroutine = StartCoroutine(Attack());
+        coroutine = StartCoroutine(Spawn());
     }
 
-    private IEnumerator SpawnRoutine()
+    private IEnumerator Attack()
     {
         while (true)
         {
-            yield return new WaitForSeconds(frequency);
+            yield return new WaitForSeconds(AttackFrequency);
             if (targetManager.GetRandomTargetablePosition(out Vector3 pos))
             {
-                commander.OrderAttackRandom(pos);
+                attackerCommander.OrderAttackRandom(pos);
+            }
+        }
+    }
+
+    private IEnumerator Spawn()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(AttackFrequency);
+            if (targetManager.GetRandomTargetablePosition(out Vector3 _))
+            {
+                spawnerCommander.Spawn();
             }
         }
     }

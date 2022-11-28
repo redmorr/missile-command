@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.WSA;
 
-public class AutonomousUnit: MonoBehaviour
+public class Autonomous: MonoBehaviour
 {
     [SerializeField] private float frequency = 1f;
 

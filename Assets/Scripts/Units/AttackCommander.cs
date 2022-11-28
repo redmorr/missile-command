@@ -2,15 +2,15 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Commander : MonoBehaviour, ICommander
+public class AttackCommander : MonoBehaviour, ICommandAttacks
 {
-    public List<Unit> units;
+    public List<Attacker> units;
 
     private void Awake()
     {
-        units = GetComponentsInChildren<Unit>().ToList();
+        units = GetComponentsInChildren<Attacker>().ToList();
 
-        foreach (Unit unit in units)
+        foreach (Attacker unit in units)
         {
             unit.Commander = this;
             unit.OnBeingDestroyed += Unregister;
@@ -19,30 +19,30 @@ public class Commander : MonoBehaviour, ICommander
 
     public void OrderAttackRandom(Vector3 target)
     {
-        if (GetRandomUnit(out Unit launcher))
+        if (GetRandomUnit(out Attacker launcher))
             launcher.Launch(target);
     }
 
     public void OrderAttack(Vector3 target)
     {
-        if (GetUnitClosestToTarget(out Unit launcher, target))
+        if (GetUnitClosestToTarget(out Attacker launcher, target))
             launcher.Launch(target);
     }
 
-    public void Register(Unit newUnit)
+    public void Register(Attacker newUnit)
     {
         units.Add(newUnit);
         newUnit.Commander = this;
         newUnit.OnBeingDestroyed += Unregister;
     }
 
-    private void Unregister(Unit unit)
+    private void Unregister(Attacker unit)
     {
         units.Remove(unit);
         unit.OnBeingDestroyed -= Unregister;
     }
 
-    private bool GetRandomUnit(out Unit unit)
+    private bool GetRandomUnit(out Attacker unit)
     {
         unit = null;
         var randomIndex = Random.Range(0, units.Count);
@@ -56,12 +56,12 @@ public class Commander : MonoBehaviour, ICommander
         return false;
     }
 
-    private bool GetUnitClosestToTarget(out Unit closestUnit, Vector3 target)
+    private bool GetUnitClosestToTarget(out Attacker closestUnit, Vector3 target)
     {
         closestUnit = null;
         float minDistnace = Mathf.Infinity;
 
-        foreach (Unit unit in units)
+        foreach (Attacker unit in units)
         {
             if (unit.CanFire)
             {

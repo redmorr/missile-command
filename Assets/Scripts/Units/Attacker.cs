@@ -1,11 +1,11 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Unit : MonoBehaviour
+public class Attacker : MonoBehaviour
 {
-    public UnityAction<Unit> OnBeingDestroyed;
+    public UnityAction<Attacker> OnBeingDestroyed;
     
-    public ICommander Commander { get; set; }
+    public ICommandAttacks Commander { get; set; }
     public bool CanFire { get => true; }
     public Vector3 Position { get => transform.position; }
 

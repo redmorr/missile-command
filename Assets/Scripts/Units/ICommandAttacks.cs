@@ -1,8 +1,7 @@
 using UnityEngine;
 
-public interface ICommander
+public interface ICommandAttacks
 {
     public void OrderAttack(Vector3 target);
     public void OrderAttackRandom(Vector3 target);
-    public void Register(Unit newUnit);
 }
