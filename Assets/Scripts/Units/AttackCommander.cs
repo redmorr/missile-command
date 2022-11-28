@@ -4,64 +4,61 @@ using UnityEngine;
 
 public class AttackCommander : MonoBehaviour, ICommandAttacks
 {
-    public List<Attacker> units;
+    public List<IAttacker> units;
 
     private void Awake()
     {
-        units = GetComponentsInChildren<Attacker>().ToList();
+        units = GetComponentsInChildren<IAttacker>().ToList();
 
-        foreach (Attacker unit in units)
+        foreach (IAttacker unit in units)
         {
-            unit.Commander = this;
-            unit.OnBeingDestroyed += Unregister;
+            unit.InitPoolable(Deregister);
         }
     }
 
     public void OrderAttackRandom(Vector3 target)
     {
-        if (GetRandomUnit(out Attacker launcher))
-            launcher.Launch(target);
+        if (GetRandomUnit(out IAttacker launcher))
+            launcher.Attack(target);
     }
 
     public void OrderAttack(Vector3 target)
     {
-        if (GetUnitClosestToTarget(out Attacker launcher, target))
-            launcher.Launch(target);
+        if (GetUnitClosestToTarget(out IAttacker launcher, target))
+            launcher.Attack(target);
     }
 
-    public void Register(Attacker newUnit)
+    public void Register(IAttacker newUnit)
     {
         units.Add(newUnit);
-        newUnit.Commander = this;
-        newUnit.OnBeingDestroyed += Unregister;
+        newUnit.InitPoolable(Deregister);
     }
 
-    private void Unregister(Attacker unit)
+    private void Deregister(IAttacker unit)
     {
         units.Remove(unit);
-        unit.OnBeingDestroyed -= Unregister;
     }
 
-    private bool GetRandomUnit(out Attacker unit)
+    private bool GetRandomUnit(out IAttacker unit)
     {
         unit = null;
         var randomIndex = Random.Range(0, units.Count);
 
-        if (units[randomIndex])
+        if (units.Count > 0)
         {
             unit = units[randomIndex];
             return true;
         }
-
+        
         return false;
     }
 
-    private bool GetUnitClosestToTarget(out Attacker closestUnit, Vector3 target)
+    private bool GetUnitClosestToTarget(out IAttacker closestUnit, Vector3 target)
     {
         closestUnit = null;
         float minDistnace = Mathf.Infinity;
 
-        foreach (Attacker unit in units)
+        foreach (IAttacker unit in units)
         {
             if (unit.CanFire)
             {

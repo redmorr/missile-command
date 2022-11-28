@@ -1,28 +1,28 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Attacker : MonoBehaviour
+public class Attacker : MonoBehaviour, IAttacker
 {
+    [SerializeField] private Pool<Missile> missilePool;
     [SerializeField] private int PointsForBeingDestroyed;
     [SerializeField] private int Speed;
     [SerializeField] private ExplosionStats ExplosionStats;
 
     public UnityAction<Attacker> OnBeingDestroyed;
+    Action<IAttacker> deregister;
 
-    public ICommandAttacks Commander { get; set; }
     public bool CanFire { get => true; }
     public Vector3 Position { get => transform.position; }
 
     private Launcher launcher;
-    private Pool<Missile> missilePool;
 
     private void Awake()
     {
         launcher = GetComponent<Launcher>();
-        missilePool = FindObjectOfType<Pool<Missile>>();
     }
 
-    public void Launch(Vector3 target)
+    public void Attack(Vector3 target)
     {
         Missile missile = missilePool.Pull();
         missile.Setup(Speed, PointsForBeingDestroyed, ExplosionStats);
@@ -31,6 +31,11 @@ public class Attacker : MonoBehaviour
 
     private void OnDisable()
     {
-        OnBeingDestroyed?.Invoke(this);
+        deregister?.Invoke(this);
+    }
+
+    public void InitPoolable(Action<IAttacker> action)
+    {
+        deregister = action;
     }
 }

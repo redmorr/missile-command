@@ -686,6 +686,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1328054045}
     m_Modifications:
+    - target: {fileID: 461624861690179195, guid: 9e32c78540286b34f80c6baad0cbc062, type: 3}
+      propertyPath: missilePool
+      value: 
+      objectReference: {fileID: 997982602}
     - target: {fileID: 4013392199802934110, guid: 9e32c78540286b34f80c6baad0cbc062, type: 3}
       propertyPath: InitialAmmoSize
       value: 10
@@ -1116,6 +1120,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1328054045}
     m_Modifications:
+    - target: {fileID: 461624861690179195, guid: 9e32c78540286b34f80c6baad0cbc062, type: 3}
+      propertyPath: missilePool
+      value: 
+      objectReference: {fileID: 997982602}
     - target: {fileID: 4013392199802934110, guid: 9e32c78540286b34f80c6baad0cbc062, type: 3}
       propertyPath: InitialAmmoSize
       value: 10
@@ -1206,6 +1214,10 @@ PrefabInstance:
       propertyPath: Speed
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4741830162735704218, guid: d82e8d7ead33f864cb7c69b69b7ed6b0, type: 3}
+      propertyPath: missilePool
+      value: 
+      objectReference: {fileID: 997982602}
     - target: {fileID: 4849304467631767160, guid: d82e8d7ead33f864cb7c69b69b7ed6b0, type: 3}
       propertyPath: m_Name
       value: SkyMissileLauncher 2
@@ -1220,7 +1232,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4849304467631767163, guid: d82e8d7ead33f864cb7c69b69b7ed6b0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.9502497
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 4849304467631767163, guid: d82e8d7ead33f864cb7c69b69b7ed6b0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1483,7 +1495,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aebdbe921ca723428d8f7374a775d1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  units: []
 --- !u!1 &904329048
 GameObject:
   m_ObjectHideFlags: 0
@@ -1841,7 +1852,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aebdbe921ca723428d8f7374a775d1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  units: []
 --- !u!1 &1442978972
 GameObject:
   m_ObjectHideFlags: 0
@@ -1999,6 +2009,10 @@ PrefabInstance:
       propertyPath: Speed
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4741830162735704218, guid: d82e8d7ead33f864cb7c69b69b7ed6b0, type: 3}
+      propertyPath: missilePool
+      value: 
+      objectReference: {fileID: 997982602}
     - target: {fileID: 4849304467631767160, guid: d82e8d7ead33f864cb7c69b69b7ed6b0, type: 3}
       propertyPath: m_Name
       value: SkyMissileLauncher 1
@@ -2013,11 +2027,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4849304467631767163, guid: d82e8d7ead33f864cb7c69b69b7ed6b0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -32.04975
+      value: -33.1
       objectReference: {fileID: 0}
     - target: {fileID: 4849304467631767163, guid: d82e8d7ead33f864cb7c69b69b7ed6b0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.41
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4849304467631767163, guid: d82e8d7ead33f864cb7c69b69b7ed6b0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2418,6 +2432,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SkyAirplaneSpawner 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3066026008124523849, guid: 8c5fcc7af2321d84ebaa567f6e5f7b9f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3066026008124523850, guid: 8c5fcc7af2321d84ebaa567f6e5f7b9f, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -2462,6 +2480,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4680385890899543592, guid: 8c5fcc7af2321d84ebaa567f6e5f7b9f, type: 3}
+      propertyPath: autonomousPool
+      value: 
+      objectReference: {fileID: 734965828}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c5fcc7af2321d84ebaa567f6e5f7b9f, type: 3}
 --- !u!4 &2074968319 stripped
@@ -2564,6 +2586,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4680385890899543592, guid: 8c5fcc7af2321d84ebaa567f6e5f7b9f, type: 3}
+      propertyPath: autonomousPool
+      value: 
+      objectReference: {fileID: 734965828}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c5fcc7af2321d84ebaa567f6e5f7b9f, type: 3}
 --- !u!1001 &6606633999648811877
@@ -2630,6 +2656,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1328054045}
     m_Modifications:
+    - target: {fileID: 461624861690179195, guid: 9e32c78540286b34f80c6baad0cbc062, type: 3}
+      propertyPath: missilePool
+      value: 
+      objectReference: {fileID: 997982602}
     - target: {fileID: 4013392199802934110, guid: 9e32c78540286b34f80c6baad0cbc062, type: 3}
       propertyPath: InfiniteAmmo
       value: 0

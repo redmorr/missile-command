@@ -43,7 +43,7 @@ public class EnemyInput : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(AttackFrequency);
+            yield return new WaitForSeconds(SpawnFrequency);
             if (targetManager.GetRandomTargetablePosition(out Vector3 _))
             {
                 spawnerCommander.Spawn();

@@ -5,45 +5,42 @@ using static UnityEngine.GraphicsBuffer;
 
 public class SpawnCommander : MonoBehaviour, ICommandSpawns
 {
-    public List<Spawner> units;
+    public List<ISpawner> units;
     public List<Autonomous> autonomousUnits;
 
     private void Awake()
     {
-        units = GetComponentsInChildren<Spawner>().ToList();
+        units = GetComponentsInChildren<ISpawner>().ToList();
 
         foreach (Spawner unit in units)
         {
-            unit.Commander = this;
-            unit.OnBeingDestroyed += Unregister;
+            unit.OnBeingDestroyed += Deregister;
         }
     }
 
     public void Spawn()
     {
-        if (GetRandomUnit(out Spawner spawner))
+        if (GetRandomUnit(out ISpawner spawner))
             spawner.Spawn();
     }
 
-    public void Register(Spawner newUnit)
+    public void Register(ISpawner newUnit)
     {
         units.Add(newUnit);
-        newUnit.Commander = this;
-        newUnit.OnBeingDestroyed += Unregister;
+        newUnit.InitPoolable(Deregister);
     }
 
-    private void Unregister(Spawner unit)
+    private void Deregister(ISpawner unit)
     {
         units.Remove(unit);
-        unit.OnBeingDestroyed -= Unregister;
     }
 
-    private bool GetRandomUnit(out Spawner unit)
+    private bool GetRandomUnit(out ISpawner unit)
     {
         unit = null;
         var randomIndex = Random.Range(0, units.Count);
 
-        if (units[randomIndex])
+        if (units.Count > 0)
         {
             unit = units[randomIndex];
             return true;
@@ -51,27 +48,5 @@ public class SpawnCommander : MonoBehaviour, ICommandSpawns
 
         return false;
     }
-
-    private bool GetUnitClosestToTarget(out Spawner closestUnit, Vector3 target)
-    {
-        closestUnit = null;
-        float minDistnace = Mathf.Infinity;
-
-        foreach (Spawner unit in units)
-        {
-            if (unit.CanFire)
-            {
-                float distance = Vector2.Distance(target, unit.Position);
-                if (distance < minDistnace)
-                {
-                    minDistnace = distance;
-                    closestUnit = unit;
-                }
-            }
-        }
-
-        return closestUnit != null;
-    }
-
 
 }

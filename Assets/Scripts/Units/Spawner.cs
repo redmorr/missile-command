@@ -1,30 +1,28 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Spawner : MonoBehaviour
+public class Spawner : MonoBehaviour, ISpawner
 {
     public UnityAction<Spawner> OnBeingDestroyed;
 
+    [SerializeField] private Pool<Autonomous> autonomousPool;
     [SerializeField] private float Frequency;
     [SerializeField] private int PointsForBeingDestroyed;
     [SerializeField] private int Speed;
     [SerializeField] private ExplosionStats ExplosionStats;
 
-
-    public ICommandSpawns Commander { get; set; }
-
     public bool CanFire { get => true; }
     public Vector3 Position { get => transform.position; }
 
+    private Action<ISpawner> deregister;
     private Launcher launcher;
-    private Pool<Autonomous> autonomousPool;
 
     private void Awake()
     {
-        autonomousPool = FindObjectOfType<Pool<Autonomous>>();
         launcher = GetComponent<Launcher>();
     }
 
@@ -43,6 +41,12 @@ public class Spawner : MonoBehaviour
 
     private void OnDisable()
     {
-        OnBeingDestroyed?.Invoke(this);
+        deregister?.Invoke(this);
     }
+
+    public void InitPoolable(Action<ISpawner> action)
+    {
+        deregister = action;
+    }
+
 }
