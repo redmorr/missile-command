@@ -1,7 +1,6 @@
 using UnityEngine;
-using UnityEngine.UIElements;
 
-public class Rotator : MonoBehaviour
+public class GunBarrelRotator : MonoBehaviour
 {
     [SerializeField] private Transform WeaponPivot;
 

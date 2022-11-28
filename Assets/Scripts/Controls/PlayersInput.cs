@@ -6,11 +6,11 @@ public class PlayersInput : MonoBehaviour
     [SerializeField] private Transform MaxTargetHeight;
     private InputActions inputActions;
 
-    private ICommandAttacks commander;
+    private IOrderUnitAttack commander;
 
     private void Awake()
     {
-        commander = GetComponent<ICommandAttacks>();
+        commander = GetComponent<IOrderUnitAttack>();
         inputActions = new InputActions();
         inputActions.Player.Fire.performed += ChooseTarget;
     }

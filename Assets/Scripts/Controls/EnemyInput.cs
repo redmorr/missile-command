@@ -1,30 +1,28 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-
 
 public class EnemyInput : MonoBehaviour
 {
     [SerializeField] private float AttackFrequency = 2f;
-    [SerializeField] private float SpawnFrequency = 3f;
+    [SerializeField] private float SpawnFrequency = 2f;
 
-    private ICommandAttacks attackerCommander;
-    private ICommandSpawns spawnerCommander;
+    private IOrderUnitAttack attackerCommander;
+    private IOrderUnitSpawn spawnerCommander;
     private TargetManager targetManager;
-    private Coroutine coroutine;
+    private Coroutine attackRoutine;
+    private Coroutine spawnRoutine;
 
     private void Awake()
     {
-        attackerCommander = GetComponent<ICommandAttacks>();
-        spawnerCommander = GetComponent<ICommandSpawns>();
+        attackerCommander = GetComponent<IOrderUnitAttack>();
+        spawnerCommander = GetComponent<IOrderUnitSpawn>();
         targetManager = FindObjectOfType<TargetManager>();
     }
 
     private void Start()
     {
-        coroutine = StartCoroutine(Attack());
-        coroutine = StartCoroutine(Spawn());
+        attackRoutine = StartCoroutine(Attack());
+        spawnRoutine = StartCoroutine(Spawn());
     }
 
     private IEnumerator Attack()
@@ -53,6 +51,7 @@ public class EnemyInput : MonoBehaviour
 
     private void OnDisable()
     {
-        StopCoroutine(coroutine);
+        StopCoroutine(attackRoutine);
+        StopCoroutine(spawnRoutine);
     }
 }

@@ -2,14 +2,14 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Attacker : MonoBehaviour, IAttacker
+public class MissileLauncher : MonoBehaviour, IAttacker
 {
     [SerializeField] private ObjectPool<Missile> missilePool;
     [SerializeField] private int PointsForBeingDestroyed;
     [SerializeField] private int Speed;
     [SerializeField] private ExplosionStats ExplosionStats;
 
-    public UnityAction<Attacker> OnBeingDestroyed;
+    public UnityAction<MissileLauncher> OnBeingDestroyed;
     Action<IAttacker> deregister;
 
     public bool CanFire { get => true; }

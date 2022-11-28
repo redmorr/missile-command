@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
-public class SpawnCommander : MonoBehaviour, ICommandSpawns
+public class SpawnCommander : MonoBehaviour, IOrderUnitSpawn
 {
     public List<ISpawner> units;
     public List<IAutonomous> autonomousUnits = new List<IAutonomous>();

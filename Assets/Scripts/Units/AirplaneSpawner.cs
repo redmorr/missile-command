@@ -5,11 +5,11 @@ using System.Reflection;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Spawner : MonoBehaviour, ISpawner
+public class AirplaneSpawner : MonoBehaviour, ISpawner
 {
-    public UnityAction<Spawner> OnBeingDestroyed;
+    public UnityAction<AirplaneSpawner> OnBeingDestroyed;
 
-    [SerializeField] private ObjectPool<Autonomous> autonomousPool;
+    [SerializeField] private ObjectPool<Airplane> autonomousPool;
     [SerializeField] private float Frequency;
     [SerializeField] private int PointsForBeingDestroyed;
     [SerializeField] private int Speed;
@@ -28,7 +28,7 @@ public class Spawner : MonoBehaviour, ISpawner
 
     public IAutonomous Spawn()
     {
-        Autonomous autonomous = autonomousPool.Pull();
+        Airplane autonomous = autonomousPool.Pull();
 
         Missile missile = autonomous.GetComponent<Missile>();
 

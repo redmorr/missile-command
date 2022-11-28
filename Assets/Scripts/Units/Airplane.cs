@@ -6,9 +6,9 @@ using UnityEngine.Events;
 using UnityEngine.WSA;
 using static UnityEngine.GraphicsBuffer;
 
-public class Autonomous : MonoBehaviour, IPoolable<Autonomous>, IAutonomous
+public class Airplane : MonoBehaviour, IPoolable<Airplane>, IAutonomous
 {
-    protected Action<Autonomous> returnToPool;
+    protected Action<Airplane> returnToPool;
 
     private float Frequency;
     private int PointsForBeingDestroyed;
@@ -17,9 +17,8 @@ public class Autonomous : MonoBehaviour, IPoolable<Autonomous>, IAutonomous
 
     private Action<IAutonomous> deregister;
 
-    public UnityAction<Attacker> OnBeingDestroyed;
+    public UnityAction<MissileLauncher> OnBeingDestroyed;
 
-    public ICommandSpawns Commander { get; set; }
     public bool CanFire { get => true; }
     public Vector3 Position { get => transform.position; }
 
@@ -62,7 +61,7 @@ public class Autonomous : MonoBehaviour, IPoolable<Autonomous>, IAutonomous
         returnToPool?.Invoke(this);
     }
 
-    public void InitPoolable(Action<Autonomous> action)
+    public void InitPoolable(Action<Airplane> action)
     {
         returnToPool = action;
     }
