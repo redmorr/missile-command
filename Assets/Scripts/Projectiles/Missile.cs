@@ -4,12 +4,12 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Missile : MonoBehaviour, IPoolable<Missile>, IDestructible, IPointsOnDestroyed, IExplodable, IProjectile
 {
-    public float Speed { get; set; }
-    public int PointsForBeingDestroyed { get; set; }
-    public ExplosionStats ExplosionStats { get; set; }
+    private float Speed;
+    public int PointsForBeingDestroyed { get; private set; }
+    public ExplosionStats ExplosionStats { get; private set; }
 
     private Rigidbody2D _rigidbody2D;
-    private Action<Missile> returnToPool;
+    protected Action<Missile> returnToPool;
     private Vector3 from;
     private Vector3 to;
     private Vector3 directionToDestination;
@@ -20,6 +20,13 @@ public class Missile : MonoBehaviour, IPoolable<Missile>, IDestructible, IPoints
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
         explosionPool = FindObjectOfType<ExplosionPool>();
+    }
+
+    public void Setup(float speed, int pointsForBeingDestroyed, ExplosionStats explosionStats)
+    {
+        Speed = speed;
+        PointsForBeingDestroyed = pointsForBeingDestroyed;
+        ExplosionStats = explosionStats;
     }
 
     public void Launch(Vector3 from, Vector3 to)
@@ -34,11 +41,6 @@ public class Missile : MonoBehaviour, IPoolable<Missile>, IDestructible, IPoints
     private void FixedUpdate()
     {
         Move();
-    }
-
-    private void OnDisable()
-    {
-        ReturnToPool();
     }
 
     private void Move()
@@ -56,24 +58,17 @@ public class Missile : MonoBehaviour, IPoolable<Missile>, IDestructible, IPoints
         }
     }
 
-    public void InitPoolable(Action<Missile> action)
-    {
-        returnToPool = action;
-    }
-
-    public void ReturnToPool()
-    {
-        returnToPool?.Invoke(this);
-    }
-
-    public void Die()
-    {
-        gameObject.SetActive(false);
-    }
-
     public void Explode()
     {
         Explosion explosion = explosionPool.Pull();
         explosion.Setup(transform.position, ExplosionStats);
     }
+
+    public void InitPoolable(Action<Missile> action) => returnToPool = action;
+
+    public void ReturnToPool() => returnToPool?.Invoke(this);
+
+    public void Die() => gameObject.SetActive(false);
+
+    private void OnDisable() => ReturnToPool();
 }

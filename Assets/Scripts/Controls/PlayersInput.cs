@@ -3,15 +3,16 @@ using UnityEngine.InputSystem;
 
 public class PlayersInput : MonoBehaviour
 {
-    private InputActions inputActions;
+    [SerializeField] private Transform MaxTargetHeight;
 
-    private ICommander commander;
+    private InputActions inputActions;
+    private IOrderUnitAttack commander;
 
     private void Awake()
     {
-        commander = GetComponent<ICommander>();
+        commander = GetComponent<IOrderUnitAttack>();
         inputActions = new InputActions();
-        inputActions.Player.Fire.performed += ChooseTarget;
+        inputActions.Player.Fire.performed += SelectTarget;
     }
 
     private void OnEnable()
@@ -24,8 +25,10 @@ public class PlayersInput : MonoBehaviour
         inputActions.Disable();
     }
 
-    public void ChooseTarget(InputAction.CallbackContext _)
+    public void SelectTarget(InputAction.CallbackContext _)
     {
-        commander.OrderAttack(Camera.main.ScreenToWorldPoint(inputActions.Player.Look.ReadValue<Vector2>()));
+        Vector3 target = Camera.main.ScreenToWorldPoint(inputActions.Player.Look.ReadValue<Vector2>());
+        target.y = Mathf.Max(target.y, MaxTargetHeight.position.y);
+        commander.OrderAttack(target);
     }
 }
