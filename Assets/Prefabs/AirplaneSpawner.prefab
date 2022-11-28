@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4680385890899543592}
   - component: {fileID: 3066026008124523860}
   m_Layer: 0
-  m_Name: AirplaneLauncher
+  m_Name: AirplaneSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

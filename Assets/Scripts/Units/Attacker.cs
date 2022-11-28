@@ -25,9 +25,7 @@ public class Attacker : MonoBehaviour
     public void Launch(Vector3 target)
     {
         Missile missile = missilePool.Pull();
-        missile.Speed = Speed;
-        missile.PointsForBeingDestroyed = PointsForBeingDestroyed;
-        missile.ExplosionStats = ExplosionStats;
+        missile.Setup(Speed, PointsForBeingDestroyed, ExplosionStats);
         launcher.Launch(missile, transform.position, target);
     }
 

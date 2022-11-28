@@ -10,10 +10,10 @@ public class Autonomous : MonoBehaviour, IPoolable<Autonomous>
 {
     protected Action<Autonomous> returnToPool;
 
-    public float Frequency { get; set; }
-    public int PointsForBeingDestroyed { get; set; }
-    public int Speed { get; set; }
-    public ExplosionStats ExplosionStats { get; set; }
+    private float Frequency;
+    private int PointsForBeingDestroyed;
+    private float Speed;
+    private ExplosionStats ExplosionStats;
 
     public UnityAction<Attacker> OnBeingDestroyed;
 
@@ -47,11 +47,7 @@ public class Autonomous : MonoBehaviour, IPoolable<Autonomous>
             if (targetManager.GetRandomTargetablePosition(out Vector3 pos))
             {
                 Missile missile = missilePool.Pull();
-
-                missile.Speed = Speed;
-                missile.PointsForBeingDestroyed = PointsForBeingDestroyed;
-                missile.ExplosionStats = ExplosionStats;
-
+                missile.Setup(Speed, PointsForBeingDestroyed, ExplosionStats);
                 launcher.Launch(missile, transform.position, pos);
             }
         }
@@ -70,5 +66,13 @@ public class Autonomous : MonoBehaviour, IPoolable<Autonomous>
     public void ReturnToPool()
     {
         returnToPool?.Invoke(this);
+    }
+
+    public void Setup(float frequency, float speed, int pointsForBeingDestroyed, ExplosionStats explosionStats)
+    {
+        Frequency = frequency;
+        Speed = speed;
+        PointsForBeingDestroyed = pointsForBeingDestroyed;
+        ExplosionStats = explosionStats;
     }
 }

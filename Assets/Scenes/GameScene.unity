@@ -2416,7 +2416,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3066026008124523849, guid: 8c5fcc7af2321d84ebaa567f6e5f7b9f, type: 3}
       propertyPath: m_Name
-      value: SkyAirplaneLauncher 2
+      value: SkyAirplaneSpawner 2
       objectReference: {fileID: 0}
     - target: {fileID: 3066026008124523850, guid: 8c5fcc7af2321d84ebaa567f6e5f7b9f, type: 3}
       propertyPath: m_RootOrder
@@ -2514,7 +2514,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3066026008124523849, guid: 8c5fcc7af2321d84ebaa567f6e5f7b9f, type: 3}
       propertyPath: m_Name
-      value: SkyAirplaneLauncher 1
+      value: SkyAirplaneSpawner 1
       objectReference: {fileID: 0}
     - target: {fileID: 3066026008124523849, guid: 8c5fcc7af2321d84ebaa567f6e5f7b9f, type: 3}
       propertyPath: m_IsActive

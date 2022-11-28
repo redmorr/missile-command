@@ -13,6 +13,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] private int Speed;
     [SerializeField] private ExplosionStats ExplosionStats;
 
+
     public ICommandSpawns Commander { get; set; }
 
     public bool CanFire { get => true; }
@@ -33,14 +34,9 @@ public class Spawner : MonoBehaviour
 
         Missile missile = autonomous.GetComponent<Missile>();
 
-        missile.Speed = Speed;
-        missile.PointsForBeingDestroyed = PointsForBeingDestroyed;
-        missile.ExplosionStats = ExplosionStats;
+        missile.Setup(Speed, PointsForBeingDestroyed, ExplosionStats);
 
-        autonomous.Frequency = Frequency;
-        autonomous.Speed = Speed;
-        autonomous.PointsForBeingDestroyed = PointsForBeingDestroyed;
-        autonomous.ExplosionStats = ExplosionStats;
+        autonomous.Setup(Frequency, Speed, PointsForBeingDestroyed, ExplosionStats);
 
         launcher.Launch(missile, transform.position, transform.position + Vector3.right * 50f);
     }

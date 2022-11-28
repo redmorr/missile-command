@@ -4,9 +4,9 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Missile : MonoBehaviour, IPoolable<Missile>, IDestructible, IPointsOnDestroyed, IExplodable, IProjectile
 {
-    public float Speed { get; set; }
-    public int PointsForBeingDestroyed { get; set; }
-    public ExplosionStats ExplosionStats { get; set; }
+    private float Speed;
+    public int PointsForBeingDestroyed { get; private set; }
+    public ExplosionStats ExplosionStats { get; private set; }
 
     private Rigidbody2D _rigidbody2D;
     protected Action<Missile> returnToPool;
@@ -21,6 +21,7 @@ public class Missile : MonoBehaviour, IPoolable<Missile>, IDestructible, IPoints
         _rigidbody2D = GetComponent<Rigidbody2D>();
         explosionPool = FindObjectOfType<ExplosionPool>();
     }
+
 
     public void Launch(Vector3 from, Vector3 to)
     {
@@ -75,5 +76,12 @@ public class Missile : MonoBehaviour, IPoolable<Missile>, IDestructible, IPoints
     {
         Explosion explosion = explosionPool.Pull();
         explosion.Setup(transform.position, ExplosionStats);
+    }
+
+    public void Setup(float speed, int pointsForBeingDestroyed, ExplosionStats explosionStats)
+    {
+        Speed = speed;
+        PointsForBeingDestroyed = pointsForBeingDestroyed;
+        ExplosionStats = explosionStats;
     }
 }
