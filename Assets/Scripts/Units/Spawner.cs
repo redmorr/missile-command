@@ -26,7 +26,7 @@ public class Spawner : MonoBehaviour, ISpawner
         launcher = GetComponent<Launcher>();
     }
 
-    public void Spawn()
+    public IAutonomous Spawn()
     {
         Autonomous autonomous = autonomousPool.Pull();
 
@@ -37,6 +37,8 @@ public class Spawner : MonoBehaviour, ISpawner
         autonomous.Setup(Frequency, Speed, PointsForBeingDestroyed, ExplosionStats);
 
         launcher.Launch(missile, transform.position, transform.position + Vector3.right * 50f);
+
+        return autonomous;
     }
 
     private void OnDisable()

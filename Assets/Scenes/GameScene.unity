@@ -1224,7 +1224,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4849304467631767160, guid: d82e8d7ead33f864cb7c69b69b7ed6b0, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4849304467631767163, guid: d82e8d7ead33f864cb7c69b69b7ed6b0, type: 3}
       propertyPath: m_RootOrder
@@ -1481,8 +1481,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f70e018ac6b1b424eaac9eea957690a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  units: []
-  autonomousUnits: []
 --- !u!114 &884663573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2019,7 +2017,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4849304467631767160, guid: d82e8d7ead33f864cb7c69b69b7ed6b0, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4849304467631767163, guid: d82e8d7ead33f864cb7c69b69b7ed6b0, type: 3}
       propertyPath: m_RootOrder

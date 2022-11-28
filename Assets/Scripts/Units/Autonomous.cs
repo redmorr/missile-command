@@ -6,7 +6,7 @@ using UnityEngine.Events;
 using UnityEngine.WSA;
 using static UnityEngine.GraphicsBuffer;
 
-public class Autonomous : MonoBehaviour, IPoolable<Autonomous>
+public class Autonomous : MonoBehaviour, IPoolable<Autonomous>, IAutonomous
 {
     protected Action<Autonomous> returnToPool;
 
@@ -14,6 +14,8 @@ public class Autonomous : MonoBehaviour, IPoolable<Autonomous>
     private int PointsForBeingDestroyed;
     private float Speed;
     private ExplosionStats ExplosionStats;
+
+    private Action<IAutonomous> deregister;
 
     public UnityAction<Attacker> OnBeingDestroyed;
 
@@ -56,11 +58,18 @@ public class Autonomous : MonoBehaviour, IPoolable<Autonomous>
     private void OnDisable()
     {
         StopCoroutine(coroutine);
+        deregister?.Invoke(this);
+        returnToPool?.Invoke(this);
     }
 
     public void InitPoolable(Action<Autonomous> action)
     {
         returnToPool = action;
+    }
+
+    public void InitDeregistration(Action<IAutonomous> action)
+    {
+        deregister = action;
     }
 
     public void ReturnToPool()
@@ -74,5 +83,10 @@ public class Autonomous : MonoBehaviour, IPoolable<Autonomous>
         Speed = speed;
         PointsForBeingDestroyed = pointsForBeingDestroyed;
         ExplosionStats = explosionStats;
+    }
+
+    public void InitPoolable(Action<IAutonomous> action)
+    {
+        deregister = action;
     }
 }

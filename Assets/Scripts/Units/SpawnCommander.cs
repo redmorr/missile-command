@@ -6,22 +6,27 @@ using static UnityEngine.GraphicsBuffer;
 public class SpawnCommander : MonoBehaviour, ICommandSpawns
 {
     public List<ISpawner> units;
-    public List<Autonomous> autonomousUnits;
+    public List<IAutonomous> autonomousUnits = new List<IAutonomous>();
 
     private void Awake()
     {
         units = GetComponentsInChildren<ISpawner>().ToList();
 
-        foreach (Spawner unit in units)
+        foreach (ISpawner unit in units)
         {
-            unit.OnBeingDestroyed += Deregister;
+            unit.InitPoolable(Deregister);
         }
+
     }
 
     public void Spawn()
     {
         if (GetRandomUnit(out ISpawner spawner))
-            spawner.Spawn();
+        {
+            IAutonomous a = spawner.Spawn();
+            a.InitDeregistration(DeregisterAuto);
+            autonomousUnits.Add(a);
+        }
     }
 
     public void Register(ISpawner newUnit)
@@ -33,6 +38,11 @@ public class SpawnCommander : MonoBehaviour, ICommandSpawns
     private void Deregister(ISpawner unit)
     {
         units.Remove(unit);
+    }
+
+    private void DeregisterAuto(IAutonomous unit)
+    {
+        autonomousUnits.Remove(unit);
     }
 
     private bool GetRandomUnit(out ISpawner unit)
