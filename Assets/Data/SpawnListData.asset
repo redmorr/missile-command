@@ -13,63 +13,15 @@ MonoBehaviour:
   m_Name: SpawnListData
   m_EditorClassIdentifier: 
   Rounds:
-  - AttackNumber: 3
-    SpawnNumber: 1
-    AttackRatePerSecond: 2
-    SpawnRatePerSecond: 1
-  - AttackNumber: 4
-    SpawnNumber: 1
-    AttackRatePerSecond: 2
-    SpawnRatePerSecond: 1
-  - AttackNumber: 4
-    SpawnNumber: 1
-    AttackRatePerSecond: 2
-    SpawnRatePerSecond: 1
-  - AttackNumber: 4
-    SpawnNumber: 1
-    AttackRatePerSecond: 2
-    SpawnRatePerSecond: 1
-  - AttackNumber: 4
-    SpawnNumber: 1
-    AttackRatePerSecond: 2
-    SpawnRatePerSecond: 1
-  - AttackNumber: 4
-    SpawnNumber: 1
-    AttackRatePerSecond: 2
-    SpawnRatePerSecond: 1
-  - AttackNumber: 4
-    SpawnNumber: 1
-    AttackRatePerSecond: 2
-    SpawnRatePerSecond: 1
-  - AttackNumber: 4
-    SpawnNumber: 1
-    AttackRatePerSecond: 2
-    SpawnRatePerSecond: 1
-  - AttackNumber: 4
-    SpawnNumber: 1
-    AttackRatePerSecond: 2
-    SpawnRatePerSecond: 1
-  - AttackNumber: 4
-    SpawnNumber: 1
-    AttackRatePerSecond: 2
-    SpawnRatePerSecond: 1
-  - AttackNumber: 4
-    SpawnNumber: 1
-    AttackRatePerSecond: 2
-    SpawnRatePerSecond: 1
-  - AttackNumber: 4
-    SpawnNumber: 1
-    AttackRatePerSecond: 2
-    SpawnRatePerSecond: 1
-  - AttackNumber: 4
-    SpawnNumber: 1
-    AttackRatePerSecond: 2
-    SpawnRatePerSecond: 1
-  - AttackNumber: 4
-    SpawnNumber: 1
-    AttackRatePerSecond: 2
-    SpawnRatePerSecond: 1
-  - AttackNumber: 4
-    SpawnNumber: 1
-    AttackRatePerSecond: 2
-    SpawnRatePerSecond: 1
+  - AttackNumber: 10
+    SpawnNumber: 3
+    AttackRatePerSecond: 1
+    SpawnRatePerSecond: 2
+  - AttackNumber: 10
+    SpawnNumber: 3
+    AttackRatePerSecond: 1
+    SpawnRatePerSecond: 2
+  - AttackNumber: 10
+    SpawnNumber: 3
+    AttackRatePerSecond: 1
+    SpawnRatePerSecond: 2

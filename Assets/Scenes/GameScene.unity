@@ -1360,16 +1360,24 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4741830162735704218, guid: d82e8d7ead33f864cb7c69b69b7ed6b0, type: 3}
+      propertyPath: speed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4741830162735704218, guid: d82e8d7ead33f864cb7c69b69b7ed6b0, type: 3}
       propertyPath: missilePool
       value: 
       objectReference: {fileID: 997982602}
+    - target: {fileID: 4741830162735704218, guid: d82e8d7ead33f864cb7c69b69b7ed6b0, type: 3}
+      propertyPath: pointsForDestroyingMissile
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 4849304467631767160, guid: d82e8d7ead33f864cb7c69b69b7ed6b0, type: 3}
       propertyPath: m_Name
       value: SkyMissileLauncher 2
       objectReference: {fileID: 0}
     - target: {fileID: 4849304467631767160, guid: d82e8d7ead33f864cb7c69b69b7ed6b0, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4849304467631767163, guid: d82e8d7ead33f864cb7c69b69b7ed6b0, type: 3}
       propertyPath: m_RootOrder
@@ -2198,7 +2206,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4849304467631767160, guid: d82e8d7ead33f864cb7c69b69b7ed6b0, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4849304467631767163, guid: d82e8d7ead33f864cb7c69b69b7ed6b0, type: 3}
       propertyPath: m_RootOrder

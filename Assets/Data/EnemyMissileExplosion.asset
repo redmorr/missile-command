@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 874f9a3c317eb8a4b90fea6515d08439, type: 3}
   m_Name: EnemyMissileExplosion
   m_EditorClassIdentifier: 
-  StartRadius: 2
-  EndRadius: 3
-  Duration: 0.5
+  StartRadius: 3
+  EndRadius: 4
+  Duration: 0.35
