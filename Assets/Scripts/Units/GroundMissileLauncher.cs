@@ -18,15 +18,18 @@ public class GroundMissileLauncher : MonoBehaviour, IAttacker
 
     public void Attack(Vector3 target)
     {
-        Projectile missile = missilePool.Pull();
-        missile.Setup(speed, 0, explosionStats);
-
         if (ammoCounter.HasAmmo)
         {
+            Projectile missile = missilePool.Pull();
+            missile.Setup(speed, 0, explosionStats);
             missile.Launch(transform.position, target);
             ammoCounter.SpentAmmo();
             gunBarrelRotator.RotateBarrel(target);
+
+            if(!ammoCounter.HasAmmo)
+                deregister?.Invoke(this);
         }
+
     }
 
     public void SetupAttacker(Action<IAttacker> action)
