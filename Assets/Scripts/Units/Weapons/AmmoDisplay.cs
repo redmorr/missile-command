@@ -7,7 +7,7 @@ public class AmmoDisplay : MonoBehaviour
     [SerializeField] private RectTransform ammoCellPrefab;
     [SerializeField] private AmmoCounter ammoCounter;
 
-    private List<RectTransform> ammoCells = new List<RectTransform>();
+    private readonly List<RectTransform> ammoCells = new List<RectTransform>();
 
     private void Awake()
     {
