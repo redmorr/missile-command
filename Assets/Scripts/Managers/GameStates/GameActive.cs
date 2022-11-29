@@ -1,8 +1,3 @@
-
-using System.Diagnostics;
-using UnityEngine;
-using Debug = UnityEngine.Debug;
-
 public class GameActive : IState
 {
     private readonly SpawnList spawnList;
@@ -16,14 +11,12 @@ public class GameActive : IState
 
     public void OnEnter()
     {
-        Debug.Log("GameActive enter");
         targetManager.ReactivateAll();
         spawnList.BeginNextRound();
     }
 
     public void OnExit()
     {
-        Debug.Log("GameActive exit");
     }
 
     public void Tick()

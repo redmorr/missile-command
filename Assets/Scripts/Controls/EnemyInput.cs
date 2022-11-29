@@ -38,9 +38,9 @@ public class EnemyInput : MonoBehaviour
         }
 
         if (attackNumber == 0 && spawnNumber == 0)
+        {
             OnAttackingFinished?.Invoke();
-
-        Debug.Log("Finished");
+        }
     }
 
     private IEnumerator Spawn()
@@ -54,11 +54,11 @@ public class EnemyInput : MonoBehaviour
             yield return new WaitForSeconds(spawnFrequency);
             spawnNumber--;
         }
+
         if (attackNumber == 0 && spawnNumber == 0)
+        {
             OnAttackingFinished?.Invoke();
-
-
-        Debug.Log("Finished");
+        }
     }
 
     private void OnDisable()
@@ -67,7 +67,7 @@ public class EnemyInput : MonoBehaviour
         StopCoroutine(spawnRoutine);
     }
 
-    public void BeginAttacking(float attackFrequency, int attackNumber, float spawnFrequency, int spawnNumber)
+    public void BeginAttacking(SpawnStats spawnStats)
     {
         if (attackRoutine != null)
             StopCoroutine(attackRoutine);
@@ -75,10 +75,10 @@ public class EnemyInput : MonoBehaviour
         if (spawnRoutine != null)
             StopCoroutine(spawnRoutine);
 
-        this.attackFrequency = attackFrequency;
-        this.attackNumber = attackNumber;
-        this.spawnFrequency = spawnFrequency;
-        this.spawnNumber = spawnNumber;
+        attackFrequency = spawnStats.AttackRatePerSecond;
+        attackNumber = spawnStats.AttackNumber;
+        spawnFrequency = spawnStats.SpawnRatePerSecond;
+        spawnNumber = spawnStats.SpawnNumber;
 
         attackRoutine = StartCoroutine(Attack());
         spawnRoutine = StartCoroutine(Spawn());

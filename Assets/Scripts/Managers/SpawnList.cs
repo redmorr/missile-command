@@ -5,39 +5,29 @@ using UnityEngine;
 
 public class SpawnList : MonoBehaviour
 {
-    public int AttacksLeft;
-    public int SpawnsLeft;
+    [SerializeField] private SpawnListData SpawnListData;
+    [SerializeField] int roundIndex;
 
-    public EnemyInput enemyInput;
+    private EnemyInput enemyInput;
 
     public bool IsRoundOngoing { get; private set; }
+    public bool NoMoreRounds { get => roundIndex >= SpawnListData.Rounds.Count - 1; }
 
     private void Awake()
     {
         enemyInput = FindObjectOfType<EnemyInput>();
-        enemyInput.OnAttackingFinished += UpdateFlag;
+        enemyInput.OnAttackingFinished += UpdateStatus;
         IsRoundOngoing = false;
     }
 
-    private void UpdateFlag()
-    {
-        IsRoundOngoing = false;
-    }
+    private void UpdateStatus() => IsRoundOngoing = false;
 
     public void BeginNextRound()
     {
         IsRoundOngoing = true;
-        enemyInput.BeginAttacking(2, 2, 2, 2);
+        enemyInput.BeginAttacking(SpawnListData.Rounds[roundIndex]);
+        roundIndex++;
     }
 
-
-    public void ResetToRoundOne()
-    {
-
-    }
-
-    private void OnDisable()
-    {
-        enemyInput.OnAttackingFinished -= UpdateFlag;
-    }
+    private void OnDisable() => enemyInput.OnAttackingFinished -= UpdateStatus;
 }

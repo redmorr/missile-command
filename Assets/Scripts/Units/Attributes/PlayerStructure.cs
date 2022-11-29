@@ -24,11 +24,6 @@ public class PlayerStructure : MonoBehaviour, IDestructible, IPointsOnSurvived, 
         _rigidbody2D.constraints = RigidbodyConstraints2D.FreezeAll;
     }
 
-    private void OnEnable()
-    {
-        Debug.Log(name);
-    }
-
     public void Die()
     {
         OnBeingDestroyed?.Invoke(this);

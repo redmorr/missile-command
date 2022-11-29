@@ -1,5 +1,4 @@
 using System;
-using UnityEngine.AI;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -9,10 +8,10 @@ public class GameManager : Singleton<GameManager>
     private RoundTimer roundTimer;
     private ObjectPool<Projectile> missilePool;
 
-
     protected override void Awake()
     {
         base.Awake();
+
         targetManager = FindObjectOfType<TargetManager>();
         missilePool = FindObjectOfType<ObjectPool<Projectile>>();
         roundTimer = GetComponent<RoundTimer>();
@@ -22,15 +21,15 @@ public class GameManager : Singleton<GameManager>
 
         var roundTransition = new RoundTransition(roundTimer);
         var gameActive = new GameActive(spawnList, targetManager);
-        var gameEnded = new GameEnded(spawnList);
+        var gameEnded = new GameEnded();
 
         stateMachine.AddTransition(roundTransition, gameActive, TimePassed());
         stateMachine.AddTransition(gameActive, roundTransition, RoundFinished());
-        stateMachine.AddTransition(gameActive, gameEnded, PlayerStructuresDestroyed());
+        stateMachine.AddTransition(gameActive, gameEnded, PlayerDead());
 
-        Func<bool> TimePassed() => () => roundTimer.TimerEnded;
+        Func<bool> TimePassed() => () => roundTimer.TimerStopped;
         Func<bool> RoundFinished() => () => !spawnList.IsRoundOngoing && missilePool.CurrentlyActive == 0;
-        Func<bool> PlayerStructuresDestroyed() => () => targetManager.PlayerStructuresNumber <= 0;
+        Func<bool> PlayerDead() => () => targetManager.PlayerStructuresNumber <= 0;
 
         stateMachine.SetState(roundTransition);
     }

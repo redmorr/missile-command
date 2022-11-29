@@ -1,19 +1,15 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class RoundTimer : MonoBehaviour
 {
     [SerializeField] private int roundTransitionTime;
-    [SerializeField] private TextMeshProUGUI Text;
-
-    public int seconds;
-
-    public bool TimerEnded;
+    [SerializeField] private TextMeshProUGUI roundTimerText;
 
     private Coroutine timerRoutine;
+
+    public bool TimerStopped { get; private set; }
 
     public void StartTimer()
     {
@@ -22,20 +18,19 @@ public class RoundTimer : MonoBehaviour
 
     public void ResetTimer()
     {
-        if(timerRoutine != null)
+        if (timerRoutine != null)
             StopCoroutine(timerRoutine);
-        TimerEnded = false;
+        TimerStopped = false;
     }
 
     private IEnumerator TimerRoutine()
     {
-        for (int i = roundTransitionTime; i > 0; i--)
+        for (int t = roundTransitionTime; t > 0; t--)
         {
-            Text.SetText(i.ToString());
+            roundTimerText.SetText(t.ToString());
             yield return new WaitForSeconds(1f);
-            seconds = i;
         }
-        TimerEnded = true;
-        Text.SetText("");
+        TimerStopped = true;
+        roundTimerText.SetText("");
     }
 }

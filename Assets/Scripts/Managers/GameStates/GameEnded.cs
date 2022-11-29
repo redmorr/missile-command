@@ -1,13 +1,10 @@
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameEnded : IState
 {
-    private SpawnList spawnList;
-
-    public GameEnded(SpawnList spawnList)
+    public GameEnded()
     {
-        this.spawnList = spawnList;
+
     }
 
     public void OnEnter()
@@ -17,7 +14,6 @@ public class GameEnded : IState
 
     public void OnExit()
     {
-        Debug.Log("GameEnded exit");
         
     }
 

@@ -1670,7 +1670,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c07666a30e1e05a45a17ab12b110c6f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStructures: []
+  initalPlayerStructures: []
+  activePlayerStructures: []
 --- !u!4 &904329050
 Transform:
   m_ObjectHideFlags: 0
@@ -1784,9 +1785,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f675e8c68291af40a52857021347300, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttacksLeft: 3
-  SpawnsLeft: 3
-  enemyInput: {fileID: 0}
+  SpawnListData: {fileID: 11400000, guid: 7174d559d967f9b408a718d17952f4b5, type: 2}
+  roundIndex: 0
 --- !u!114 &1046764785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1800,9 +1800,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roundTransitionTime: 5
-  Text: {fileID: 630590824}
-  seconds: 0
-  TimerEnded: 0
+  roundTimerText: {fileID: 630590824}
 --- !u!114 &1046764786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2484,7 +2482,7 @@ GameObject:
   m_Layer: 0
   m_Name: MaxTargetHeightMarker
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -2615,7 +2613,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3066026008124523849, guid: 8c5fcc7af2321d84ebaa567f6e5f7b9f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3066026008124523850, guid: 8c5fcc7af2321d84ebaa567f6e5f7b9f, type: 3}
       propertyPath: m_RootOrder
@@ -2623,7 +2621,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3066026008124523850, guid: 8c5fcc7af2321d84ebaa567f6e5f7b9f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.6
+      value: -35.4
       objectReference: {fileID: 0}
     - target: {fileID: 3066026008124523850, guid: 8c5fcc7af2321d84ebaa567f6e5f7b9f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2725,7 +2723,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3066026008124523849, guid: 8c5fcc7af2321d84ebaa567f6e5f7b9f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3066026008124523850, guid: 8c5fcc7af2321d84ebaa567f6e5f7b9f, type: 3}
       propertyPath: m_RootOrder
@@ -2733,7 +2731,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3066026008124523850, guid: 8c5fcc7af2321d84ebaa567f6e5f7b9f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -49.6
+      value: -61.6
       objectReference: {fileID: 0}
     - target: {fileID: 3066026008124523850, guid: 8c5fcc7af2321d84ebaa567f6e5f7b9f, type: 3}
       propertyPath: m_LocalPosition.y
