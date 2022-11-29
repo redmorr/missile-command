@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -8528143980191641445}
   - component: {fileID: 6606634000567997808}
   - component: {fileID: 6589964735014044258}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: City
   m_TagString: Untagged
   m_Icon: {fileID: 0}

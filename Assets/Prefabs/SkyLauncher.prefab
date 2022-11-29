@@ -45,6 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   missilePool: {fileID: 0}
-  PointsForDestroyingMissile: 100
-  speed: 2
+  pointsForDestroyingMissile: 100
+  speed: 3
   explosionStats: {fileID: 11400000, guid: 64c141c770d0dfe40a8bd37d4f1bdb05, type: 2}

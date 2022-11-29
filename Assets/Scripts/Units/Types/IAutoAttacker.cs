@@ -1,4 +1,4 @@
 public interface IAutoAttacker
 {
-    public void SetupAutoAttacker(System.Action<IAutoAttacker> action);
+    public void SetupActionOnDeath(System.Action<IAutoAttacker> action);
 }

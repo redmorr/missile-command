@@ -1,20 +1,19 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class SpawnCommander : MonoBehaviour, IOrderUnitSpawn
 {
-    private List<ISpawner> spawners;
+    private List<ISpawner> spawners = new List<ISpawner>();
     private List<IAutoAttacker> autoAttackers = new List<IAutoAttacker>();
 
-    private void Awake()
+    public void Deregister(ISpawner unit)
     {
-        spawners = GetComponentsInChildren<ISpawner>().ToList();
+        spawners.Remove(unit);
+    }
 
-        foreach (ISpawner unit in spawners)
-        {
-            unit.InitSpawner(Deregister);
-        }
+    public void Register(ISpawner unit)
+    {
+        spawners.Add(unit);
     }
 
     public void OrderSpawn()
@@ -22,20 +21,9 @@ public class SpawnCommander : MonoBehaviour, IOrderUnitSpawn
         if (GetRandomUnit(out ISpawner spawner))
         {
             IAutoAttacker autoAttacker = spawner.Spawn();
-            autoAttacker.SetupAutoAttacker(DeregisterAuto);
+            autoAttacker.SetupActionOnDeath(DeregisterAuto);
             autoAttackers.Add(autoAttacker);
         }
-    }
-
-    public void Register(ISpawner newUnit)
-    {
-        spawners.Add(newUnit);
-        newUnit.InitSpawner(Deregister);
-    }
-
-    private void Deregister(ISpawner unit)
-    {
-        spawners.Remove(unit);
     }
 
     private void DeregisterAuto(IAutoAttacker unit)

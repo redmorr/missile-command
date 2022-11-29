@@ -8,10 +8,15 @@ public class SkyMissileLauncher : MonoBehaviour, IAttacker
     [SerializeField] private int speed;
     [SerializeField] private ExplosionStats explosionStats;
 
-    private Action<IAttacker> deregister;
+    private IOrderUnitAttack attackCommander;
 
     public Vector3 Position { get => transform.position; }
     public bool CanAttack => true;
+
+    private void Awake()
+    {
+        attackCommander = GetComponentInParent<IOrderUnitAttack>();
+    }
 
     public void Attack(Vector3 target)
     {
@@ -20,13 +25,13 @@ public class SkyMissileLauncher : MonoBehaviour, IAttacker
         missile.Launch(transform.position, target);
     }
 
-    public void SetupAttacker(Action<IAttacker> action)
+    private void OnEnable()
     {
-        deregister = action;
+        attackCommander.Register(this);
     }
 
     private void OnDisable()
     {
-        deregister?.Invoke(this);
+        attackCommander.Deregister(this);
     }
 }

@@ -14,9 +14,10 @@ public class AmmoCounter : MonoBehaviour
     public int CurrentAmmo { get => currentAmmo; }
     public bool HasAmmo { get => currentAmmo > 0 || hasInfiniteAmmo; }
 
-    private void Awake()
+    private void OnEnable()
     {
         currentAmmo = initialAmmo;
+        OnAmmoChanged?.Invoke(currentAmmo);
     }
 
     public void SpentAmmo()

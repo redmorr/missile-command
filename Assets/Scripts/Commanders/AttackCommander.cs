@@ -4,18 +4,16 @@ using UnityEngine;
 
 public class AttackCommander : MonoBehaviour, IOrderUnitAttack
 {
-    private List<IAttacker> attackers;
-    private List<IAttacker> activeAttackers;
+    private List<IAttacker> attackers = new List<IAttacker>();
 
-    private void Awake()
+    public void Deregister(IAttacker unit)
     {
-        attackers = GetComponentsInChildren<IAttacker>().ToList();
-        activeAttackers = attackers;
+        attackers.Remove(unit);
+    }
 
-        foreach (IAttacker attacker in attackers)
-        {
-            attacker.SetupAttacker(Deregister);
-        }
+    public void Register(IAttacker unit)
+    {
+        attackers.Add(unit);
     }
 
     public void OrderAttackRandom(Vector3 target)
@@ -30,17 +28,12 @@ public class AttackCommander : MonoBehaviour, IOrderUnitAttack
             launcher.Attack(target);
     }
 
-    private void Deregister(IAttacker unit)
-    {
-        activeAttackers.Remove(unit);
-    }
-
     private bool GetRandomUnit(out IAttacker unit)
     {
         unit = null;
-        var randomIndex = Random.Range(0, activeAttackers.Count);
+        var randomIndex = Random.Range(0, attackers.Count);
 
-        if (activeAttackers.Count > 0)
+        if (attackers.Count > 0)
         {
             unit = attackers[randomIndex];
             return true;
@@ -54,7 +47,7 @@ public class AttackCommander : MonoBehaviour, IOrderUnitAttack
         closestAttacker = null;
         float minDistnace = Mathf.Infinity;
 
-        foreach (IAttacker attacker in activeAttackers)
+        foreach (IAttacker attacker in attackers)
         {
             float distance = Vector2.Distance(target, attacker.Position);
             if (distance < minDistnace)
@@ -65,4 +58,5 @@ public class AttackCommander : MonoBehaviour, IOrderUnitAttack
         }
         return closestAttacker != null;
     }
+
 }

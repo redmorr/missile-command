@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: PlayerMissileExplosion
   m_EditorClassIdentifier: 
   StartRadius: 2
-  EndRadius: 5
-  Duration: 0.5
+  EndRadius: 7
+  Duration: 0.35
