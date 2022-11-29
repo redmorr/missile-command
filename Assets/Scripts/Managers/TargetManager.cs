@@ -6,6 +6,8 @@ public class TargetManager : Singleton<TargetManager>
 {
     private List<PlayerStructure> playerStructures;
 
+    public int PlayerStructuresNumber { get => playerStructures.Count; }
+
     protected override void Awake()
     {
         base.Awake();
