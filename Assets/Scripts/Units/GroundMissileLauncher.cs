@@ -6,6 +6,7 @@ public class GroundMissileLauncher : MonoBehaviour, IAttacker
 {
     [SerializeField] private ObjectPool<Projectile> missilePool;
     [SerializeField] private AmmoCounter ammoCounter;
+    [SerializeField] private Transform muzzle;
     [SerializeField] private GunBarrelRotator gunBarrelRotator;
     [SerializeField] private PlayerStructure playerStructure;
     [SerializeField] private int speed;
@@ -20,16 +21,15 @@ public class GroundMissileLauncher : MonoBehaviour, IAttacker
     {
         if (ammoCounter.HasAmmo)
         {
+            gunBarrelRotator.RotateBarrel(target);
             Projectile missile = missilePool.Pull();
             missile.Setup(speed, 0, explosionStats);
-            missile.Launch(transform.position, target);
+            missile.Launch(muzzle.position, target);
             ammoCounter.SpentAmmo();
-            gunBarrelRotator.RotateBarrel(target);
 
             if(!ammoCounter.HasAmmo)
                 deregister?.Invoke(this);
         }
-
     }
 
     public void SetupAttacker(Action<IAttacker> action)
