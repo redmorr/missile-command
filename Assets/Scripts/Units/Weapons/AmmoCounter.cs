@@ -3,32 +3,25 @@ using UnityEngine.Events;
 
 public class AmmoCounter : MonoBehaviour
 {
-    [SerializeField] private int InitialAmmoSize;
-    [SerializeField] private bool InfiniteAmmo;
+    [SerializeField] private int initialAmmo;
+    [SerializeField] private bool hasInfiniteAmmo;
+
+    private int currentAmmo;
 
     public UnityAction<int> OnAmmoChanged;
 
-    public int InitialAmmo { get => InitialAmmoSize; }
-    public bool HasAmmo { get => currentAmmo > 0 || InfiniteAmmo; }
-
-    private Launcher launcher;
-    private int currentAmmo;
+    public int InitialAmmo { get => initialAmmo; }
+    public int CurrentAmmo { get => currentAmmo; }
+    public bool HasAmmo { get => currentAmmo > 0 || hasInfiniteAmmo; }
 
     private void Awake()
     {
-        launcher = GetComponent<Launcher>();
-        launcher.OnLaunch += SpentAmmo;
-        currentAmmo = InitialAmmoSize;
+        currentAmmo = initialAmmo;
     }
 
-    private void SpentAmmo(Vector3 _)
+    public void SpentAmmo()
     {
         currentAmmo--;
         OnAmmoChanged?.Invoke(currentAmmo);
-    }
-
-    private void OnDisable()
-    {
-        launcher.OnLaunch -= SpentAmmo;
     }
 }

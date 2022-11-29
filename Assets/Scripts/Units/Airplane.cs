@@ -1,24 +1,19 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class Airplane : MonoBehaviour, IPoolable<Airplane>, IAutoAttacker
 {
     private Action<Airplane> returnToPool;
-
     private float attackFrequency;
     private int pointsForBeingDestroyed;
     private float speed;
     private ExplosionStats explosionStats;
-
-    private Action<IAutoAttacker> deregister;
-    public Vector3 Position { get => transform.position; }
-
-    private Launcher launcher;
-    private ObjectPool<Missile> missilePool;
+    private ObjectPool<Projectile> missilePool;
     private TargetManager targetManager;
     private Coroutine attackRoutine;
+    
+    private Action<IAutoAttacker> deregister;
 
     public void Setup(float attackFrequency, float speed, int pointsForBeingDestroyed, ExplosionStats explosionStats)
     {
@@ -31,8 +26,7 @@ public class Airplane : MonoBehaviour, IPoolable<Airplane>, IAutoAttacker
     private void Awake()
     {
         targetManager = FindObjectOfType<TargetManager>();
-        missilePool = FindObjectOfType<ObjectPool<Missile>>();
-        launcher = GetComponent<Launcher>();
+        missilePool = FindObjectOfType<ObjectPool<Projectile>>();
     }
 
     private void OnEnable()
@@ -46,11 +40,11 @@ public class Airplane : MonoBehaviour, IPoolable<Airplane>, IAutoAttacker
         {
             yield return new WaitForSeconds(attackFrequency);
 
-            if (targetManager.GetRandomTargetablePosition(out Vector3 pos))
+            if (targetManager.GetRandomTargetablePosition(out Vector3 target))
             {
-                Missile missile = missilePool.Pull();
+                Projectile missile = missilePool.Pull();
                 missile.Setup(speed, pointsForBeingDestroyed, explosionStats);
-                launcher.Launch(missile, transform.position, pos);
+                missile.Launch(transform.position, target);
             }
         }
     }

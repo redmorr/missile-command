@@ -3,18 +3,18 @@ using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
-public class Targetable : MonoBehaviour, IDestructible, IPointsOnSurvived, IExplodable
+public class PlayerStructure : MonoBehaviour, IDestructible, IPointsOnSurvived, IExplodable
 {
-    [SerializeField] private int Points;
-    [SerializeField] private ExplosionStats ExplosionStats;
-
-    public UnityAction<Targetable> OnBeingDestroyed;
-
-    public Vector3 Position { get => transform.position; }
-    public int PointsForSurviving { get => Points; set => Points = value; }
+    [SerializeField] private int pointsForSurviving;
+    [SerializeField] private ExplosionStats explosionStats;
 
     private Rigidbody2D _rigidbody2D;
     private ExplosionPool explosionPool;
+
+    public UnityAction<PlayerStructure> OnBeingDestroyed;
+
+    public Vector3 Position { get => transform.position; }
+    public int PointsForSurviving { get => pointsForSurviving; set => pointsForSurviving = value; }
 
     private void Awake()
     {
@@ -33,6 +33,6 @@ public class Targetable : MonoBehaviour, IDestructible, IPointsOnSurvived, IExpl
     public void Explode()
     {
         Explosion explosion = explosionPool.Pull();
-        explosion.Setup(transform.position, ExplosionStats);
+        explosion.Setup(transform.position, explosionStats);
     }
 }

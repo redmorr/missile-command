@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3066026008124523850}
   - component: {fileID: 4680385890899543592}
-  - component: {fileID: 3066026008124523860}
   m_Layer: 0
   m_Name: AirplaneSpawner
   m_TagString: Untagged
@@ -45,19 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d535f2f20d332b04f9878044f819e2e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Frequency: 1
-  PointsForBeingDestroyed: 100
-  Speed: 1
-  ExplosionStats: {fileID: 11400000, guid: 64c141c770d0dfe40a8bd37d4f1bdb05, type: 2}
---- !u!114 &3066026008124523860
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3066026008124523849}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c36ac0aeb7489254db83a06811dd0776, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  airplanePool: {fileID: 0}
+  frequency: 2
+  pointsForBeingDestroyed: 500
+  speed: 2
+  explosionStats: {fileID: 11400000, guid: 64c141c770d0dfe40a8bd37d4f1bdb05, type: 2}

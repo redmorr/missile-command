@@ -1,2 +1,2 @@
-public class MissilePool : ObjectPool<Missile>
+public class MissilePool : ObjectPool<Projectile>
 { }

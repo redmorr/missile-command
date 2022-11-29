@@ -4,31 +4,30 @@ using UnityEngine;
 
 public class TargetManager : Singleton<TargetManager>
 {
-    private List<Targetable> playersUnits;
+    private List<PlayerStructure> playerStructures;
 
     protected override void Awake()
     {
         base.Awake();
-        playersUnits = FindObjectsOfType<Targetable>().ToList();
 
-        foreach (Targetable targetable in playersUnits)
-        {
+        playerStructures = FindObjectsOfType<PlayerStructure>().ToList();
+
+        foreach (PlayerStructure targetable in playerStructures)
             targetable.OnBeingDestroyed += RemoveFromList;
-        }
     }
 
     public bool GetRandomTargetablePosition(out Vector3 targetPosition)
     {
         targetPosition = Vector3.zero;
 
-        if (playersUnits.Count <= 0)
+        if (playerStructures.Count <= 0)
             return false;
 
-        var i = Random.Range(0, playersUnits.Count);
+        var i = Random.Range(0, playerStructures.Count);
 
-        if (playersUnits[i])
+        if (playerStructures[i])
         {
-            targetPosition = playersUnits[i].Position;
+            targetPosition = playerStructures[i].Position;
             return true;
         }
         else
@@ -38,9 +37,9 @@ public class TargetManager : Singleton<TargetManager>
         }
     }
 
-    private void RemoveFromList(Targetable targetable)
+    private void RemoveFromList(PlayerStructure targetable)
     {
-        playersUnits.Remove(targetable);
+        playerStructures.Remove(targetable);
         targetable.OnBeingDestroyed -= RemoveFromList;
     }
 }

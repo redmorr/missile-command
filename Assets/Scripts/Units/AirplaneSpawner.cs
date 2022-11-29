@@ -1,46 +1,26 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Reflection;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class AirplaneSpawner : MonoBehaviour, ISpawner
 {
-    [SerializeField] private ObjectPool<Airplane> autonomousPool;
-    [SerializeField] private float Frequency;
-    [SerializeField] private int PointsForBeingDestroyed;
-    [SerializeField] private int Speed;
-    [SerializeField] private ExplosionStats ExplosionStats;
+    [SerializeField] private ObjectPool<Airplane> airplanePool;
+    [SerializeField] private float frequency;
+    [SerializeField] private int pointsForBeingDestroyed;
+    [SerializeField] private int speed;
+    [SerializeField] private ExplosionStats explosionStats;
 
     public Vector3 Position { get => transform.position; }
 
     private Action<ISpawner> deregister;
-    private Launcher launcher;
-
-    private void Awake()
-    {
-        launcher = GetComponent<Launcher>();
-    }
 
     public IAutoAttacker Spawn()
     {
-        Airplane autonomous = autonomousPool.Pull();
-
-        Missile missile = autonomous.GetComponent<Missile>();
-
-        missile.Setup(Speed, PointsForBeingDestroyed, ExplosionStats);
-
-        autonomous.Setup(Frequency, Speed, PointsForBeingDestroyed, ExplosionStats);
-
-        launcher.Launch(missile, transform.position, transform.position + Vector3.right * 50f);
-
+        Airplane autonomous = airplanePool.Pull();
+        Projectile projectile = autonomous.GetComponent<Projectile>();
+        projectile.Setup(speed, pointsForBeingDestroyed, explosionStats);
+        autonomous.Setup(frequency, speed, pointsForBeingDestroyed, explosionStats);
+        projectile.Launch(transform.position, transform.position + Vector3.right * 50f);
         return autonomous;
-    }
-
-    private void OnDisable()
-    {
-        deregister?.Invoke(this);
     }
 
     public void InitSpawner(Action<ISpawner> action)
@@ -48,4 +28,8 @@ public class AirplaneSpawner : MonoBehaviour, ISpawner
         deregister = action;
     }
 
+    private void OnDisable()
+    {
+        deregister?.Invoke(this);
+    }
 }

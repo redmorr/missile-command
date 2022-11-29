@@ -2,14 +2,14 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Missile : MonoBehaviour, IPoolable<Missile>, IDestructible, IPointsOnDestroyed, IExplodable, IProjectile
+public class Projectile : MonoBehaviour, IPoolable<Projectile>, IDestructible, IPointsOnDestroyed, IExplodable, IProjectile
 {
     private float Speed;
     public int PointsForBeingDestroyed { get; private set; }
     public ExplosionStats ExplosionStats { get; private set; }
 
     private Rigidbody2D _rigidbody2D;
-    protected Action<Missile> returnToPool;
+    protected Action<Projectile> returnToPool;
     private Vector3 from;
     private Vector3 to;
     private Vector3 directionToDestination;
@@ -64,7 +64,7 @@ public class Missile : MonoBehaviour, IPoolable<Missile>, IDestructible, IPoints
         explosion.Setup(transform.position, ExplosionStats);
     }
 
-    public void InitPoolable(Action<Missile> action) => returnToPool = action;
+    public void InitPoolable(Action<Projectile> action) => returnToPool = action;
 
     public void ReturnToPool() => returnToPool?.Invoke(this);
 

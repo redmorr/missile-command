@@ -5,10 +5,12 @@ using UnityEngine;
 public class AttackCommander : MonoBehaviour, IOrderUnitAttack
 {
     private List<IAttacker> attackers;
+    private List<IAttacker> activeAttackers;
 
     private void Awake()
     {
         attackers = GetComponentsInChildren<IAttacker>().ToList();
+        activeAttackers = attackers;
 
         foreach (IAttacker attacker in attackers)
         {
@@ -28,23 +30,17 @@ public class AttackCommander : MonoBehaviour, IOrderUnitAttack
             launcher.Attack(target);
     }
 
-    public void Register(IAttacker newUnit)
-    {
-        attackers.Add(newUnit);
-        newUnit.SetupAttacker(Deregister);
-    }
-
     private void Deregister(IAttacker unit)
     {
-        attackers.Remove(unit);
+        activeAttackers.Remove(unit);
     }
 
     private bool GetRandomUnit(out IAttacker unit)
     {
         unit = null;
-        var randomIndex = Random.Range(0, attackers.Count);
+        var randomIndex = Random.Range(0, activeAttackers.Count);
 
-        if (attackers.Count > 0)
+        if (activeAttackers.Count > 0)
         {
             unit = attackers[randomIndex];
             return true;
@@ -58,7 +54,7 @@ public class AttackCommander : MonoBehaviour, IOrderUnitAttack
         closestAttacker = null;
         float minDistnace = Mathf.Infinity;
 
-        foreach (IAttacker attacker in attackers)
+        foreach (IAttacker attacker in activeAttackers)
         {
             float distance = Vector2.Distance(target, attacker.Position);
             if (distance < minDistnace)
