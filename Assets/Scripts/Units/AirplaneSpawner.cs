@@ -16,20 +16,20 @@ public class AirplaneSpawner : MonoBehaviour, ISpawner
     public IAutoAttacker Spawn()
     {
         Airplane autonomous = airplanePool.Pull();
-        Projectile missile = autonomous.GetComponent<Projectile>();
-        missile.Setup(speed, pointsForBeingDestroyed, explosionStats);
+        Projectile projectile = autonomous.GetComponent<Projectile>();
+        projectile.Setup(speed, pointsForBeingDestroyed, explosionStats);
         autonomous.Setup(frequency, speed, pointsForBeingDestroyed, explosionStats);
-        missile.Launch(transform.position, transform.position + Vector3.right * 50f);
+        projectile.Launch(transform.position, transform.position + Vector3.right * 50f);
         return autonomous;
-    }
-
-    private void OnDisable()
-    {
-        deregister?.Invoke(this);
     }
 
     public void InitSpawner(Action<ISpawner> action)
     {
         deregister = action;
+    }
+
+    private void OnDisable()
+    {
+        deregister?.Invoke(this);
     }
 }
