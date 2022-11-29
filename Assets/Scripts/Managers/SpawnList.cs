@@ -11,7 +11,6 @@ public class SpawnList : MonoBehaviour
     private EnemyInput enemyInput;
 
     public bool IsRoundOngoing { get; private set; }
-    public bool NoMoreRounds { get => roundIndex >= SpawnListData.Rounds.Count - 1; }
 
     private void Awake()
     {
@@ -25,8 +24,10 @@ public class SpawnList : MonoBehaviour
     public void BeginNextRound()
     {
         IsRoundOngoing = true;
+
         enemyInput.BeginAttacking(SpawnListData.Rounds[roundIndex]);
-        roundIndex++;
+        if (roundIndex + 1 < SpawnListData.Rounds.Count)
+            roundIndex++;
     }
 
     private void OnDisable() => enemyInput.OnAttackingFinished -= UpdateStatus;
