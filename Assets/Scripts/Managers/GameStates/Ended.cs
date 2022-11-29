@@ -1,8 +1,8 @@
 using UnityEngine.SceneManagement;
 
-public class GameEnded : IState
+public class Ended : IState
 {
-    public GameEnded()
+    public Ended()
     {
 
     }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
@@ -10,11 +9,10 @@ public class EnemyInput : MonoBehaviour
     private TargetManager targetManager;
     private Coroutine attackRoutine;
     private Coroutine spawnRoutine;
-
-    public float attackFrequency;
-    public int attackNumber;
-    public float spawnFrequency;
-    public int spawnNumber;
+    private float attackFrequency;
+    private int attackNumber;
+    private float spawnFrequency;
+    private int spawnNumber;
 
     public UnityAction OnAttackingFinished;
 
@@ -30,17 +28,13 @@ public class EnemyInput : MonoBehaviour
         while (attackNumber > 0)
         {
             if (targetManager.GetRandomTargetablePosition(out Vector3 pos))
-            {
                 attackerCommander.OrderAttackRandom(pos);
-            }
             yield return new WaitForSeconds(attackFrequency);
             attackNumber--;
         }
 
         if (attackNumber == 0 && spawnNumber == 0)
-        {
             OnAttackingFinished?.Invoke();
-        }
     }
 
     private IEnumerator Spawn()
@@ -48,17 +42,14 @@ public class EnemyInput : MonoBehaviour
         while (spawnNumber > 0)
         {
             if (targetManager.GetRandomTargetablePosition(out Vector3 _))
-            {
                 spawnerCommander.OrderSpawn();
-            }
+
             yield return new WaitForSeconds(spawnFrequency);
             spawnNumber--;
         }
 
         if (attackNumber == 0 && spawnNumber == 0)
-        {
             OnAttackingFinished?.Invoke();
-        }
     }
 
     private void OnDisable()

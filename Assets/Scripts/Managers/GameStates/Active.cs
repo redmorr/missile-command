@@ -1,9 +1,9 @@
-public class GameActive : IState
+public class Active : IState
 {
     private readonly SpawnList spawnList;
     private readonly TargetManager targetManager;
 
-    public GameActive(SpawnList spawnList, TargetManager targetManager)
+    public Active(SpawnList spawnList, TargetManager targetManager)
     {
         this.spawnList = spawnList;
         this.targetManager = targetManager;

@@ -1,8 +1,8 @@
-public class RoundTransition : IState
+public class Transition : IState
 {
     private RoundTimer roundTimer;
 
-    public RoundTransition(RoundTimer roundTimer)
+    public Transition(RoundTimer roundTimer)
     {
         this.roundTimer = roundTimer;
     }

@@ -6,32 +6,32 @@ public class GameManager : Singleton<GameManager>
     private TargetManager targetManager;
     private SpawnList spawnList;
     private RoundTimer roundTimer;
-    private ObjectPool<Projectile> missilePool;
+    private ObjectPool<Projectile> projectilePool;
 
     protected override void Awake()
     {
         base.Awake();
 
         targetManager = FindObjectOfType<TargetManager>();
-        missilePool = FindObjectOfType<ObjectPool<Projectile>>();
+        projectilePool = FindObjectOfType<ObjectPool<Projectile>>();
         roundTimer = GetComponent<RoundTimer>();
         spawnList = GetComponent<SpawnList>();
 
         stateMachine = new StateMachine();
 
-        var roundTransition = new RoundTransition(roundTimer);
-        var gameActive = new GameActive(spawnList, targetManager);
-        var gameEnded = new GameEnded();
+        var transition = new Transition(roundTimer);
+        var active = new Active(spawnList, targetManager);
+        var ended = new Ended();
 
-        stateMachine.AddTransition(roundTransition, gameActive, TimePassed());
-        stateMachine.AddTransition(gameActive, roundTransition, RoundFinished());
-        stateMachine.AddTransition(gameActive, gameEnded, PlayerDead());
+        stateMachine.AddTransition(transition, active, TimePassed());
+        stateMachine.AddTransition(active, transition, RoundFinishedAndNoActiveProjectiles());
+        stateMachine.AddTransition(active, ended, PlayerDead());
 
         Func<bool> TimePassed() => () => roundTimer.TimerStopped;
-        Func<bool> RoundFinished() => () => !spawnList.IsRoundOngoing && missilePool.CurrentlyActive == 0;
+        Func<bool> RoundFinishedAndNoActiveProjectiles() => () => !spawnList.IsRoundOngoing && projectilePool.CurrentlyActive == 0;
         Func<bool> PlayerDead() => () => targetManager.PlayerStructuresNumber <= 0;
 
-        stateMachine.SetState(roundTransition);
+        stateMachine.SetState(transition);
     }
 
     private void Update()

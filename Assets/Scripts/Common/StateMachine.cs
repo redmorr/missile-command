@@ -1,10 +1,9 @@
-
 using System;
 using System.Collections.Generic;
 
 public class StateMachine
 {
-    public IState CurrentState;
+    private IState currentState;
 
     private Dictionary<Type, List<Transition>> transitions = new Dictionary<Type, List<Transition>>();
     private List<Transition> currentTransitions = new List<Transition>();
@@ -17,22 +16,22 @@ public class StateMachine
         if (transition != null)
             SetState(transition.To);
 
-        CurrentState?.Tick();
+        currentState?.Tick();
     }
 
     public void SetState(IState state)
     {
-        if (state == CurrentState)
+        if (state == currentState)
             return;
 
-        CurrentState?.OnExit();
-        CurrentState = state;
+        currentState?.OnExit();
+        currentState = state;
 
-        transitions.TryGetValue(CurrentState.GetType(), out currentTransitions);
+        transitions.TryGetValue(currentState.GetType(), out currentTransitions);
         if (currentTransitions == null)
             currentTransitions = EmptyTransitions;
 
-        CurrentState.OnEnter();
+        currentState.OnEnter();
     }
 
     public void AddTransition(IState from, IState to, Func<bool> predicate)
