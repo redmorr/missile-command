@@ -205,7 +205,7 @@ GameObject:
   - component: {fileID: 8919541692296506070}
   - component: {fileID: 8908958873710900322}
   - component: {fileID: 3273492007100349180}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GroundLauncher
   m_TagString: Untagged
   m_Icon: {fileID: 0}

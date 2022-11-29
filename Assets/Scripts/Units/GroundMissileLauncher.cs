@@ -25,11 +25,6 @@ public class GroundMissileLauncher : MonoBehaviour, IAttacker
         gunBarrelRotator = GetComponent<GunBarrelRotator>();
     }
 
-    private void OnEnable()
-    {
-        attackCommander.Register(this);
-    }
-
     public void Attack(Vector3 target)
     {
         if (ammoCounter.HasAmmo)
@@ -43,6 +38,11 @@ public class GroundMissileLauncher : MonoBehaviour, IAttacker
             if (!ammoCounter.HasAmmo)
                 attackCommander.Deregister(this);
         }
+    }
+
+    private void OnEnable()
+    {
+        attackCommander.Register(this);
     }
 
     private void OnDisable()
