@@ -6,10 +6,9 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerStructure))]
 public class GroundMissileLauncher : MonoBehaviour, IAttacker
 {
-    [SerializeField] private ObjectPool<Projectile> missilePool;
+    [SerializeField] private ObjectPool<Missile> missilePool;
     [SerializeField] private Transform muzzle;
-    [SerializeField] private int speed;
-    [SerializeField] private ExplosionStats explosionStats;
+    [SerializeField] private ProjectileData projectileData;
 
     private AmmoCounter ammoCounter;
     private GunBarrelRotator gunBarrelRotator;
@@ -30,9 +29,8 @@ public class GroundMissileLauncher : MonoBehaviour, IAttacker
         if (ammoCounter.HasAmmo)
         {
             gunBarrelRotator.RotateBarrel(target);
-            Projectile missile = missilePool.Pull();
-            missile.Setup(speed, 0, explosionStats);
-            missile.Launch(muzzle.position, target);
+            Missile missile = missilePool.Pull();
+            missile.Launch(muzzle.position, target, projectileData);
             ammoCounter.SpentAmmo();
 
             if (!ammoCounter.HasAmmo)

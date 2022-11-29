@@ -45,7 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   airplanePool: {fileID: 0}
-  frequency: 2
+  airplaneMissileData: {fileID: 11400000, guid: d3603296217aaf949aeb99c73b54198b, type: 2}
+  airplaneMissileLauncherData: {fileID: 11400000, guid: 67e2ed90db3845044881c178e7a69e29, type: 2}
+  attackFrequency: 3
   pointsForBeingDestroyed: 500
   speed: 2
   explosionStats: {fileID: 11400000, guid: 64c141c770d0dfe40a8bd37d4f1bdb05, type: 2}

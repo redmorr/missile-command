@@ -243,8 +243,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   missilePool: {fileID: 0}
   muzzle: {fileID: 8919541691592505018}
-  speed: 20
-  explosionStats: {fileID: 11400000, guid: ec2c12c4b0b664841ae38d525c2d7d0e, type: 2}
+  projectileData: {fileID: 11400000, guid: 09ef61201da62e94089d6c5dd37b207b, type: 2}
 --- !u!114 &4013392199802934110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -299,7 +298,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dbf6e2cf9113c04db614a97c26fbe12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointsForSurviving: 1000
   explosionStats: {fileID: 11400000, guid: d007713ab41577e49a8d066fce3b7201, type: 2}
 --- !u!212 &8919541692296506070
 SpriteRenderer:

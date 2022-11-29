@@ -5,7 +5,9 @@ public class AirplaneSpawner : MonoBehaviour, ISpawner
     private readonly float screenLength = 80f;
 
     [SerializeField] private ObjectPool<Airplane> airplanePool;
-    [SerializeField] private float frequency;
+    [SerializeField] private ProjectileData airplaneMissileData;
+    [SerializeField] private ProjectileData airplaneMissileLauncherData;
+    [SerializeField] private float attackFrequency;
     [SerializeField] private int pointsForBeingDestroyed;
     [SerializeField] private int speed;
     [SerializeField] private ExplosionStats explosionStats;
@@ -21,10 +23,9 @@ public class AirplaneSpawner : MonoBehaviour, ISpawner
     public IAutoAttacker Spawn()
     {
         Airplane airplane = airplanePool.Pull();
-        Projectile projectile = airplane.GetComponent<Projectile>();
-        projectile.Setup(speed, pointsForBeingDestroyed, explosionStats);
-        airplane.Setup(frequency, speed, pointsForBeingDestroyed, explosionStats);
-        projectile.Launch(transform.position, transform.position + transform.right * screenLength);
+        Missile projectile = airplane.GetComponent<Missile>();
+        airplane.Activate(attackFrequency, airplaneMissileLauncherData);
+        projectile.Launch(transform.position, transform.position + transform.right * screenLength, airplaneMissileData);
         return airplane;
     }
 

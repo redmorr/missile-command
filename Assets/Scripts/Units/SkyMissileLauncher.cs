@@ -3,10 +3,8 @@ using UnityEngine;
 
 public class SkyMissileLauncher : MonoBehaviour, IAttacker
 {
-    [SerializeField] private ObjectPool<Projectile> missilePool;
-    [SerializeField] private int pointsForDestroyingMissile;
-    [SerializeField] private int speed;
-    [SerializeField] private ExplosionStats explosionStats;
+    [SerializeField] private ObjectPool<Missile> missilePool;
+    [SerializeField] private ProjectileData projectileData;
 
     private IOrderUnitAttack attackCommander;
 
@@ -20,9 +18,8 @@ public class SkyMissileLauncher : MonoBehaviour, IAttacker
 
     public void Attack(Vector3 target)
     {
-        Projectile missile = missilePool.Pull();
-        missile.Setup(speed, pointsForDestroyingMissile, explosionStats);
-        missile.Launch(transform.position, target);
+        Missile missile = missilePool.Pull();
+        missile.Launch(transform.position, target, projectileData);
     }
 
     private void OnEnable()

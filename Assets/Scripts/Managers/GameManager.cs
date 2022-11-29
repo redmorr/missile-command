@@ -6,14 +6,14 @@ public class GameManager : Singleton<GameManager>
     private TargetManager targetManager;
     private SpawnList spawnList;
     private RoundTimer roundTimer;
-    private ObjectPool<Projectile> projectilePool;
+    private ObjectPool<Missile> projectilePool;
 
     protected override void Awake()
     {
         base.Awake();
 
         targetManager = FindObjectOfType<TargetManager>();
-        projectilePool = FindObjectOfType<ObjectPool<Projectile>>();
+        projectilePool = FindObjectOfType<ObjectPool<Missile>>();
         roundTimer = GetComponent<RoundTimer>();
         spawnList = GetComponent<SpawnList>();
 

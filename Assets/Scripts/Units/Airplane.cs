@@ -4,33 +4,24 @@ using UnityEngine;
 
 public class Airplane : MonoBehaviour, IPoolable<Airplane>, IAutoAttacker
 {
-    private Action<Airplane> returnToPool;
     private float attackFrequency;
-    private int pointsForBeingDestroyed;
-    private float speed;
-    private ExplosionStats explosionStats;
-    private ObjectPool<Projectile> missilePool;
     private TargetManager targetManager;
     private Coroutine attackRoutine;
-    
+    private ProjectileData projectileData;
+    private Action<Airplane> returnToPool;
+    private ObjectPool<Missile> missilePool;
     private Action<IAutoAttacker> deregister;
-
-    public void Setup(float attackFrequency, float speed, int pointsForBeingDestroyed, ExplosionStats explosionStats)
-    {
-        this.attackFrequency = attackFrequency;
-        this.speed = speed;
-        this.pointsForBeingDestroyed = pointsForBeingDestroyed;
-        this.explosionStats = explosionStats;
-    }
 
     private void Awake()
     {
         targetManager = FindObjectOfType<TargetManager>();
-        missilePool = FindObjectOfType<ObjectPool<Projectile>>();
+        missilePool = FindObjectOfType<ObjectPool<Missile>>();
     }
 
-    private void OnEnable()
+    public void Activate(float attackFrequency, ProjectileData projectileData)
     {
+        this.attackFrequency = attackFrequency;
+        this.projectileData = projectileData;
         attackRoutine = StartCoroutine(SpawnRoutine());
     }
 
@@ -42,16 +33,16 @@ public class Airplane : MonoBehaviour, IPoolable<Airplane>, IAutoAttacker
 
             if (targetManager.GetRandomTargetablePosition(out Vector3 target))
             {
-                Projectile missile = missilePool.Pull();
-                missile.Setup(speed, pointsForBeingDestroyed, explosionStats);
-                missile.Launch(transform.position, target);
+                Missile missile = missilePool.Pull();
+                missile.Launch(transform.position, target, projectileData);
             }
         }
     }
 
     private void OnDisable()
     {
-        StopCoroutine(attackRoutine);
+        if (attackRoutine != null)
+            StopCoroutine(attackRoutine);
         deregister?.Invoke(this);
         returnToPool?.Invoke(this);
     }
@@ -61,5 +52,4 @@ public class Airplane : MonoBehaviour, IPoolable<Airplane>, IAutoAttacker
     public void SetupActionOnDeath(Action<IAutoAttacker> action) => deregister = action;
 
     public void ReturnToPool() => returnToPool?.Invoke(this);
-
 }
