@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class TargetManager : Singleton<TargetManager>
 {
-    public List<PlayerStructure> playerStructures;
+    public List<PlayerStructure> initalPlayerStructures;
+    public List<PlayerStructure> activePlayerStructures;
 
-    public int PlayerStructuresNumber { get => playerStructures.Count; }
+    public int PlayerStructuresNumber { get => activePlayerStructures.Count; }
 
     protected override void Awake()
     {
         base.Awake();
 
-        playerStructures = FindObjectsOfType<PlayerStructure>().ToList();
+        initalPlayerStructures = FindObjectsOfType<PlayerStructure>().ToList();
+        activePlayerStructures = FindObjectsOfType<PlayerStructure>().ToList();
 
-        foreach (PlayerStructure targetable in playerStructures)
+        foreach (PlayerStructure targetable in activePlayerStructures)
             targetable.OnBeingDestroyed += RemoveFromList;
     }
 
@@ -22,14 +24,14 @@ public class TargetManager : Singleton<TargetManager>
     {
         targetPosition = Vector3.zero;
 
-        if (playerStructures.Count <= 0)
+        if (activePlayerStructures.Count <= 0)
             return false;
 
-        var i = Random.Range(0, playerStructures.Count);
+        var i = Random.Range(0, activePlayerStructures.Count);
 
-        if (playerStructures[i])
+        if (activePlayerStructures[i])
         {
-            targetPosition = playerStructures[i].Position;
+            targetPosition = activePlayerStructures[i].Position;
             return true;
         }
         else
@@ -39,9 +41,18 @@ public class TargetManager : Singleton<TargetManager>
         }
     }
 
+    public void ReactivateAll()
+    {
+        activePlayerStructures = new List<PlayerStructure>(initalPlayerStructures);
+        foreach (var item in activePlayerStructures)
+        {
+            item.gameObject.SetActive(true);
+        }
+    }
+
     private void RemoveFromList(PlayerStructure targetable)
     {
-        playerStructures.Remove(targetable);
+        activePlayerStructures.Remove(targetable);
         targetable.OnBeingDestroyed -= RemoveFromList;
     }
 }

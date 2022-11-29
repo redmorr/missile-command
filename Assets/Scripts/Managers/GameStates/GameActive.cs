@@ -5,16 +5,19 @@ using Debug = UnityEngine.Debug;
 
 public class GameActive : IState
 {
-    private SpawnList spawnList;
+    private readonly SpawnList spawnList;
+    private readonly TargetManager targetManager;
 
-    public GameActive(SpawnList spawnList)
+    public GameActive(SpawnList spawnList, TargetManager targetManager)
     {
         this.spawnList = spawnList;
+        this.targetManager = targetManager;
     }
 
     public void OnEnter()
     {
         Debug.Log("GameActive enter");
+        targetManager.ReactivateAll();
         spawnList.BeginNextRound();
     }
 

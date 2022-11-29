@@ -13,16 +13,24 @@ public class GroundMissileLauncher : MonoBehaviour, IAttacker
 
     private AmmoCounter ammoCounter;
     private GunBarrelRotator gunBarrelRotator;
+    private IOrderUnitAttack attackCommander;
 
-    private Action<IAttacker> deregister;
+
 
     public Vector3 Position { get => transform.position; }
     public bool CanAttack { get => ammoCounter.HasAmmo; }
 
     private void Awake()
     {
+        attackCommander = GetComponentInParent<IOrderUnitAttack>();
         ammoCounter = GetComponent<AmmoCounter>();
         gunBarrelRotator = GetComponent<GunBarrelRotator>();
+    }
+
+    private void OnEnable()
+    {
+        Debug.Log(name);
+        attackCommander.Register(this);
     }
 
     public void Attack(Vector3 target)
@@ -36,17 +44,22 @@ public class GroundMissileLauncher : MonoBehaviour, IAttacker
             ammoCounter.SpentAmmo();
 
             if (!ammoCounter.HasAmmo)
-                deregister?.Invoke(this);
+                attackCommander.Deregister(this);
         }
-    }
-
-    public void SetupAttacker(Action<IAttacker> action)
-    {
-        deregister = action;
     }
 
     private void OnDisable()
     {
-        deregister?.Invoke(this);
+        attackCommander.Deregister(this);
+    }
+
+    public void Disable()
+    {
+        gameObject.SetActive(false);
+    }
+
+    public void Enable()
+    {
+        gameObject.SetActive(true);
     }
 }

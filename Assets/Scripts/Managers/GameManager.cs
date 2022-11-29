@@ -21,7 +21,7 @@ public class GameManager : Singleton<GameManager>
         stateMachine = new StateMachine();
 
         var roundTransition = new RoundTransition(roundTimer);
-        var gameActive = new GameActive(spawnList);
+        var gameActive = new GameActive(spawnList, targetManager);
         var gameEnded = new GameEnded(spawnList);
 
         stateMachine.AddTransition(roundTransition, gameActive, TimePassed());
