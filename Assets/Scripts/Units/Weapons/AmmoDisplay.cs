@@ -1,24 +1,18 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class AmmoDisplay : MonoBehaviour
 {
-    [SerializeField] private Canvas AmmoDisplayCanvas;
-    [SerializeField] private RectTransform AmmoCellPrefab;
+    [SerializeField] private Canvas ammoDisplayCanvas;
+    [SerializeField] private RectTransform ammoCellPrefab;
+    [SerializeField] private AmmoCounter ammoCounter;
 
-    private AmmoCounter ammo;
-    public List<RectTransform> ammoCells;
+    private List<RectTransform> ammoCells = new List<RectTransform>();
 
     private void Awake()
     {
-        ammo = GetComponent<AmmoCounter>();
-        ammo.OnAmmoChanged += UpdateDisplay;
-
-        ammoCells = new List<RectTransform>();
-
-        AddCells(ammo.InitialAmmo);
+        AddCells(ammoCounter.CurrentAmmo);
+        ammoCounter.OnAmmoChanged += UpdateDisplay;
     }
 
     private void UpdateDisplay(int newAmmo)
@@ -33,7 +27,7 @@ public class AmmoDisplay : MonoBehaviour
     {
         for (int i = 0; i < number; i++)
         {
-            ammoCells.Add(Instantiate(AmmoCellPrefab, AmmoDisplayCanvas.transform));
+            ammoCells.Add(Instantiate(ammoCellPrefab, ammoDisplayCanvas.transform));
         }
     }
 

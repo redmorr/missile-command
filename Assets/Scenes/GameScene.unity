@@ -686,7 +686,7 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1328054045}
     m_Modifications:
-    - target: {fileID: 461624861690179195, guid: 9e32c78540286b34f80c6baad0cbc062, type: 3}
+    - target: {fileID: -494422616944100491, guid: 9e32c78540286b34f80c6baad0cbc062, type: 3}
       propertyPath: missilePool
       value: 
       objectReference: {fileID: 997982602}
@@ -1120,7 +1120,7 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1328054045}
     m_Modifications:
-    - target: {fileID: 461624861690179195, guid: 9e32c78540286b34f80c6baad0cbc062, type: 3}
+    - target: {fileID: -494422616944100491, guid: 9e32c78540286b34f80c6baad0cbc062, type: 3}
       propertyPath: missilePool
       value: 
       objectReference: {fileID: 997982602}
@@ -2479,6 +2479,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4680385890899543592, guid: 8c5fcc7af2321d84ebaa567f6e5f7b9f, type: 3}
+      propertyPath: airplanePool
+      value: 
+      objectReference: {fileID: 734965828}
+    - target: {fileID: 4680385890899543592, guid: 8c5fcc7af2321d84ebaa567f6e5f7b9f, type: 3}
       propertyPath: autonomousPool
       value: 
       objectReference: {fileID: 734965828}
@@ -2585,6 +2589,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4680385890899543592, guid: 8c5fcc7af2321d84ebaa567f6e5f7b9f, type: 3}
+      propertyPath: airplanePool
+      value: 
+      objectReference: {fileID: 734965828}
+    - target: {fileID: 4680385890899543592, guid: 8c5fcc7af2321d84ebaa567f6e5f7b9f, type: 3}
       propertyPath: autonomousPool
       value: 
       objectReference: {fileID: 734965828}
@@ -2654,7 +2662,7 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1328054045}
     m_Modifications:
-    - target: {fileID: 461624861690179195, guid: 9e32c78540286b34f80c6baad0cbc062, type: 3}
+    - target: {fileID: -494422616944100491, guid: 9e32c78540286b34f80c6baad0cbc062, type: 3}
       propertyPath: missilePool
       value: 
       objectReference: {fileID: 997982602}

@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6606634000567997809}
   - component: {fileID: 6606634000567997811}
-  - component: {fileID: 6606634000567997808}
+  - component: {fileID: 6748585433341460014}
   - component: {fileID: -8528143980191641445}
+  - component: {fileID: 6606634000567997808}
   - component: {fileID: 6589964735014044258}
   m_Layer: 0
   m_Name: City
@@ -87,6 +88,32 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6748585433341460014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6606634000567997814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc8ad36ad54f44a47bcaf0ba74bed30c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-8528143980191641445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6606634000567997814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dbf6e2cf9113c04db614a97c26fbe12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointsForSurviving: 2000
+  explosionStats: {fileID: 11400000, guid: d007713ab41577e49a8d066fce3b7201, type: 2}
 --- !u!61 &6606634000567997808
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -113,20 +140,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &-8528143980191641445
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6606634000567997814}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1dbf6e2cf9113c04db614a97c26fbe12, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Points: 100
-  ExplosionStats: {fileID: 11400000, guid: d007713ab41577e49a8d066fce3b7201, type: 2}
 --- !u!50 &6589964735014044258
 Rigidbody2D:
   serializedVersion: 4
