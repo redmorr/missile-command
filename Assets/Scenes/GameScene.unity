@@ -896,7 +896,7 @@ GameObject:
   - component: {fileID: 630590825}
   - component: {fileID: 630590824}
   m_Layer: 5
-  m_Name: Timer
+  m_Name: TimerText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1807,7 +1807,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 747a0c7e4bc225a48b03c9fb19d4fdb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roundTransitionTime: 5
+  roundTransitionTime: 3
   roundTimerText: {fileID: 630590824}
 --- !u!114 &1046764786
 MonoBehaviour:
@@ -2355,7 +2355,7 @@ GameObject:
   - component: {fileID: 1854964696}
   - component: {fileID: 1854964694}
   m_Layer: 5
-  m_Name: Score
+  m_Name: ScoreText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

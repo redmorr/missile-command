@@ -3,9 +3,8 @@ using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
-public class PlayerStructure : MonoBehaviour, IDestructible, IPointsOnSurvived, IExplodable
+public class PlayerStructure : MonoBehaviour, IDestructible, IExplodable
 {
-    [SerializeField] private int pointsForSurviving;
     [SerializeField] private ExplosionStats explosionStats;
 
     private Rigidbody2D _rigidbody2D;
@@ -14,7 +13,6 @@ public class PlayerStructure : MonoBehaviour, IDestructible, IPointsOnSurvived, 
     public UnityAction<PlayerStructure> OnBeingDestroyed;
 
     public Vector3 Position { get => transform.position; }
-    public int PointsForSurviving { get => pointsForSurviving; set => pointsForSurviving = value; }
 
     private void Awake()
     {
