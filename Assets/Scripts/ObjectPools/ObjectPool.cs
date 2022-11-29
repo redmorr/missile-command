@@ -5,6 +5,8 @@ public class ObjectPool<T> : Singleton<ObjectPool<T>> where T : MonoBehaviour, I
 {
     [SerializeField] private int InitialPoolSize;
     [SerializeField] private T Prefab;
+    
+    public int CurrentlyActive = 0;
 
     private Stack<T> pooledObjects;
 
@@ -22,7 +24,8 @@ public class ObjectPool<T> : Singleton<ObjectPool<T>> where T : MonoBehaviour, I
         for (int i = 0; i < amount; i++)
         {
             instance = GameObject.Instantiate(Prefab);
-            Release(instance);
+            instance.gameObject.SetActive(false);
+            pooledObjects.Push(instance);
         }
     }
 
@@ -30,6 +33,7 @@ public class ObjectPool<T> : Singleton<ObjectPool<T>> where T : MonoBehaviour, I
     {
         instance.gameObject.SetActive(false);
         pooledObjects.Push(instance);
+        CurrentlyActive--;
     }
 
     public T Pull()
@@ -43,6 +47,8 @@ public class ObjectPool<T> : Singleton<ObjectPool<T>> where T : MonoBehaviour, I
 
         instance.gameObject.SetActive(true);
         instance.InitPoolable(Release);
+
+        CurrentlyActive++;
 
         return instance;
     }

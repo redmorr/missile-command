@@ -7,12 +7,14 @@ public class GameManager : Singleton<GameManager>
     private TargetManager targetManager;
     private SpawnList spawnList;
     private RoundTimer roundTimer;
+    private ObjectPool<Projectile> missilePool;
 
 
     protected override void Awake()
     {
         base.Awake();
         targetManager = FindObjectOfType<TargetManager>();
+        missilePool = FindObjectOfType<ObjectPool<Projectile>>();
         roundTimer = GetComponent<RoundTimer>();
         spawnList = GetComponent<SpawnList>();
 
@@ -23,11 +25,11 @@ public class GameManager : Singleton<GameManager>
         var gameEnded = new GameEnded(spawnList);
 
         stateMachine.AddTransition(roundTransition, gameActive, TimePassed());
-        stateMachine.AddTransition(gameActive, roundTransition, SpawnListDepleted());
+        stateMachine.AddTransition(gameActive, roundTransition, RoundFinished());
         stateMachine.AddTransition(gameActive, gameEnded, PlayerStructuresDestroyed());
 
         Func<bool> TimePassed() => () => roundTimer.TimerEnded;
-        Func<bool> SpawnListDepleted() => () => spawnList.AttacksLeft <= 0 && spawnList.SpawnsLeft <= 0;
+        Func<bool> RoundFinished() => () => !spawnList.IsRoundOngoing && missilePool.CurrentlyActive == 0;
         Func<bool> PlayerStructuresDestroyed() => () => targetManager.PlayerStructuresNumber <= 0;
 
         stateMachine.SetState(roundTransition);
