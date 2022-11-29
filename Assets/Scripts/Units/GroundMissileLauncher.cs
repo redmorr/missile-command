@@ -15,8 +15,6 @@ public class GroundMissileLauncher : MonoBehaviour, IAttacker
     private GunBarrelRotator gunBarrelRotator;
     private IOrderUnitAttack attackCommander;
 
-
-
     public Vector3 Position { get => transform.position; }
     public bool CanAttack { get => ammoCounter.HasAmmo; }
 
@@ -29,7 +27,6 @@ public class GroundMissileLauncher : MonoBehaviour, IAttacker
 
     private void OnEnable()
     {
-        Debug.Log(name);
         attackCommander.Register(this);
     }
 
@@ -53,13 +50,4 @@ public class GroundMissileLauncher : MonoBehaviour, IAttacker
         attackCommander.Deregister(this);
     }
 
-    public void Disable()
-    {
-        gameObject.SetActive(false);
-    }
-
-    public void Enable()
-    {
-        gameObject.SetActive(true);
-    }
 }

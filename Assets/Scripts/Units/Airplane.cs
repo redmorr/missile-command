@@ -58,7 +58,7 @@ public class Airplane : MonoBehaviour, IPoolable<Airplane>, IAutoAttacker
 
     public void InitPoolable(Action<Airplane> action) => returnToPool = action;
 
-    public void SetupAutoAttacker(Action<IAutoAttacker> action) => deregister = action;
+    public void SetupActionOnDeath(Action<IAutoAttacker> action) => deregister = action;
 
     public void ReturnToPool() => returnToPool?.Invoke(this);
 

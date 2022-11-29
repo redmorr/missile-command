@@ -20,15 +20,6 @@ public class SkyMissileLauncher : MonoBehaviour, IAttacker
         missile.Launch(transform.position, target);
     }
 
-    public void Disable()
-    {
-
-    }
-
-    public void Enable()
-    {
-
-    }
 
     public void SetupAttacker(Action<IAttacker> action)
     {

@@ -46,6 +46,7 @@ public class TargetManager : Singleton<TargetManager>
         activePlayerStructures = new List<PlayerStructure>(initalPlayerStructures);
         foreach (var item in activePlayerStructures)
         {
+            item.gameObject.SetActive(false);
             item.gameObject.SetActive(true);
         }
     }

@@ -242,11 +242,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   missilePool: {fileID: 0}
-  ammoCounter: {fileID: 4013392199802934110}
   muzzle: {fileID: 8919541691592505018}
-  gunBarrelRotator: {fileID: 8919541692296506066}
-  playerStructure: {fileID: 5614678071834072365}
-  speed: 12
+  speed: 20
   explosionStats: {fileID: 11400000, guid: ec2c12c4b0b664841ae38d525c2d7d0e, type: 2}
 --- !u!114 &4013392199802934110
 MonoBehaviour:

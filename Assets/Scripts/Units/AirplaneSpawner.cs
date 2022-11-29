@@ -11,7 +11,12 @@ public class AirplaneSpawner : MonoBehaviour, ISpawner
 
     public Vector3 Position { get => transform.position; }
 
-    private Action<ISpawner> deregister;
+    private IOrderUnitSpawn attackCommander;
+
+    private void Awake()
+    {
+        attackCommander = GetComponentInParent<IOrderUnitSpawn>();
+    }
 
     public IAutoAttacker Spawn()
     {
@@ -23,13 +28,13 @@ public class AirplaneSpawner : MonoBehaviour, ISpawner
         return autonomous;
     }
 
-    public void InitSpawner(Action<ISpawner> action)
+    private void OnEnable()
     {
-        deregister = action;
+        attackCommander.Register(this);
     }
 
     private void OnDisable()
     {
-        deregister?.Invoke(this);
+        attackCommander.Deregister(this);
     }
 }
