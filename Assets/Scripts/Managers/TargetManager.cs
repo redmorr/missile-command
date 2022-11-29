@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TargetManager : Singleton<TargetManager>
 {
-    private List<PlayerStructure> playerStructures;
+    public List<PlayerStructure> playerStructures;
 
     public int PlayerStructuresNumber { get => playerStructures.Count; }
 

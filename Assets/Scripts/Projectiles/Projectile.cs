@@ -29,7 +29,7 @@ public class Projectile : MonoBehaviour, IPoolable<Projectile>, IDestructible, I
         ExplosionStats = explosionStats;
     }
 
-    public void Launch(Vector3 from, Vector3 to)
+    public void Launch(Vector2 from, Vector2 to)
     {
         this.from = from;
         this.to = to;

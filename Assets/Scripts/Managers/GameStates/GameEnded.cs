@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameEnded : IState
 {
@@ -11,13 +12,13 @@ public class GameEnded : IState
 
     public void OnEnter()
     {
-        Debug.Log("GameEnded enter");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex, LoadSceneMode.Single);
     }
 
     public void OnExit()
     {
         Debug.Log("GameEnded exit");
-        spawnList.ResetToRoundOne();
+        
     }
 
     public void Tick()

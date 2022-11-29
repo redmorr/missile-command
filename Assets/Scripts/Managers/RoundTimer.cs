@@ -7,8 +7,10 @@ using UnityEngine;
 public class RoundTimer : MonoBehaviour
 {
     [SerializeField] private int roundTransitionTime;
-    //[SerializeField] private TextMeshProUGUI Text;
+    [SerializeField] private TextMeshProUGUI Text;
+
     public int seconds;
+
     public bool TimerEnded;
 
     private Coroutine timerRoutine;
@@ -29,10 +31,11 @@ public class RoundTimer : MonoBehaviour
     {
         for (int i = roundTransitionTime; i > 0; i--)
         {
-            Debug.Log("timer");
+            Text.SetText(i.ToString());
             yield return new WaitForSeconds(1f);
             seconds = i;
         }
         TimerEnded = true;
+        Text.SetText("");
     }
 }

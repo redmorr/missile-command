@@ -24,7 +24,6 @@ public class Singleton<T> : MonoBehaviour where T : Component
         if (instance == null)
         {
             instance = this as T;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -40,7 +39,6 @@ public class Singleton<T> : MonoBehaviour where T : Component
             GameObject gameObj = new GameObject();
             gameObj.name = typeof(T).Name;
             instance = gameObj.AddComponent<T>();
-            DontDestroyOnLoad(gameObj);
         }
     }
 }
