@@ -60,3 +60,5 @@ crashlytics-build.properties
 
 /UserSettings
 /.vsconfig
+/ProjectSettings/CommonBurstAotSettings.json
+/ProjectSettings/BurstAotSettings_StandaloneWindows.json
