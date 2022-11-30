@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d47b2f7ec40c7674db29bf7b11a8b81c, type: 3}
   m_Name: GroundMissileLauncher
   m_EditorClassIdentifier: 
-  Speed: 15
+  Speed: 20
   PointsForBeingDestroyed: 0
   explosionStats: {fileID: 11400000, guid: ec2c12c4b0b664841ae38d525c2d7d0e, type: 2}

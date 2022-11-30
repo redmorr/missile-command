@@ -8,9 +8,6 @@ public class AirplaneSpawner : MonoBehaviour, ISpawner
     [SerializeField] private ProjectileData airplaneMissileData;
     [SerializeField] private ProjectileData airplaneMissileLauncherData;
     [SerializeField] private float attackFrequency;
-    [SerializeField] private int pointsForBeingDestroyed;
-    [SerializeField] private int speed;
-    [SerializeField] private ExplosionStats explosionStats;
 
     private IOrderUnitSpawn attackCommander;
     public Vector3 Position { get => transform.position; }
