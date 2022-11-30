@@ -13,15 +13,31 @@ MonoBehaviour:
   m_Name: SpawnListData
   m_EditorClassIdentifier: 
   Rounds:
+  - AttackNumber: 5
+    SpawnNumber: 1
+    AttackRatePerSecond: 1
+    SpawnRatePerSecond: 3
   - AttackNumber: 10
+    SpawnNumber: 2
+    AttackRatePerSecond: 1
+    SpawnRatePerSecond: 3
+  - AttackNumber: 15
     SpawnNumber: 3
     AttackRatePerSecond: 1
-    SpawnRatePerSecond: 2
-  - AttackNumber: 10
-    SpawnNumber: 3
+    SpawnRatePerSecond: 3
+  - AttackNumber: 20
+    SpawnNumber: 4
     AttackRatePerSecond: 1
     SpawnRatePerSecond: 2
-  - AttackNumber: 10
-    SpawnNumber: 3
+  - AttackNumber: 20
+    SpawnNumber: 4
     AttackRatePerSecond: 1
     SpawnRatePerSecond: 2
+  - AttackNumber: 40
+    SpawnNumber: 5
+    AttackRatePerSecond: 1
+    SpawnRatePerSecond: 2
+  - AttackNumber: 100
+    SpawnNumber: 20
+    AttackRatePerSecond: 0.7
+    SpawnRatePerSecond: 1
